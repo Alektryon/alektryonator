@@ -113,8 +113,8 @@ function AddTerm() {
     	}
     }
 
-    xhttp.open("POST", "http://www.gematrinator.com/nextgen/addtodatabase.php?phrase=" + qStr, true);
-    xhttp.send();
+    //xhttp.open("POST", "http://www.gematrinator.com/nextgen/addtodatabase.php?phrase=" + qStr, true);
+    //xhttp.send();
 }
 function Open_History() {
 	var ms, x, y, aCipher, gemSum
@@ -756,7 +756,7 @@ function Set_Breakdown() {
 }
 
 function Open_Shortcuts() {
-	window.open("http://www.gematrinator.com/nextgen/Shortcuts.png", 'Keyboard Shortcuts')
+	//window.open("http://www.gematrinator.com/nextgen/Shortcuts.png", 'Keyboard Shortcuts')
 }
 function Open_Ciphers(impOpt = cOption, impBool = false) {
 	var mSpot = document.getElementById("MenuSpot")
@@ -910,11 +910,11 @@ function Get_Matches() {
 		};
 
 		if (NumberArray() == true) {
-			xhttp.open("GET", "http://www.gematrinator.com/nextgen/numbermatch.php?search=" + SearchNumbers(), true);
-			xhttp.send();
+			//xhttp.open("GET", "http://www.gematrinator.com/nextgen/numbermatch.php?search=" + SearchNumbers(), true);
+			//xhttp.send();
 		} else {
-			xhttp.open("GET", "http://www.gematrinator.com/nextgen/getmatch.php?search=" + SearchString(), true);
-			xhttp.send();
+			//xhttp.open("GET", "http://www.gematrinator.com/nextgen/getmatch.php?search=" + SearchString(), true);
+			//xhttp.send();
 		}
 	} else {
 		tText = '<font style="font-size: 150%; color: RGB(223, 0, 0)">Select 12 or fewer ciphers</font><BR>'
@@ -1046,8 +1046,8 @@ function UpdateUserHistory() {
 	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {}
     };
-    xhttp.open("POST", "http://www.gematrinator.com/usersettings/updatehistory.php?history=" + cString, true);
-    xhttp.send();
+    //xhttp.open("POST", "http://www.gematrinator.com/usersettings/updatehistory.php?history=" + cString, true);
+    //xhttp.send();
 }
 function UpdateOptions() {
 	var oString, cString, x
@@ -1067,6 +1067,6 @@ function UpdateOptions() {
     		document.getElementById("SaveMsg").innerHTML = respText
     	}
     };
-    xhttp.open("POST", "http://www.gematrinator.com/usersettings/updateoptions.php?options=" + oString, true);
-    xhttp.send();
+    //xhttp.open("POST", "http://www.gematrinator.com/usersettings/updateoptions.php?options=" + oString, true);
+    //xhttp.send();
 }
