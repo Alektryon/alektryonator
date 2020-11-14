@@ -98,6 +98,11 @@ class cipher {
 		if (impMods.indexOf("SquareNum") > -1) {this.Make_Squares()}
 		if (impMods.indexOf("SumerianNum") > -1) {this.Make_Sumerian()}
 		if (impMods.indexOf("KeyNum") > -1) {this.Make_KeyAlt()}
+		if (impMods.indexOf("EnglishIJUV") > -1) {this.Make_EnglishIJUV()}
+		if (impMods.indexOf("EnglishIJUVReverse") > -1) {this.Make_EnglishIJUVReverse()}
+		if (impMods.indexOf("EnglishIlluminati") > -1) {this.Make_EnglishIlluminati()}
+		if (impMods.indexOf("EnglishShort") > -1) {this.Make_EnglishShort()}
+		if (impMods.indexOf("EnglishKaye") > -1) {this.Make_EnglishKaye()}
 	}
 
 	Gematria(impVal, impType, wLink = false, impHistory = false) {
@@ -501,6 +506,26 @@ class cipher {
 		this.vArr = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 0, 7, 7, 8, 8, 8, 9, 9, 9, 0]
 		this.vArr2 = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 0, 7, 7, 8, 8, 8, 9, 9, 9, 0]
 	}
+	Make_EnglishIJUV() {
+		this.vArr = [1,2,3,4,5,6,7,8,9,9,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
+		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
+	}
+	Make_EnglishIJUVReverse() {
+		this.vArr = [24,23,22,21,20,19,18,17,16,16,15,14,13,12,11,10,9,8,7,6,5,5,4,3,2,1]
+		this.vArr2 = [24,23,22,21,20,19,18,17,16,16,15,14,13,12,11,10,9,8,7,6,5,5,4,3,2,1]
+	}
+	Make_EnglishIlluminati() {
+		this.vArr = [12,11,10,9,8,7,6,5,4,4,3,2,1,13,14,15,16,17,18,19,20,20,21,22,23,24]
+		this.vArr2 = [12,11,10,9,8,7,6,5,4,4,3,2,1,13,14,15,16,17,18,19,20,20,21,22,23,24]
+	}
+	Make_EnglishShort() {
+		this.vArr = [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,1,2,2,3,4,5,6]
+		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,1,2,2,3,4,5,6]
+	}
+	Make_EnglishKaye() {
+		this.vArr = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
+		this.vArr2 = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
+	}
 
 }
 
@@ -669,6 +694,12 @@ function Build_Ciphers() {
 			case "RU Reverse Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 100, 226, 226, "Reverse", "FullReduction"); break;
 			case "RU Reverse Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 100, 216, 209, "Reverse", "SingleReduction"); break;
 			case "RU Reverse Sumerian": allCiphers[allCiphers.length] = new cipher(key, "Russian", 220, 208, 148, "Reverse", "SumerianNum"); break;
+			
+			case "English IJ/UV": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "EnglishIJUV"); break;
+			case "Reverse English IJ/UV": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "EnglishIJUVReverse"); break;
+			case "English Illuminati": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 201, 171, "EnglishIlluminati"); break;
+			case "English Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "EnglishShort"); break;
+			case "English Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "EnglishKaye"); break;
 
 		}
 	}
@@ -677,7 +708,7 @@ function Build_Ciphers() {
 }
 
 function Set_Categories() {
-	catArr = ["English", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian"]
+	catArr = ["English", "English (Special)", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian"]
 
 	cipherArray["English Ordinal"] = "English"
 	cipherArray["Full Reduction"] = "English"
@@ -758,6 +789,12 @@ function Set_Categories() {
 	cipherArray["RU Reverse Full Reduction"] = "Russian"
 	cipherArray["RU Reverse Single Reduction"] = "Russian"
 	cipherArray["RU Reverse Sumerian"] = "Russian"
+	
+	cipherArray["English IJ/UV"] = "English (Special)"
+	cipherArray["Reverse English IJ/UV"] = "English (Special)"
+	cipherArray["English Illuminati"] = "English (Special)"
+	cipherArray["English Short"] = "English (Special)"
+	cipherArray["English Kaye"] = "English (Special)"
 	
 
 }
