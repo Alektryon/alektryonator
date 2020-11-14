@@ -1,6 +1,6 @@
 var catArr = []; gemArr = []
 var cipherArray = [];
-var openCiphers = ["English Ordinal", "Full Reduction", "Single Reduction", "English Extended", "Reverse Ordinal", "Reverse Full Reduction", "Reverse Single Reduction", "Reverse Extended", "Jewish Reduction", "Jewish Ordinal", "Jewish", "ALW Kabbalah", "English Sumerian", "Reverse English Sumerian", "Septenary", "Chaldean"]
+var openCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
 var ciphersOn = []; allCiphers = []; sHistory = []
 var opt_NumCalculation = "Reduced"
 var primeArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 
@@ -528,7 +528,7 @@ function Populate_Sums(impVal) {
 
 function Open_Properties(impNum) {
 	if (impNum > 0 && impNum < 10000000) {
-		window.open("http://www.gematrinator.com/calculator/numberProperties.php?Number=" + impNum, "Properties of " + impNum, "height=480,width=750")
+		//window.open("http://www.gematrinator.com/calculator/numberProperties.php?Number=" + impNum, "Properties of " + impNum, "height=480,width=750")
 	}
 }
 
@@ -873,7 +873,7 @@ function Build_Open_Ciphers() {
 }
 
 function Load_Options(ApplyOptions = false) {
-	qString = "http://www.gematrinator.com/usersettings/viewIP.php"
+	//qString = "http://www.gematrinator.com/usersettings/viewIP.php"
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -891,8 +891,8 @@ function Load_Options(ApplyOptions = false) {
 		}
 	}
 
-	xhttp.open("GET", qString, true);
-	xhttp.send();
+	//xhttp.open("GET", qString, true);
+	//xhttp.send();
 }
 
 function ParseText() {
