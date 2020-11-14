@@ -74,6 +74,11 @@ class cipher {
 				this.vArr = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9]
 				this.vArr2 = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9]
 				break;
+			case "Russian":
+				this.cArr = [1072,1073,1074,1075,1076,1077,1105,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103]
+				this.cArr2 = [1040,1041,1042,1043,1044,1045,1025,1046,1047,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071] // caps
+				Build_GemVals(this)
+				break;
 		}
 
 		if (impMods.indexOf("Exception") > -1) {this.Exception = true}
@@ -472,16 +477,16 @@ class cipher {
 	}
 	Make_Sumerian() {
 		var x
-		for (x = 0; x < 26; x++) {
+		for (x = 0; x < this.vArr.length; x++) {
 			this.vArr[x] = this.vArr[x] * 6
 		}
 		if (this.vArr2.length > 0) {
-			for (x = 0; x < 26; x++) {
+			for (x = 0; x < this.vArr2.length; x++) {
 				this.vArr2[x] = this.vArr2[x] * 6
 			}
 		}
 		if (this.vArr3.length > 0) {
-			for (x = 0; x < 26; x++) {
+			for (x = 0; x < this.vArr3.length; x++) {
 				this.vArr3[x] = this.vArr3[x] * 6
 			}
 		}
@@ -655,7 +660,15 @@ function Build_Ciphers() {
 			case "Jewish Reduction Trigonal": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction", "TriangleNum"); break;
 			case "Jewish Reduction Square": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction", "SquareNum"); break
 */
+			case "RU Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 186, 0); break;
+			case "RU Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 88, 125, 254, "FullReduction"); break;
+			case "RU Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 140, 171, 227, "SingleReduction"); break;
+			case "RU Sumerian": allCiphers[allCiphers.length] = new cipher(key, "Russian", 169, 208, 142, "SumerianNum"); break;
 
+			case "RU Reverse Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 235, 21, "Reverse"); break;
+			case "RU Reverse Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 100, 226, 226, "Reverse", "FullReduction"); break;
+			case "RU Reverse Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 100, 216, 209, "Reverse", "SingleReduction"); break;
+			case "RU Reverse Sumerian": allCiphers[allCiphers.length] = new cipher(key, "Russian", 220, 208, 148, "Reverse", "SumerianNum"); break;
 
 		}
 	}
@@ -664,7 +677,7 @@ function Build_Ciphers() {
 }
 
 function Set_Categories() {
-	catArr = ["English", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign"]
+	catArr = ["English", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian"]
 
 	cipherArray["English Ordinal"] = "English"
 	cipherArray["Full Reduction"] = "English"
@@ -735,6 +748,18 @@ function Set_Categories() {
 	cipherArray["Greek Reduction"] = "Foreign"
 	cipherArray["Greek Ordinal"] = "Foreign"
 	cipherArray["Greek Isopsephy"] = "Foreign"
+	
+	cipherArray["RU Ordinal"] = "Russian"
+	cipherArray["RU Full Reduction"] = "Russian"
+	cipherArray["RU Single Reduction"] = "Russian"
+	cipherArray["RU Sumerian"] = "Russian"
+
+	cipherArray["RU Reverse Ordinal"] = "Russian"
+	cipherArray["RU Reverse Full Reduction"] = "Russian"
+	cipherArray["RU Reverse Single Reduction"] = "Russian"
+	cipherArray["RU Reverse Sumerian"] = "Russian"
+	
+
 }
 
 function Add_Cipher(impName, impBool = true) {
@@ -772,7 +797,7 @@ function Add_AllCiphers(impBool = false) {
 	for (x = 0; x < allCiphers.length; x++) {
 		q = 0
 		cN = allCiphers[x].Nickname
-		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1) {
+		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1 && cN.indexOf("RU") == -1) {
 			for (z = 0; z < allCiphers.length; z++) {
 				if (allCiphers[z].Nickname == cN) {
 					openCiphers.splice(q, 0, cN)
@@ -794,6 +819,42 @@ function Add_AllCiphers(impBool = false) {
 function Add_BaseCiphers(impBool = false) {
 	var x, q, cN, z
 	var baseCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
+
+	openCiphers = []
+	for (z = 0; z < allCiphers.length; z++) {
+		if (baseCiphers.indexOf(allCiphers[z].Nickname) > -1) {
+			openCiphers.push(allCiphers[z].Nickname)
+		}
+	}
+
+	Build_Open_Ciphers()
+	if (impBool == true) {
+		Open_Ciphers()
+	} else {
+		Populate_MenuBar()
+	}
+}
+function No_Ciphers(impBool = false) {
+	var x, q, cN, z
+	var baseCiphers = []
+
+	openCiphers = []
+	for (z = 0; z < allCiphers.length; z++) {
+		if (baseCiphers.indexOf(allCiphers[z].Nickname) > -1) {
+			openCiphers.push(allCiphers[z].Nickname)
+		}
+	}
+
+	Build_Open_Ciphers()
+	if (impBool == true) {
+		Open_Ciphers()
+	} else {
+		Populate_MenuBar()
+	}
+}
+function Add_RussianCiphers(impBool = false) {
+	var x, q, cN, z
+	var baseCiphers = ["RU Ordinal", "RU Full Reduction", "RU Single Reduction", "RU Sumerian", "RU Reverse Ordinal", "RU Reverse Full Reduction", "RU Reverse Single Reduction", "RU Reverse Sumerian"]
 
 	openCiphers = []
 	for (z = 0; z < allCiphers.length; z++) {
