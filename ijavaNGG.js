@@ -34,23 +34,24 @@ function sVal() {
 	return sBox.value.trim()
 }
 
-function navHistory(impNum) {
+function navHistory(impNum) { // run on each keystroke inside text box - onkeydown="navHistory(event.keyCode) - from index.html
 	var hPlace, tBox
 	var newVal = ""; thisTerm = replaceAll(sVal(), "|", "")
 	tBox = document.getElementById("SearchField")
 
 	hPlace = sHistory.indexOf(thisTerm)
 	switch (impNum) {
-		case 13:
+		case 13: // Enter
 			newHistory(true)
+			tBox.value = "" // clear textbox
 			break;
-		case 38:
+		case 38: // Up Arrow
 			if (hPlace > 0) {
 				newVal = sHistory[hPlace - 1]
 			}
 			if (newVal !== "") {tBox.value = newVal; Populate_Sums(newVal); Populate_Breakdown()}
 			break;
-		case 40:
+		case 40: // Down Arrow
 			if (hPlace > -1) {
 				if (sHistory.length > (hPlace + 1)) {newVal = sHistory[hPlace + 1]}
 			} else {
@@ -58,9 +59,25 @@ function navHistory(impNum) {
 			}
 			if (newVal !== "") {tBox.value = newVal; Populate_Sums(newVal); Populate_Breakdown()}
 			break;
+		case 46: // Delete, remove entries from history
+			//console.log(sHistory)
+			hSpot = sHistory.indexOf(tBox.value); // find contents of textbox in history array
+			if (sHistory.length == 1) {
+				sHistory = [] // reinitialize array if there is only one entry
+				tArea = document.getElementById("MiscSpot")
+				tArea.innerHTML = '<table class="HistoryTable"></table>' // clear table
+			}
+			if (hSpot > -1) {
+				sHistory.splice(hSpot, 1) // if a match is found, delete entry
+			}
+			tBox.value = "" // empty text box, so the old value us not added again
+			newHistory() // update history
+			Open_History() // update table
+			//console.log(sHistory)
+			break;
 	}
 }
-function newHistory(impOpt = false) {
+function newHistory(impOpt = false) { // called from function navHistory(impNum) -> case 13
 	var hSpot, isNew
 	var x, ys
 	var impVal = replaceAll(sVal(), "|", "")
@@ -90,6 +107,7 @@ function newHistory(impOpt = false) {
 	
 	if (impOpt == true || miscContents !== "match") {Open_History()}
 	if (isNew == true) {AddTerm(); UpdateUserHistory()};
+	//console.log(sHistory);
 }
 function AddTerm() {
 	var xhttp = new XMLHttpRequest();
@@ -137,6 +155,7 @@ function Open_History() {
 		}
 
 		ms += '<tr><td class="historyPhrase">' + sHistory[x] + '</td>'
+
 
 		for (y = 0; y < ciphersOn.length; y++) {
 
@@ -476,7 +495,7 @@ function cipherHead_mouseOver(impName) {
 			Populate_Breakdown(aCipher.Nickname, false)
 		}
 	}
-	newHistory()
+	//newHistory() // phrase is not added on mouse over
 }
 
 function cipherHead_click(impName) {

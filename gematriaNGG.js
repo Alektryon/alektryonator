@@ -812,7 +812,8 @@ function Add_Cipher(impName, impBool = true) {
 	}
 
 	Build_Open_Ciphers()
-
+	Open_History() // update table
+	
 	if (impBool == true) {breakCipher = impName; Populate_Breakdown()}
 }
 function Remove_Cipher(impName) {
@@ -852,6 +853,7 @@ function Add_AllCiphers(impBool = false) {
 	} else {
 		Populate_MenuBar()
 	}
+	Open_History() // update table
 }
 function Add_BaseCiphers(impBool = false) {
 	var x, q, cN, z
@@ -870,6 +872,7 @@ function Add_BaseCiphers(impBool = false) {
 	} else {
 		Populate_MenuBar()
 	}
+	Open_History() // update table
 }
 function No_Ciphers(impBool = false) {
 	var x, q, cN, z
@@ -888,6 +891,7 @@ function No_Ciphers(impBool = false) {
 	} else {
 		Populate_MenuBar()
 	}
+	Open_History() // update table
 }
 function Add_RussianCiphers(impBool = false) {
 	var x, q, cN, z
@@ -906,6 +910,7 @@ function Add_RussianCiphers(impBool = false) {
 	} else {
 		Populate_MenuBar()
 	}
+	Open_History() // update table
 }
 function FindSpot(impName) {
 	for (x = 0; x < allCiphers.length; x++) {
