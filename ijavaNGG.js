@@ -34,6 +34,18 @@ function sVal() {
 	return sBox.value.trim()
 }
 
+function HighlightRefresh (impNum) { // keytroke in Highlight textbox
+
+	Open_History() // update table
+	
+	switch (impNum) {
+		case 46: // clear
+			tArea = document.getElementById("Highlight")
+			tArea.value = ""
+			break
+	}
+}
+
 function navHistory(impNum) { // run on each keystroke inside text box - onkeydown="navHistory(event.keyCode) - from index.html
 	var hPlace, tBox
 	var newVal = ""; thisTerm = replaceAll(sVal(), "|", "")
@@ -139,6 +151,8 @@ function Open_History() {
 	tArea = document.getElementById("MiscSpot")
 
 	if (sHistory.length == 0) {return}
+	
+	highlt = document.getElementById("Highlight").value // value of Highlight textbox
 
 	ms = '<table class="HistoryTable">'
 
@@ -147,7 +161,7 @@ function Open_History() {
 		if (x % 25 == 0) {
 			ms += '<tr><td class="MPhrase"><font style="color: orange;">Word or Phrase</font></td>'
 			for (z = 0; z < ciphersOn.length; z++) {
-				ms += '<td class="HistoryHead" style="color: RGB(' + ciphersOn[z].RGB.join() +')">'
+				ms += '<td class="HistoryHead" style="color: RGB(' + ciphersOn[z].RGB.join() +')">' // color of cipher displayed in the table
 				ms += ciphersOn[z].Nickname
 				ms += "</td>"
 			}
@@ -158,11 +172,23 @@ function Open_History() {
 
 
 		for (y = 0; y < ciphersOn.length; y++) {
-
+			
 			aCipher = ciphersOn[y]
-			gemSum = '<font style="font-size: 115%"><B>' + aCipher.Gematria(sHistory[x], 2, false, true) + '</B></font>'
+			gemSum = '<font style="font-size: 115%"><B>' + aCipher.Gematria(sHistory[x], 2, false, true) + '</B></font>' // actual value displayed
 
-			ms += '<td><font style="color: RGB(' + aCipher.RGB.join() + '")>' + gemSum + '</font></td>'
+			r = aCipher.R;
+			g = aCipher.G;
+			b = aCipher.B;
+			//if (!highlt.match(/\S/) && highlt.indexOf(aCipher.Gematria(sHistory[x], 2, false, true)) >- 1) { // if highlight not empty and doesn't match value
+			if (highlt > 0 && aCipher.Gematria(sHistory[x], 2, false, true) != highlt) { // if highlight not empty and doesn't match value
+				r *= 0.3
+				g *= 0.3
+				b *= 0.3
+			}
+			numcol = r+','+g+','+b
+			
+			//ms += '<td><font style="color: RGB(' + aCipher.RGB.join() + '")>' + gemSum + '</font></td>'
+			ms += '<td><font style="color: RGB(' + numcol + '")>' + gemSum + '</font></td>'
 		}
 		ms += '</tr>'
 	}
