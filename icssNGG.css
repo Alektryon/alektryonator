@@ -4,6 +4,16 @@ body {
 	color: white;
 }
 
+#Highlight {
+	background-color: RGB(16, 16, 16);
+	color: RGB(220, 220, 220);
+	font-weight: bold;
+	border-style: solid;
+	border-width: 1px;
+	border-color: RGB(77, 77, 77);
+	
+}
+
 #MenuSpot {
 	display: inline;
 }

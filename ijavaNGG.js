@@ -152,10 +152,11 @@ function Open_History() {
 
 	if (sHistory.length == 0) {return}
 	
-	highlt = document.getElementById("Highlight").value // value of Highlight textbox
 
 	ms = '<table class="HistoryTable">'
-
+	highlt = document.getElementById("Highlight").value // value of Highlight textbox
+	highlt_num = highlt.split(" "); // create array, space delimited numbers
+	
 	for (x = 0; x < sHistory.length; x++) {
 
 		if (x % 25 == 0) {
@@ -179,8 +180,12 @@ function Open_History() {
 			r = aCipher.R;
 			g = aCipher.G;
 			b = aCipher.B;
-			//if (!highlt.match(/\S/) && highlt.indexOf(aCipher.Gematria(sHistory[x], 2, false, true)) >- 1) { // if highlight not empty and doesn't match value
-			if (highlt > 0 && aCipher.Gematria(sHistory[x], 2, false, true) != highlt) { // if highlight not empty and doesn't match value
+
+			//console.log("highlt_num.includes('"+aCipher.Gematria(sHistory[x], 2, false, true)+"'))")
+			//console.log(highlt_num.indexOf((aCipher.Gematria(sHistory[x], 2, false, true)).toString()))
+			//console.log(highlt_num)
+			
+			if (highlt_num[0] > 0 && !highlt_num.includes((aCipher.Gematria(sHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
 				r *= 0.3
 				g *= 0.3
 				b *= 0.3

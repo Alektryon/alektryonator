@@ -107,6 +107,7 @@ class cipher {
 		if (impMods.indexOf("EnglishShort") > -1) {this.Make_EnglishShort()}
 		if (impMods.indexOf("EnglishKaye") > -1) {this.Make_EnglishKaye()}
 		if (impMods.indexOf("RussianE") > -1) {this.Make_RussianE()}
+		if (impMods.indexOf("RussianRevE") > -1) {this.Make_RussianRevE()}
 	}
 
 	Gematria(impVal, impType, wLink = false, impHistory = false) {
@@ -534,6 +535,10 @@ class cipher {
 		this.vArr = [1,2,3,4,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
 		this.vArr2 = [1,2,3,4,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
 	}
+	Make_RussianRevE() {
+		this.vArr = [32,31,30,29,28,27,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+		this.vArr2 = [32,31,30,29,28,27,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+	}
 
 }
 
@@ -704,7 +709,7 @@ function Build_Ciphers() {
 			case "RU Reverse Sumerian": allCiphers[allCiphers.length] = new cipher(key, "Russian", 220, 208, 148, "Reverse", "SumerianNum"); break;
 			
 			case "RU Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 128, 0, "RussianE"); break;
-			case "RU Reverse Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 160, 20, "Reverse", "RussianE"); break;
+			case "RU Reverse Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 160, 20, "RussianRevE"); break;
 			
 			case "English IJ/UV": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "EnglishIJUV"); break;
 			case "Reverse English IJ/UV": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "EnglishIJUVReverse"); break;
@@ -909,7 +914,7 @@ function No_Ciphers(impBool = false) {
 }
 function Add_RussianCiphers(impBool = false) {
 	var x, q, cN, z
-	var baseCiphers = ["RU Ordinal", "RU Full Reduction", "RU Single Reduction", "RU Sumerian", "RU Reverse Ordinal", "RU Reverse Full Reduction", "RU Reverse Single Reduction", "RU Reverse Sumerian", "RU Ordinal E", "RU Reverse Ordinal E"]
+	var baseCiphers = ["RU Ordinal", "RU Full Reduction", "RU Single Reduction", "RU Sumerian", "RU Reverse Ordinal", "RU Reverse Full Reduction", "RU Reverse Single Reduction", "RU Reverse Sumerian"]
 
 	openCiphers = []
 	for (z = 0; z < allCiphers.length; z++) {
