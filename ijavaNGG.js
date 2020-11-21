@@ -92,6 +92,11 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 			Open_History() // update table
 			//console.log(sHistory)
 			break;
+		case 36: // Home, clear all history
+			sHistory = [] // reinitialize array if there is only one entry
+			tArea = document.getElementById("MiscSpot")
+			tArea.innerHTML = '<table class="HistoryTable"></table>' // clear table
+			break;
 		case 35: // End, enter sentence as separate words and phrases
 			wordarray = (tBox.value).split(" ")
 			phr_len = 5 // max phrase length
