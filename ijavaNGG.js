@@ -54,6 +54,11 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 	hPlace = sHistory.indexOf(thisTerm)
 	switch (impNum) {
 		case 13: // Enter
+			if (ctrlKey = true) {
+				//console.log("Ctrl+Enter")
+				newHistory(true)
+				break;
+			}
 			newHistory(true)
 			tBox.value = "" // clear textbox
 			break;
@@ -87,8 +92,56 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 			Open_History() // update table
 			//console.log(sHistory)
 			break;
+		case 35: // End, enter sentence as separate words and phrases
+			wordarray = (tBox.value).split(" ")
+			phr_len = 5 // max phrase length
+			for (i = 0; i < wordarray.length; i++) {
+				k = 1 // init variable
+				phrase = wordarray[i]
+				newHistoryBulk(true, phrase)
+				while (k < phr_len && i+k < wordarray.length) { // add words to a phrase, check it is within array size
+					phrase += " "+wordarray[i+k]
+					newHistoryBulk(true, phrase)
+					k++
+				}
+			}
+			break;
 	}
 }
+
+function newHistoryBulk(impOpt = false, word) { // called from function navHistory(impNum) -> case 13
+	var hSpot, isNew
+	var x, ys
+	var impVal = replaceAll(word, "|", "")
+
+	isNew = false
+
+	if (impVal !== "") {
+
+		if (Number(impVal) > 0) {
+
+		} else {
+			hSpot = sHistory.indexOf(impVal);
+
+			if (hSpot > -1) {
+				sHistory.splice(hSpot, 1)
+			} else {
+				isNew = true
+			}
+			
+			//if (sHistory.length > 100) { // history entry limit
+			//	sHistory.pop()
+			//}
+
+			sHistory.unshift(impVal)
+		}
+	}
+	
+	if (impOpt == true || miscContents !== "match") {Open_History()}
+	if (isNew == true) {AddTerm(); UpdateUserHistory()};
+	//console.log(sHistory);
+}
+
 function newHistory(impOpt = false) { // called from function navHistory(impNum) -> case 13
 	var hSpot, isNew
 	var x, ys
@@ -109,9 +162,9 @@ function newHistory(impOpt = false) { // called from function navHistory(impNum)
 				isNew = true
 			}
 			
-			if (sHistory.length > 100) {
-				sHistory.pop()
-			}
+			//if (sHistory.length > 100) { // history entry limit
+			//	sHistory.pop()
+			//}
 
 			sHistory.unshift(impVal)
 		}
