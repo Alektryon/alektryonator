@@ -3,6 +3,7 @@
 
 - Removed 100 entries history limit
 - Textbox is cleared on "Enter" after new word is added to history (press "Del" to clear manually)
+- Press "Home" inside textbox to empty history
 - New entries are no longer added on mouse over ciphers
 - Sentence can be added as a list of words and phrases (press "End" instead of "Enter")
 - History table is updated on new cipher selection
