@@ -897,6 +897,13 @@ function PromptCustomValues() {
 		customvalues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26] // reinitialize array to Ordinal
 	}
 	
+	pop_zero = customvalues.length // populate missing values with zeroes so there is no "undefined" if less than 26 values are specified
+	if (pop_zero < 26) {
+		for (i = pop_zero; i < 26; i++) {
+				customvalues.push(0)
+		};
+	}
+	
 	cipherArray = [] // clear cipher array
 	catArr = [] // clear categories
 	allCiphers = [] // clear ciphers
