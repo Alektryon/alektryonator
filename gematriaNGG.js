@@ -1,11 +1,14 @@
 var catArr = []; gemArr = []
 var cipherArray = [];
-var openCiphers = ["English Ordinal", "Full Reduction", "Single Reduction", "English Extended", "Reverse Ordinal", "Reverse Full Reduction", "Reverse Single Reduction", "Reverse Extended", "Jewish Reduction", "Jewish Ordinal", "Jewish", "ALW Kabbalah", "English Sumerian", "Reverse English Sumerian"]
+var openCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
 var ciphersOn = []; allCiphers = []; sHistory = []
 var opt_NumCalculation = "Reduced"
 var primeArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 
 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251]
 var ignoreArr = [1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473]
+
+var customvalues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26] // English Custom
+//var customcharset = [];
 
 function Gem_Launch() {
 	Set_Categories()
@@ -108,6 +111,7 @@ class cipher {
 		if (impMods.indexOf("EnglishKaye") > -1) {this.Make_EnglishKaye()}
 		if (impMods.indexOf("RussianE") > -1) {this.Make_RussianE()}
 		if (impMods.indexOf("RussianRevE") > -1) {this.Make_RussianRevE()}
+		if (impMods.indexOf("EnglishCustom") > -1) {this.Make_CustomCipher()}
 	}
 
 	Gematria(impVal, impType, wLink = false, impHistory = false) {
@@ -539,6 +543,11 @@ class cipher {
 		this.vArr = [32,31,30,29,28,27,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
 		this.vArr2 = [32,31,30,29,28,27,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
 	}
+	Make_CustomCipher() {
+		// if array is empty, populate it with Ordinal values
+		this.vArr = customvalues
+		this.vArr2 = customvalues
+	}
 
 }
 
@@ -623,7 +632,7 @@ function isReduced(impNum, impOpt = false) {
 		return false
 	}
 }
-
+			
 function Build_Ciphers() {
 	var key
 
@@ -716,6 +725,8 @@ function Build_Ciphers() {
 			case "English Illuminati": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 201, 171, "EnglishIlluminati"); break;
 			case "English Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "EnglishShort"); break;
 			case "English Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "EnglishKaye"); break;
+			
+			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 224, 224, 32, "EnglishCustom"); break;
 
 		}
 	}
@@ -724,7 +735,7 @@ function Build_Ciphers() {
 }
 
 function Set_Categories() {
-	catArr = ["English", "English (Special)", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian"]
+	catArr = ["English", "English (Special)", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian", "Custom"]
 
 	cipherArray["English Ordinal"] = "English"
 	cipherArray["Full Reduction"] = "English"
@@ -815,6 +826,8 @@ function Set_Categories() {
 	cipherArray["English Short"] = "English (Special)"
 	cipherArray["English Kaye"] = "English (Special)"
 	
+	cipherArray["English Custom"] = "Custom"
+	
 
 }
 
@@ -854,7 +867,9 @@ function Add_AllCiphers(impBool = false) {
 	for (x = 0; x < allCiphers.length; x++) {
 		q = 0
 		cN = allCiphers[x].Nickname
-		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1 && cN.indexOf("RU") == -1) {
+		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1
+		&& cN.indexOf("RU") == -1 && cN.indexOf("Custom") == -1 &&
+		cN.indexOf("IJ/UV") == -1 && cN.indexOf("Illuminati") == -1 && cN.indexOf("Short") == -1 && cN.indexOf("Kaye") == -1) {
 			for (z = 0; z < allCiphers.length; z++) {
 				if (allCiphers[z].Nickname == cN) {
 					openCiphers.splice(q, 0, cN)

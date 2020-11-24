@@ -54,11 +54,6 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 	hPlace = sHistory.indexOf(thisTerm)
 	switch (impNum) {
 		case 13: // Enter
-			if (ctrlKey = true) {
-				//console.log("Ctrl+Enter")
-				newHistory(true)
-				break;
-			}
 			newHistory(true)
 			tBox.value = "" // clear textbox
 			break;
@@ -866,6 +861,52 @@ function Set_Breakdown() {
 function Open_Shortcuts() {
 	//window.open("http://www.gematrinator.com/nextgen/Shortcuts.png", 'Keyboard Shortcuts')
 }
+
+//function PromptCustomCharacters() {
+//	if (customcharset.length < 1) { examplecharset = "a b c d e f g h i j k l m n o p q r s t u v w x y z"; }
+//	var retVal = prompt("Enter custom set of comma delimited characters: ", customcharset)
+//    console.log("You have entered : " + retVal)
+//	split = retVal.split(",")
+//	console.log(split)
+//}
+
+function PromptCustomValues() {
+	//empty = false
+	if (customvalues[0] == null) {
+		examplevalues = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26";
+		empty = true // otherwise else condition becomes immediately valid
+	//} else if (!empty) {
+	} else {
+		//string = JSON.stringify(customvalues).replace(/","/g, "\n");
+		string = JSON.stringify(customvalues);
+		examplevalues = string.substring(1, string.length - 1);
+	}
+	
+	var retVal = prompt("Enter custom set of comma delimited values: ", examplevalues) // user input prompt
+	console.log("You have entered : " + retVal)
+	split = retVal.split(",") // string to string array, comma delimited
+	console.log(split)
+
+	result = split.map(function (x) { // parse string array as integer array to exclude quotes
+		return parseInt(x, 10); 
+	});
+	customvalues = result
+	
+	console.log(customvalues)
+	if (split == "") {
+		customvalues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26] // reinitialize array to Ordinal
+	}
+	
+	cipherArray = [] // clear cipher array
+	catArr = [] // clear categories
+	allCiphers = [] // clear ciphers
+	gemArr = []
+
+	Page_Launch() // rebuild ciphers and categories
+	
+	Open_History() // update history table values
+}
+
 function Open_Ciphers(impOpt = cOption, impBool = false) {
 	var mSpot = document.getElementById("MenuSpot")
 	var hStr = '<center><table id="CipherChart"><tr>'
@@ -882,7 +923,7 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 
 	for (key in cipherArray) {
 		thisCat = cipherArray[key]
-		if (thisCat == cOption) {
+		if (thisCat == cOption && thisCat !== "Custom") { // all categories except for custom
 			keyOn = "unchecked"
 			for (x = 0; x < ciphersOn.length; x++) {
 				if (ciphersOn[x].Nickname == key) {
@@ -900,12 +941,39 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 			hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
 		}
 	}
+	
+	if (cOption == "Custom") { // special menu for Custom category
+			keyOn = "unchecked"
+			for (x = 0; x < ciphersOn.length; x++) {
+				if (ciphersOn[x].Nickname == key) {
+					keyOn = "checked"
+					break;
+				}
+			}
+			for (y = 0; y < allCiphers.length; y++) {
+				if (allCiphers[y].Nickname == key) {
+					aCipher = allCiphers[y]
+					break;
+				}
+			}
+			hStr += '<input type="checkbox" id="' + replaceAll(key, " ", "") + '_Box" onclick="set_Ciphers()" value="' + key + '" '
+			hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
+			
+			//hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomCharacters()" value="CusotmCharacters"><B>Characters</B></button>'
+			hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomValues()" value="CustomValues"><B>Custom</B></button>'
+			hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
+			hStr += '<button class="CipherButton" onclick="Add_AllCiphers(true)" value="AllCiphers"><B>All Ciphers</B></button>'
+			hStr += '<button class="CipherButton" onclick="Add_RussianCiphers(true)" value="RussianCiphers"><B>Russian</B></button><BR>'
+			hStr += '</td></tr></table></center>'
+	}
 
-	hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="No_Ciphers(true)" value="NoCiphers"><B>Empty</B></button>'
-	hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
-	hStr += '<button class="CipherButton" onclick="Add_AllCiphers(true)" value="AllCiphers"><B>All Ciphers</B></button>'
-	hStr += '<button class="CipherButton" onclick="Add_RussianCiphers(true)" value="RussianCiphers"><B>Russian</B></button><BR>'
-	hStr += '</td></tr></table></center>'
+	if (cOption !== "Custom") { // populate buttons for all categories except custom
+		hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="No_Ciphers(true)" value="NoCiphers"><B>Empty</B></button>'
+		hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
+		hStr += '<button class="CipherButton" onclick="Add_AllCiphers(true)" value="AllCiphers"><B>All Ciphers</B></button>'
+		hStr += '<button class="CipherButton" onclick="Add_RussianCiphers(true)" value="RussianCiphers"><B>Russian</B></button><BR>'
+		hStr += '</td></tr></table></center>'
+	}
 
 	mSpot.innerHTML = ""
 	mSpot.innerHTML = hStr
