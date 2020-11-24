@@ -11,4 +11,5 @@
 - Dynamic highlighter, type space delimited numbers in the dark textbox ("Del" to clear)
 - Old history entries can be removed with "Del", use Up/Down arrows to cycle through history
 - Added "English (special)" cipher category
+- Added "Custom" cipher category (English alphabet, fully customizable)
 - Added "Russian" cipher category
