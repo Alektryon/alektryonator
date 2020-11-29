@@ -109,6 +109,9 @@ class cipher {
 		if (impMods.indexOf("EnglishIlluminati") > -1) {this.Make_EnglishIlluminati()}
 		if (impMods.indexOf("EnglishShort") > -1) {this.Make_EnglishShort()}
 		if (impMods.indexOf("EnglishKaye") > -1) {this.Make_EnglishKaye()}
+		if (impMods.indexOf("BeatusOrdinal") > -1) {this.Make_BeatusOrdinal()}
+		if (impMods.indexOf("BeatusReduction") > -1) {this.Make_BeatusReduction()}
+		if (impMods.indexOf("BeatusExtended") > -1) {this.Make_BeatusExtended()}
 		if (impMods.indexOf("RussianE") > -1) {this.Make_RussianE()}
 		if (impMods.indexOf("RussianRevE") > -1) {this.Make_RussianRevE()}
 		if (impMods.indexOf("EnglishCustom") > -1) {this.Make_CustomCipher()}
@@ -535,6 +538,18 @@ class cipher {
 		this.vArr = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
 		this.vArr2 = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
 	}
+	Make_BeatusOrdinal() {
+		this.vArr = [1,2,3,4,5,6,7,8,9,9,10,11,12,13,14,15,16,17,18,19,20,20,20,21,22,23]
+		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,10,11,12,13,14,15,16,17,18,19,20,20,20,21,22,23]
+	}
+	Make_BeatusReduction() {
+		this.vArr = [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,1,2,2,2,3,4,5]
+		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,1,2,2,2,3,4,5]
+	}
+	Make_BeatusExtended() {
+		this.vArr = [1,2,3,4,5,6,7,8,9,9,10,20,30,40,50,60,70,80,90,100,200,200,200,300,400,500]
+		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,10,20,30,40,50,60,70,80,90,100,200,200,200,300,400,500]
+	}
 	Make_RussianE() {
 		this.vArr = [1,2,3,4,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
 		this.vArr2 = [1,2,3,4,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
@@ -725,6 +740,9 @@ function Build_Ciphers() {
 			case "English Illuminati": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 201, 171, "EnglishIlluminati"); break;
 			case "English Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "EnglishShort"); break;
 			case "English Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "EnglishKaye"); break;
+			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 163, 70, "BeatusOrdinal"); break;
+			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 200, 171, 16, "BeatusReduction"); break;
+			case "Beatus Extended": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "BeatusExtended"); break;
 			
 			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 224, 224, 32, "EnglishCustom"); break;
 
@@ -825,6 +843,9 @@ function Set_Categories() {
 	cipherArray["English Illuminati"] = "English (Special)"
 	cipherArray["English Short"] = "English (Special)"
 	cipherArray["English Kaye"] = "English (Special)"
+	cipherArray["Beatus of Liebana"] = "English (Special)"
+	cipherArray["Beatus Reduction"] = "English (Special)"
+	cipherArray["Beatus Extended"] = "English (Special)"
 	
 	cipherArray["English Custom"] = "Custom"
 	
