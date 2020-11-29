@@ -95,16 +95,28 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 		case 35: // End, enter sentence as separate words and phrases
 			wordarray = (tBox.value).split(" ")
 			phr_len = 5 // max phrase length
-			for (i = 0; i < wordarray.length; i++) {
+			var phrase; // init variable outside of for cycle, memory efficient
+			// for (i = 0; i < wordarray.length; i++) { // phrases in normal order
+				// k = 1 // init variable
+				// phrase = wordarray[i]
+				// newHistoryBulk(true, phrase)
+				// while (k < phr_len && i+k < wordarray.length) { // add words to a phrase, check it is within array size
+					// phrase += " "+wordarray[i+k]
+					// newHistoryBulk(true, phrase)
+					// k++
+				// }
+			// }
+			for (i = wordarray.length-1; i > 0; i--) { // add phrases in reverse order, so you don't have to read backwards
 				k = 1 // init variable
 				phrase = wordarray[i]
 				newHistoryBulk(true, phrase)
-				while (k < phr_len && i+k < wordarray.length) { // add words to a phrase, check it is within array size
-					phrase += " "+wordarray[i+k]
+				while (k < phr_len && i-k > -1) { // add words to a phrase, check it is within array size
+					phrase = wordarray[i-k]+" "+phrase
 					newHistoryBulk(true, phrase)
 					k++
 				}
 			}
+			Open_History() // update table only once after all phrases are added
 			break;
 	}
 }
@@ -137,7 +149,7 @@ function newHistoryBulk(impOpt = false, word) { // called from function navHisto
 		}
 	}
 	
-	if (impOpt == true || miscContents !== "match") {Open_History()}
+	//if (impOpt == true || miscContents !== "match") {Open_History()}
 	if (isNew == true) {AddTerm(); UpdateUserHistory()};
 	//console.log(sHistory);
 }
