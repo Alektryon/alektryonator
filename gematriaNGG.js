@@ -740,9 +740,9 @@ function Build_Ciphers() {
 			case "English Illuminati": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 201, 171, "EnglishIlluminati"); break;
 			case "English Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "EnglishShort"); break;
 			case "English Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "EnglishKaye"); break;
-			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 163, 70, "BeatusOrdinal"); break;
+			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 163, 70, "BeatusExtended"); break;
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 200, 171, 16, "BeatusReduction"); break;
-			case "Beatus Extended": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "BeatusExtended"); break;
+			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "BeatusOrdinal"); break;
 			
 			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 224, 224, 32, "EnglishCustom"); break;
 
@@ -845,7 +845,7 @@ function Set_Categories() {
 	cipherArray["English Kaye"] = "English (Special)"
 	cipherArray["Beatus of Liebana"] = "English (Special)"
 	cipherArray["Beatus Reduction"] = "English (Special)"
-	cipherArray["Beatus Extended"] = "English (Special)"
+	cipherArray["Beatus Ordinal"] = "English (Special)"
 	
 	cipherArray["English Custom"] = "Custom"
 	
