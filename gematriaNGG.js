@@ -881,6 +881,8 @@ function Remove_Cipher(impName) {
 		if (openCiphers.length > 0) {breakCipher = openCiphers[0]} else {breakCipher = ""}
 		Populate_Breakdown()
 	}
+	
+	Open_History() // update table
 }
 function Add_AllCiphers(impBool = false) {
 	var x, q, cN, z
