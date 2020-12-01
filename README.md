@@ -12,7 +12,7 @@
 - Press "Home" inside textbox to clear all history, no need to reload page
 - Sentence can be added as a list of words and phrases (press "End" instead of "Enter")
 - Dynamic highlighter, type space delimited numbers in the dark textbox ("Del" to clear)
-- You can also click values inside history table to toggle highlighter
+- You can also click on values inside history table to toggle highlighter
 
 ### Ciphers:
 - Added "Empty" button to disable all active ciphers
