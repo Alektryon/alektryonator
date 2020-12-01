@@ -3,13 +3,18 @@
 
 - Removed 100 entries history limit
 - Textbox is cleared on "Enter" after new word is added to history (press "Del" to clear manually)
-- Press "Home" inside textbox to empty history
 - New entries are no longer added on mouse over ciphers
-- Sentence can be added as a list of words and phrases (press "End" instead of "Enter")
 - History table is updated on new cipher selection
-- Added "Empty" button to disable all active ciphers
+
+- Old history entries can be separately removed with "Del", use Up/Down arrows to cycle through history
+- Press "Home" inside textbox to clear all history, no need to reload page
+
+- Sentence can be added as a list of words and phrases (press "End" instead of "Enter")
+
 - Dynamic highlighter, type space delimited numbers in the dark textbox ("Del" to clear)
-- Old history entries can be removed with "Del", use Up/Down arrows to cycle through history
+- You can also click values inside history table to toggle highlighter
+
+- Added "Empty" button to disable all active ciphers
 - Added "English (special)" cipher category
 - Added "Custom" cipher category (English alphabet, fully customizable)
 - Added "Russian" cipher category
