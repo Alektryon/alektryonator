@@ -241,6 +241,7 @@ function Open_History() {
 			
 			aCipher = ciphersOn[y]
 			gemSum = '<font style="font-size: 115%"><B>' + aCipher.Gematria(sHistory[x], 2, false, true) + '</B></font>' // actual value displayed
+			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
 
 			r = aCipher.R;
 			g = aCipher.G;
@@ -258,7 +259,8 @@ function Open_History() {
 			numcol = r+','+g+','+b
 			
 			//ms += '<td><font style="color: RGB(' + aCipher.RGB.join() + '")>' + gemSum + '</font></td>'
-			ms += '<td><font style="color: RGB(' + numcol + '")>' + gemSum + '</font></td>'
+			//ms += '<td><font style="color: RGB(' + numcol + '")>' + gemSum + '</font></td>'
+			ms += '<td onclick="tdToggleHighlight('+gemVal+')"><font style="color: RGB(' + numcol + '")>' + gemSum + '</font></td>'
 		}
 		ms += '</tr>'
 	}
@@ -267,6 +269,28 @@ function Open_History() {
 	tArea.innerHTML = ms
 	miscContents = "history"
 }
+
+function tdToggleHighlight(val){ // click on value in history table to toggle highlighter
+    //console.log('Clicked on: '+val)
+	highlt = document.getElementById("Highlight").value
+	prevchar = highlt.substring(highlt.indexOf(val+" "),highlt.indexOf(val+" ")-1)
+	lastchar = highlt.substring(highlt.length-1,highlt.length)
+	
+	// disable
+	if (highlt.indexOf(val+" ") > -1 && prevchar == " " || highlt.indexOf(val+" ") == 0) { // if value is present and previous character is space, or if it is the first number
+		document.getElementById("Highlight").value = document.getElementById("Highlight").value.replace(val+" ",""); // remove value from textbox
+		Open_History() // update table
+		return
+	}
+	
+	// enable
+	if (lastchar !== " " && highlt.length > 0) {
+		document.getElementById("Highlight").value += " " // append space if you manually typed numbers before
+	}
+	document.getElementById("Highlight").value += val+" " // append clicked value to Highlight textbox
+	//console.log('Highlight: '+document.getElementById("Highlight").value)
+	Open_History() // update table
+};
 
 function getSum(total, num) {
     return total + num;
