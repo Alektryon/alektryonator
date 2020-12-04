@@ -5,6 +5,10 @@ var pixelcount = 0; breakArr = []; pArr= []; mArr = []
 var opt_Reduce = true; opt_Quotes = true; opt_Summ = true; opt_Breakdown = "Chart"; opt_LetterCount = true
 var opt_Chart = true; opt_Shortcuts = true; opt_Headers = true; opt_InTable = false
 
+var values_arr = []; // automatically higlight all available matches
+var phrase_val = [];
+var avail_val = []; // matches available for auto highligher
+
 function Page_Launch() {
 	//Header_Load()
 	Gem_Launch()
@@ -117,6 +121,9 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 				}
 			}
 			Open_History() // update table only once after all phrases are added
+			break;
+		case 45:// Insert, auto available values highlighter
+			Open_HistoryAutoHlt()
 			break;
 	}
 }
@@ -291,6 +298,61 @@ function tdToggleHighlight(val){ // click on value in history table to toggle hi
 	//console.log('Highlight: '+document.getElementById("Highlight").value)
 	Open_History() // update table
 };
+
+function Open_HistoryAutoHlt() {
+	var x, y, aCipher
+
+	avail_val = [] // reinit
+	values_arr = []
+	
+	if (sHistory.length == 0) {return}
+	
+	for (x = 0; x < sHistory.length; x++) { // calculate gematria for all phrases
+		for (y = 0; y < ciphersOn.length; y++) {
+			aCipher = ciphersOn[y]
+			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
+			phrase_val.push(gemVal) // append all values of this phrase
+		}
+		values_arr.push(phrase_val) // append all values of each phrase
+		phrase_val = [] // reinit	
+	}
+	
+	//auto highlighter, all available values
+	var cur_phrase_arr = []
+	var cur_phrase_arr2 = []
+	var cur_val // current word value
+	
+	for (i = 0; i < values_arr.length; i++){ // loop array
+		cur_phrase_arr = values_arr[i] // select row with phrase values
+		for (n = 0; n < cur_phrase_arr.length; n++){
+			cur_val = cur_phrase_arr[n] // took the first value of the first phrase
+			for (m = 0; m < values_arr.length; m++){ // loop array again to find mathces
+				if (m!=i){ // can't be same row
+					//console.log("m:"+m+" i:"+i)
+					cur_phrase_arr2 = values_arr[m] // select another row
+					for (p = 0; p < cur_phrase_arr2.length; p++){ // loop values in that row
+						if (cur_val == cur_phrase_arr2[p] && avail_val.indexOf(cur_val) == -1) { // avoid duplicate matches
+							avail_val.push(cur_val) // if matching number is found in other rows (phrases), push to array
+						}
+					}
+				}
+			}
+		}
+	}
+	cur_phrase_arr = [] // reinit
+	cur_phrase_arr2 = []
+	cur_val = ""
+	
+	console.log(values_arr) // print all phrase values 2d array
+	console.log(avail_val) // print available matches
+	
+	// paste available values inside Highlight textbox
+	str = JSON.stringify(avail_val).replace(/,/g, " ") // replace comma with space
+	substr = str.substring(1, str.length - 1) // remove brackets
+	document.getElementById("Highlight").value = substr
+	
+	Open_History() // update table
+}
 
 function getSum(total, num) {
     return total + num;
