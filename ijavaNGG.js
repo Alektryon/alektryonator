@@ -279,23 +279,32 @@ function Open_History() {
 
 function tdToggleHighlight(val){ // click on value in history table to toggle highlighter
     //console.log('Clicked on: '+val)
-	highlt = document.getElementById("Highlight").value
-	prevchar = highlt.substring(highlt.indexOf(val+" "),highlt.indexOf(val+" ")-1)
+	highlt = document.getElementById("Highlight").value.replace(/ +/g," ") // get value, remove double spaces
 	lastchar = highlt.substring(highlt.length-1,highlt.length)
 	
+	highlt_num = highlt.split(" ") // create array, space delimited numbers
+	highlt_num = highlt_num.map(function (x) { // parse string array as integer array to exclude quotes
+		return parseInt(x, 10); 
+	});
+	
+	i = highlt_num.indexOf(val)
+	
 	// disable
-	if (highlt.indexOf(val+" ") > -1 && prevchar == " " || highlt.indexOf(val+" ") == 0) { // if value is present and previous character is space, or if it is the first number
-		document.getElementById("Highlight").value = document.getElementById("Highlight").value.replace(val+" ",""); // remove value from textbox
+	var hlt_val
+	if (i > -1) { // if value is present
+		highlt_num.splice(i,1) // remove value
+		hlt_val = JSON.stringify(highlt_num).replace(/,/g, " ") // to string
+		hlt_val = hlt_val.substring(1, hlt_val.length-1) // remove brackets
+		document.getElementById("Highlight").value = hlt_val // update values inside textbox
 		Open_History() // update table
 		return
 	}
 	
 	// enable
 	if (lastchar !== " " && highlt.length > 0) {
-		document.getElementById("Highlight").value += " " // append space if you manually typed numbers before
+		document.getElementById("Highlight").value += " " // append space if necessary
 	}
-	document.getElementById("Highlight").value += val+" " // append clicked value to Highlight textbox
-	//console.log('Highlight: '+document.getElementById("Highlight").value)
+	document.getElementById("Highlight").value += val // append clicked value to Highlight textbox
 	Open_History() // update table
 };
 
@@ -1010,6 +1019,7 @@ function PromptCustomValues() {
 	Page_Launch() // rebuild ciphers and categories
 	
 	Open_History() // update history table values
+	Open_Ciphers() // open Cipher options
 }
 
 function Open_Ciphers(impOpt = cOption, impBool = false) {
@@ -1045,32 +1055,34 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 			hStr += '<input type="checkbox" id="' + replaceAll(key, " ", "") + '_Box" onclick="set_Ciphers()" value="' + key + '" '
 			hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
 		}
+		if (thisCat == cOption && thisCat == "Custom") { // special menu for Custom category
+				keyOn = "unchecked"
+				for (x = 0; x < ciphersOn.length; x++) {
+					if (ciphersOn[x].Nickname == key) {
+						keyOn = "checked"
+						break;
+					}
+				}
+				for (y = 0; y < allCiphers.length; y++) {
+					if (allCiphers[y].Nickname == key) {
+						aCipher = allCiphers[y]
+						break;
+					}
+				}
+				hStr += '<input type="checkbox" id="' + replaceAll(key, " ", "") + '_Box" onclick="set_Ciphers()" value="' + key + '" '
+				hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
+		}
+	}
+
+	if (cOption == "Custom") {
+		//hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomCharacters()" value="CusotmCharacters"><B>Characters</B></button>'
+		hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomValues()" value="CustomValues"><B>Custom</B></button>'
+		hStr += '<button class="CipherButton" onclick="No_Ciphers(true)" value="NoCiphers"><B>Empty</B></button>'
+		hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
+		hStr += '<button class="CipherButton" onclick="Add_AllCiphers(true)" value="AllCiphers"><B>All Ciphers</B></button>'
+		hStr += '<BR></td></tr></table></center>'
 	}
 	
-	if (cOption == "Custom") { // special menu for Custom category
-			keyOn = "unchecked"
-			for (x = 0; x < ciphersOn.length; x++) {
-				if (ciphersOn[x].Nickname == key) {
-					keyOn = "checked"
-					break;
-				}
-			}
-			for (y = 0; y < allCiphers.length; y++) {
-				if (allCiphers[y].Nickname == key) {
-					aCipher = allCiphers[y]
-					break;
-				}
-			}
-			hStr += '<input type="checkbox" id="' + replaceAll(key, " ", "") + '_Box" onclick="set_Ciphers()" value="' + key + '" '
-			hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
-			
-			//hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomCharacters()" value="CusotmCharacters"><B>Characters</B></button>'
-			hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomValues()" value="CustomValues"><B>Custom</B></button>'
-			hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
-			hStr += '<button class="CipherButton" onclick="Add_AllCiphers(true)" value="AllCiphers"><B>All Ciphers</B></button>'
-			hStr += '<button class="CipherButton" onclick="Add_RussianCiphers(true)" value="RussianCiphers"><B>Russian</B></button><BR>'
-			hStr += '</td></tr></table></center>'
-	}
 
 	if (cOption !== "Custom") { // populate buttons for all categories except custom
 		hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="No_Ciphers(true)" value="NoCiphers"><B>Empty</B></button>'
