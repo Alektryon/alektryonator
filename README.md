@@ -9,14 +9,17 @@
 
 ### New features:
 - Old history entries can be separately removed with "Del", use Up/Down arrows to cycle through history
-- Press "Home" inside textbox to clear all history, no need to reload page
+- Press "Home" inside white textbox to clear all history, no need to reload page
 - Sentence can be added as a list of words and phrases (press "End" instead of "Enter")
 - Dynamic highlighter, type space delimited numbers in the dark textbox ("Del" to clear)
 - Press "Insert" inside the white textbox to automatically highlight all available matches
-- You can also click on values inside history table to toggle highlighter
+- Click on values inside history table to toggle highlighter
 
 ### Ciphers:
 - Added "Empty" button to disable all active ciphers
 - Added "English (special)" cipher category
 - Added "Custom" cipher category (English alphabet, fully customizable)
 - Added "Russian" cipher category
+
+### Experimental:
+- Press "Page Down" inside dark textbox to display only those phrases that match highlighter values (*entries are permanently removed from history*)
