@@ -125,8 +125,52 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 		case 45:// Insert, auto available values highlighter
 			Open_HistoryAutoHlt()
 			break;
+		// case 34:// Page Down, remove phrases that don't match
+			// RemoveNotMatchingPhrases()
+			// break;
 	}
 }
+
+function RemoveNotMatchingPhrases() {
+	
+	highlt = document.getElementById("Highlight").value.replace(/ +/g," ") // get value, remove double spaces
+	highlt_num = highlt.split(" ") // create array, space delimited numbers
+	highlt_num = highlt_num.map(function (x) { // parse string array as integer array to exclude quotes
+		return parseInt(x, 10); 
+	});
+	
+	var phr_values = []
+	var match = false
+	var x = 0
+	// for (x = 0; x < sHistory.length; x++) { // for each phrase in history
+	while (x < sHistory.length) { // for each phrase in history
+	
+		phr_values = [] // reinit
+		match = false
+		
+		for (y = 0; y < ciphersOn.length; y++) { // for each enabled cipher
+			aCipher = ciphersOn[y]
+			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
+			phr_values.push(gemVal) // build an array of all gematria values for that phrase
+		}
+		//console.log(phr_values)
+		for (z = 0; z < highlt_num.length; z++) { // for each chosen value to be highlighted
+			if (phr_values.indexOf(highlt_num[z]) > -1 && !match) { // if value is present in any gematria cipher
+				match = true // if match is found
+			}
+		}
+		//console.log(match)
+		if (!match) { // if no match is found, don't do x++ as array indices shift
+			//console.log("removed: '"+sHistory[x]+"'")
+			sHistory.splice(x,1) // remove phrase
+		} else {
+			x++ // check next item if match is found
+		}
+	}
+	
+	Open_History() // rebuild table
+	
+}	
 
 function newHistoryBulk(impOpt = false, word) { // called from function navHistory(impNum) -> case 13
 	var hSpot, isNew
@@ -352,8 +396,12 @@ function Open_HistoryAutoHlt() {
 	cur_phrase_arr2 = []
 	cur_val = ""
 	
-	console.log(values_arr) // print all phrase values 2d array
-	console.log(avail_val) // print available matches
+	avail_val.sort(function(a, b) { // sort ascending order
+		return a - b; //  b - a, for descending sort
+	});
+	
+	//console.log(values_arr) // print all phrase values 2d array
+	console.log(JSON.stringify(avail_val).replace(/,/g, " ").slice(1, -1)) // print available matches
 	
 	// paste available values inside Highlight textbox
 	str = JSON.stringify(avail_val).replace(/,/g, " ") // replace comma with space

@@ -10,8 +10,11 @@
 
 $(document).ready(function(){
     $("#Highlight").keyup(function(event){ // Highlight box
-		if ( event.which == 46 ) { // "Delete" is pressed
+		if ( event.which == 46 ) { // "Delete" - clear box
 			document.getElementById("Highlight").value = "";
+		}
+		if ( event.which == 34 ) { // "Page Down" - show only highlights
+			RemoveNotMatchingPhrases();
 		}
 		HighlightRefresh();
     });
