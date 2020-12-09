@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<Title>The Web's Best Gematria Calculator - Gematrinator.com</Title>
+
+<script src="jquery.min.js"></script>
+
+<script src="gematriaNGG.js"></script>
+<script src="ijavaNGG.js"></script>
+<script src="highlighter.js"></script>
+<script src="tts\voice_tts.js"></script>
+<script src="html2canvas\html2canvas.min.js"></script>
+
+<!-- ########################################################## -->
+
+</HEAD>
+
+<link rel="stylesheet" type="text/css" href="icssNGG.css">
+
+<BODY onload="Page_Launch()">
+
+<canvas id="canv" width="1858" height="1008"></canvas>
+
+<P>
+
+<center>
+
+<!-- screenshot, html2canvas -->
+<div id="screenshotToolbar"></div>
+	
+<div id="MenuSpot"></div><BR>
+
+<div id="MainTable"><table><tr>
+	<td><center>
+		<h3>Enter word, phrase or number:</h3>
+	</center></td>
+
+	</tr><tr>
+
+	<td><center><input id="SearchField" autofocus type="text" oninput="FieldChange(sVal())" style="width: 500px; font-size: 125%" onkeydown="navHistory(event.keyCode);"></input>
+	<right><input id="Highlight" type="text" style="width: 200px; font-size: 125%"></input>
+
+	</center><P>
+
+	<div id="Gematria_Table"></div>
+	<div id="BreakdownSpot"></div>
+
+	</td>
+</tr></table></div>
+
+	<P>
+	<center><div id="ChartSpot" style="min-height: 182px;"></div></center><P>
+	<div id="MiscSpot"></div>
+
+	<P>&nbsp;</P>
+
+	<div id="PageFooter" style="background-color: RGB(0, 0, 16);">
+	</div>
+
+</center>
+</BODY>
+
+<!-- add after page elements are created -->
+<script src="matrix.js"></script>
+<script src="html2canvas\save_screenshot.js"></script>
+</HTML>
