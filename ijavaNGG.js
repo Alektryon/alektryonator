@@ -23,7 +23,7 @@ function Populate_MenuBar() {
 
 	hStr = '<center><div class="MenuLink"><a href="javascript:Open_Ciphers()">Ciphers</a></div>  |  '
 	hStr += '<div class="MenuLink"><a href="javascript:Open_Options()">Options</a></div>  |  '
-	hStr += '<div class="MenuLink"><a href="javascript:Open_Shortcuts()">Shortcuts</a></div>'
+	hStr += '<div class="MenuLink"><a href="experimental/index.html">Experimental</a></div>'
 	if (opt_InTable == true) {
 		hStr += '  |  ' + '<div class="MenuLink"><a href="javascript:Load_Options(true)">Load My Settings</a></div><BR></center>'
 	}
