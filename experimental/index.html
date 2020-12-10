@@ -1,33 +1,29 @@
-<HTML>
-<HEAD>
+<html>
+<head>
 <Title>The Web's Best Gematria Calculator - Gematrinator.com</Title>
 
-<script src="jquery.min.js"></script>
+<script src="lib/jquery.min.js"></script>
+<script src="lib/html2canvas.min.js"></script>
 
-<script src="gematriaNGG.js"></script>
-<script src="ijavaNGG.js"></script>
-<script src="highlighter.js"></script>
-<script src="tts\voice_tts.js"></script>
-<script src="html2canvas\html2canvas.min.js"></script>
+<script src="calc/gematriaNGG.js"></script>
+<script src="calc/ijavaNGG.js"></script>
+<script src="calc/highlighter.js"></script>
 
-<!-- ########################################################## -->
+</head>
 
-</HEAD>
 
-<link rel="stylesheet" type="text/css" href="icssNGG.css">
 
-<BODY onload="Page_Launch()">
+<link rel="stylesheet" type="text/css" href="calc/styles.css">
 
-<canvas id="canv" width="1858" height="1008"></canvas>
-
-<P>
-
-<center>
+<body onload="Page_Launch()">
+<canvas id="canv"></canvas>
 
 <!-- screenshot, html2canvas -->
-<div id="screenshotToolbar"></div>
+<center><div id="screenshotToolbar"></div></center><p>
 	
-<div id="MenuSpot"></div><BR>
+<center>
+	
+<div id="MenuSpot"></div><br>
 
 <div id="MainTable"><table><tr>
 	<td><center>
@@ -50,16 +46,13 @@
 	<P>
 	<center><div id="ChartSpot" style="min-height: 182px;"></div></center><P>
 	<div id="MiscSpot"></div>
-
-	<P>&nbsp;</P>
-
-	<div id="PageFooter" style="background-color: RGB(0, 0, 16);">
-	</div>
-
+	
 </center>
-</BODY>
+</body>
+
+
 
 <!-- add after page elements are created -->
-<script src="matrix.js"></script>
-<script src="html2canvas\save_screenshot.js"></script>
+<script src="calc/coderain.js"></script>
+<script src="calc/screenshot.js"></script>
 </HTML>
