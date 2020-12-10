@@ -49,7 +49,6 @@ function matrix() {
 
 function toggle_code_rain() {
 	if (opt_MatrixCodeRain && !code_rain_active) {
-		ctx.fillStyle = '#101010' // dark bg
 		code_rain = setInterval(matrix, 50)
 		code_rain_active = true
 	} else if (!opt_MatrixCodeRain && code_rain_active) {

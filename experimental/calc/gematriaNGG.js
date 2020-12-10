@@ -13,7 +13,6 @@ var customvalues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,
 function Gem_Launch() {
 	Set_Categories()
 	Build_Ciphers()
-	//Load_Options(false)
 }
 
 class cipher {
@@ -551,12 +550,12 @@ class cipher {
 		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,10,20,30,40,50,60,70,80,90,100,200,200,200,300,400,500]
 	}
 	Make_RussianE() {
-		this.vArr = [1,2,3,4,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
-		this.vArr2 = [1,2,3,4,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
+		this.vArr = [1,2,3,4,5,6,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+		this.vArr2 = [1,2,3,4,5,6,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
 	}
 	Make_RussianRevE() {
-		this.vArr = [32,31,30,29,28,27,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
-		this.vArr2 = [32,31,30,29,28,27,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+		this.vArr = [33,32,31,30,29,28,28,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+		this.vArr2 = [33,32,31,30,29,28,28,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
 	}
 	Make_CustomCipher() {
 		// if array is empty, populate it with Ordinal values
@@ -594,9 +593,6 @@ function Populate_Sums(impVal) {
 }
 
 function Open_Properties(impNum) {
-	if (impNum > 0 && impNum < 10000000) {
-		//window.open("http://www.gematrinator.com/calculator/numberProperties.php?Number=" + impNum, "Properties of " + impNum, "height=480,width=750")
-	}
 }
 
 function GetTriangular(impNum) {
@@ -1031,92 +1027,4 @@ function Build_Open_Ciphers() {
 	}
 
 	Build_Table(opt_Headers)
-}
-
-function Load_Options(ApplyOptions = false) {
-	//qString = "http://www.gematrinator.com/usersettings/viewIP.php"
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-	  		respText = xhttp.responseText
-	  		if (ApplyOptions == true) {
-	  			ParseText()
-	  		} else {
-				if (respText !== "New Record Added" && respText !== "Error") {
-					opt_InTable = true
-					Populate_MenuBar()
-				} else {
-					opt_InTable = false
-				}
-	  		}
-		}
-	}
-
-	//xhttp.open("GET", qString, true);
-	//xhttp.send();
-}
-
-function ParseText() {
-	var tempArr = []; tempCiphers = []
-	var x
-
-	openCiphers = []
-
-	if (respText !== "New Record Added" && respText !== "Error") {
-		tempArr = respText.split(":;")
-
-		tempCiphers = tempArr[0].split("|")
-		sHistory = tempArr[1].split("|")
-		if (sHistory[sHistory.length] == "") {
-			sHistory.pop()
-		}
-
-		for (x = 0; x < tempCiphers.length; x++) {
-			if (openCiphers.indexOf(tempCiphers[x]) === -1) {openCiphers.push(tempCiphers[x])}
-		}
-		
-		if (tempArr[2] == "" || tempArr[2] == null) {
-			opt_NumCalculation = "Off"
-		} else {
-			opt_NumCalculation = tempArr[2]
-		}
-		if (tempArr[3] == "" || tempArr[3] == null) {
-			opt_Breakdown = "Chart"
-		} else {
-			opt_Breakdown = tempArr[3]
-		}
-		if (tempArr[4] == "" || tempArr[4] == null) {
-			ciphers_per_row = 6
-		} else {
-			ciphers_per_row = tempArr[4]
-		}
-		if (tempArr[5] == "false") {opt_Reduce = false} else {opt_Reduce = true}
-		if (tempArr[6] == "false") {opt_Quotes = false} else {opt_Quotes = true}
-		if (tempArr[7] == "false") {opt_Summ = false} else {opt_Summ = true}
-		if (tempArr[8] == "false") {opt_Chart = false} else {opt_Chart = true}
-		if (tempArr[9] == "false") {opt_Shortcuts = false} else {opt_Shortcuts = true}
-		if (tempArr[10] == "false") {opt_Headers = false} else {opt_Headers = true}
-	}
-
-	if (openCiphers.length == 0) {
-		openCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
-	}
-
-	LoadCipherOrder()
-	Build_Open_Ciphers()
-}
-
-function LoadCipherOrder() {
-	var x, z, tC, nC
-
-	for (x = openCiphers.length - 1; x > -1; x--) {
-		tC = openCiphers[x]
-		for (z = 0; z < allCiphers.length; z++) {
-			if (allCiphers[z].Nickname == tC) {
-				nC = allCiphers[z]
-				allCiphers.splice(z, 1)
-				allCiphers.splice(0, 0, nC)
-			}
-		}
-	}
 }

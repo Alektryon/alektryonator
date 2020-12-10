@@ -1,20 +1,20 @@
 var ciphers_per_row = 6; ChartMax = 36
 var cOption = "English"
-var breakCipher, miscContents
+var breakCipher
 var pixelcount = 0; breakArr = []; pArr= []; mArr = []
 var opt_Reduce = true; opt_Quotes = true; opt_Summ = true; opt_Breakdown = "Chart"; opt_LetterCount = true
-var opt_Chart = true; opt_Shortcuts = true; opt_Headers = true; opt_InTable = false
-var opt_SeamlessHistoryTable = false;
-var opt_WeightedAutoHlt = false;
+var opt_Chart = true; opt_Shortcuts = true; opt_Headers = true;
+
+var opt_CompactHistoryTable = false; // disable Cipher names, no 25 phrase break, compact mode
+var opt_WeightedAutoHlt = false; // color grade matches found with auto highlighter (most frequest is the brightest)
 var opt_MatrixCodeRain = true; // set to true to enable by default
 
-var values_arr = []; // automatically higlight all available matches
-var phrase_val = [];
-var avail_val = []; // matches available for auto highligher
+// used inside highlighter.js
+var values_arr = []; // array of arrays, each array has gematria values for a single phrase
+var avail_val = []; // all matches found with auto highligher
 var freq = []; // frequency of matches found with auto highlighter
 
 function Page_Launch() {
-	//Header_Load()
 	Gem_Launch()
 	Populate_MenuBar()
 	Build_CharTable(ciphersOn[0])
@@ -28,10 +28,6 @@ function Populate_MenuBar() {
 	hStr = '<center><div class="MenuLink"><a href="javascript:Open_Ciphers()">Ciphers</a></div>  |  '
 	hStr += '<div class="MenuLink"><a href="javascript:Open_Options()">Options</a></div>  |  '
 	hStr += '<div class="MenuLink"><a href="https://gematrinator.com/index.php">Gematrinator.com</a></div>'
-	if (opt_InTable == true) {
-		hStr += '  |  ' + '<div class="MenuLink"><a href="javascript:Load_Options(true)">Load My Settings</a></div><BR></center>'
-	}
-	//hStr += '<div class="MenuLink"><a href="javascript:Open_Help()">Help</a></div><P>'
 
 	hStr += '<BR></center>'
 	mSpot.innerHTML = hStr
@@ -42,27 +38,16 @@ function sVal() {
 	return sBox.value.trim()
 }
 
-function HighlightRefresh (impNum) { // keytroke in Highlight textbox
-
-	Open_History() // update table
-	
-	switch (impNum) {
-		case 46: // clear
-			tArea = document.getElementById("Highlight")
-			tArea.value = ""
-			break
-	}
-}
-
 function navHistory(impNum) { // run on each keystroke inside text box - onkeydown="navHistory(event.keyCode) - from index.html
-	var hPlace, tBox
-	var newVal = ""; thisTerm = replaceAll(sVal(), "|", "")
+	var hPlace, tBox, tBoxValue
+	var newVal = "";
+	thisTerm = replaceAll(sVal(), "|", "") // get phrase from SearchField
 	tBox = document.getElementById("SearchField")
 
-	hPlace = sHistory.indexOf(thisTerm)
+	hPlace = sHistory.indexOf(thisTerm) // position of phrase in History array
 	switch (impNum) {
 		case 13: // Enter
-			newHistory(true)
+			newHistory(thisTerm, true) // enter as single phrase
 			tBox.value = "" // clear textbox
 			break;
 		case 38: // Up Arrow
@@ -80,41 +65,37 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 			if (newVal !== "") {tBox.value = newVal; Populate_Sums(newVal); Populate_Breakdown()}
 			break;
 		case 46: // Delete, remove entries from history
-			//console.log(sHistory)
-			hSpot = sHistory.indexOf(tBox.value); // find contents of textbox in history array
 			if (sHistory.length == 1) {
 				sHistory = [] // reinitialize array if there is only one entry
 				tArea = document.getElementById("MiscSpot")
-				tArea.innerHTML = '<table class="HistoryTable"></table>' // clear table
+				tArea.innerHTML = "" // clear table
 			}
-			if (hSpot > -1) {
-				sHistory.splice(hSpot, 1) // if a match is found, delete entry
+			if (hPlace > -1) {
+				sHistory.splice(hPlace, 1) // if a match is found, delete entry
 			}
 			tBox.value = "" // empty text box, so the old value us not added again
-			newHistory() // update history
 			Open_History() // update table
-			//console.log(sHistory)
 			break;
 		case 36: // Home, clear all history
 			sHistory = [] // reinitialize array if there is only one entry
 			tArea = document.getElementById("MiscSpot")
-			tArea.innerHTML = '<table class="HistoryTable"></table>' // clear table
+			tArea.innerHTML = "" // clear table
 			break;
 		case 35: // End, enter sentence as separate words and phrases
-			tboxvalue = tBox.value.replace(/\t/g, " ") // replace tab with spaces
-			tboxvalue = tboxvalue.replace(/ +/g, " ") // remove double spaces
-			// tboxvalue = tboxvalue.replace(/(\.|,|:|;|\\|)/g, "") // remove special characters, last are one is "|"
+			thisTerm = thisTerm.replace(/\t/g, " ") // replace tab with spaces
+			thisTerm = thisTerm.replace(/ +/g, " ") // remove double spaces
+			// thisTerm = thisTerm.replace(/(\.|,|:|;|\\|)/g, "") // remove special characters, last are one is "|"
 			
-			wordarray = tboxvalue.split(" ")
+			wordarray = thisTerm.split(" ")
 			phr_len = 5 // max phrase length
 			var phrase; // init variable outside of for cycle, memory efficient
 			// for (i = 0; i < wordarray.length; i++) { // phrases in normal order
 				// k = 1 // init variable
 				// phrase = wordarray[i]
-				// newHistoryBulk(true, phrase)
+				// newHistory(phrase, false)
 				// while (k < phr_len && i+k < wordarray.length) { // add words to a phrase, check it is within array size
 					// phrase += " "+wordarray[i+k]
-					// newHistoryBulk(true, phrase)
+					// newHistory(phrase, false)
 					// k++
 				// }
 			// }
@@ -125,10 +106,10 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 				// remove double spaces, space in the start/end
 				//phrase = phrase.replace(/ +/g, " ").replace(/^ /g, "").replace(/ $/g, "")
 
-				newHistoryBulk(true, phrase)
+				newHistory(phrase, false) // true flag doesn't update history after a new phrase is added
 				while (k < phr_len && i-k > -1) { // add words to a phrase, check it is within array size
 					phrase = wordarray[i-k]+" "+phrase
-					newHistoryBulk(true, phrase)
+					newHistory(phrase, false)
 					k++
 				}
 			}
@@ -143,136 +124,24 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 	}
 }
 
-function RemoveNotMatchingPhrases() {
-	
-	highlt = document.getElementById("Highlight").value.replace(/ +/g," ") // get value, remove double spaces
-	highlt_num = highlt.split(" ") // create array, space delimited numbers
-	highlt_num = highlt_num.map(function (x) { // parse string array as integer array to exclude quotes
-		return parseInt(x, 10); 
-	});
-	
-	var phr_values = []
-	var match = false
-	var x = 0
-	// for (x = 0; x < sHistory.length; x++) { // for each phrase in history
-	while (x < sHistory.length) { // for each phrase in history
-	
-		phr_values = [] // reinit
-		match = false
-		
-		for (y = 0; y < ciphersOn.length; y++) { // for each enabled cipher
-			aCipher = ciphersOn[y]
-			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
-			phr_values.push(gemVal) // build an array of all gematria values for that phrase
-		}
-		//console.log(phr_values)
-		for (z = 0; z < highlt_num.length; z++) { // for each chosen value to be highlighted
-			if (phr_values.indexOf(highlt_num[z]) > -1 && !match) { // if value is present in any gematria cipher
-				match = true // if match is found
-			}
-		}
-		//console.log(match)
-		if (!match) { // if no match is found, don't do x++ as array indices shift
-			//console.log("removed: '"+sHistory[x]+"'")
-			sHistory.splice(x,1) // remove phrase
-		} else {
-			x++ // check next item if match is found
-		}
-	}
-	
-	Open_History() // rebuild table
-	
-}	
+function newHistory(phr, upd_table) { // called from function navHistory(impNum) -> case 13
+	var hSpot
 
-function newHistoryBulk(impOpt = false, word) { // called from function navHistory(impNum) -> case 13
-	var hSpot, isNew
-	var x, ys
-	var impVal = replaceAll(word, "|", "")
+	if (phr !== "") { // if input is not empty
 
-	isNew = false
-
-	if (impVal !== "") {
-
-		if (Number(impVal) > 0) {
+		if (Number(phr) > 0) { // if a number is entered, do not add it to history
 
 		} else {
-			hSpot = sHistory.indexOf(impVal);
-
-			if (hSpot > -1) {
-				sHistory.splice(hSpot, 1)
-			} else {
-				isNew = true
-			}
 			
-			//if (sHistory.length > 100) { // history entry limit
-			//	sHistory.pop()
-			//}
-
-			sHistory.unshift(impVal)
+			hSpot = sHistory.indexOf(phr);
+			if (hSpot > -1) { // if element is in history
+				sHistory.splice(hSpot, 1) // remove it from array
+			}
+			sHistory.unshift(phr) // insert in the beginning of array
 		}
 	}
 	
-	//if (impOpt == true || miscContents !== "match") {Open_History()}
-	if (isNew == true) {AddTerm(); UpdateUserHistory()};
-	//console.log(sHistory);
-}
-
-function newHistory(impOpt = false) { // called from function navHistory(impNum) -> case 13
-	var hSpot, isNew
-	var x, ys
-	var impVal = replaceAll(sVal(), "|", "")
-
-	isNew = false
-
-	if (impVal !== "") {
-
-		if (Number(impVal) > 0) {
-
-		} else {
-			hSpot = sHistory.indexOf(impVal);
-
-			if (hSpot > -1) {
-				sHistory.splice(hSpot, 1)
-			} else {
-				isNew = true
-			}
-			
-			//if (sHistory.length > 100) { // history entry limit
-			//	sHistory.pop()
-			//}
-
-			sHistory.unshift(impVal)
-		}
-	}
-		
-	if (impOpt == true || miscContents !== "match") {Open_History()}
-	if (isNew == true) {AddTerm(); UpdateUserHistory()};
-	//console.log(sHistory);
-}
-function AddTerm() {
-	var xhttp = new XMLHttpRequest();
-	var x, z, lastSpace
-	xhttp.onreadystatechange = function() {
-    	if (this.readyState == 4 && this.status == 200) {
-      	;
-    	}
-    };
-
-    qStr = ""; lastSpace = true; sv = sVal()
-
-    for (x = 0; x < sv.length; x++) {
-    	z = sv.charCodeAt(x)
-    	if (z > 64 && z < 123) {
-    		qStr += String.fromCharCode(z)
-    		lastSpace = false
-    	} else if (z == 32) {
-    		if (lastSpace == false) {qStr += "_"}
-    		lastSpace = true
-    	}
-    }
-
-    //xhttp.open("POST", "http://www.gematrinator.com/nextgen/addtodatabase.php?phrase=" + qStr, true);
-    //xhttp.send();
+	if (upd_table) Open_History() // update table or not
 }
 function Open_History() {
 	var ms, x, y, aCipher, gemSum
@@ -292,7 +161,7 @@ function Open_History() {
 	
 	for (x = 0; x < sHistory.length; x++) {
 
-		if (x % 25 == 0 && !opt_SeamlessHistoryTable) {
+		if (x % 25 == 0 && !opt_CompactHistoryTable) {
 			ms += '<tr><td class="MPhrase"><font style="color: orange;">Word or Phrase</font></td>'
 			for (z = 0; z < ciphersOn.length; z++) {
 				ms += '<td class="HistoryHead" style="color: RGB(' + ciphersOn[z].RGB.join() +')">' // color of cipher displayed in the table
@@ -304,7 +173,7 @@ function Open_History() {
 
 		ms += '<tr><td class="historyPhrase">' + sHistory[x] + '</td>'
 
-		if (opt_WeightedAutoHlt) {
+		if (opt_WeightedAutoHlt && freq.length !== 0) { // if option is enabled and array is initialized
 			
 			max_match = freq[freq.length-1][1]; // last value, array is sorted
 			
@@ -335,7 +204,7 @@ function Open_History() {
 				for (i = 0; i < freq.length; i++) { // weighted coloring
 					if (freq[i][0] == gemVal) {
 						a = freq[i][1]/max_match // if max - value 1.0
-						a = a*a*a // less significant values are darker,  "gamma curve"
+						a = a*a*a // less significant values are darker, "gamma curve"
 					}
 				}
 			
@@ -344,13 +213,12 @@ function Open_History() {
 				
 				//ms += '<td><font style="color: RGB(' + aCipher.RGB.join() + '")>' + gemSum + '</font></td>'
 				//ms += '<td><font style="color: RGB(' + numcol + '")>' + gemSum + '</font></td>'
-				//tdToggleHighlight_new
-				//ms += '<td class="phraseValue" onclick="tdToggleHighlight_new('+gemVal+')"><font style="color: rgba('+numcol+')">' + gemSum + '</font></td>'
+				//ms += '<td class="phraseValue" onclick="tdToggleHighlight('+gemVal+')"><font style="color: rgba('+numcol+')">' + gemSum + '</font></td>'
 				ms += '<td class="phraseValue"><font style="color: rgba('+numcol+')">' + gemSum + '</font></td>'
 			}
 		}
 
-		if (!opt_WeightedAutoHlt) {
+		if (!opt_WeightedAutoHlt || freq.length == 0) {
 			for (y = 0; y < ciphersOn.length; y++) {
 			
 				aCipher = ciphersOn[y]
@@ -378,7 +246,7 @@ function Open_History() {
 				
 				//ms += '<td><font style="color: RGB(' + aCipher.RGB.join() + '")>' + gemSum + '</font></td>'
 				//ms += '<td><font style="color: RGB(' + numcol + '")>' + gemSum + '</font></td>'
-				//ms += '<td class="phraseValue" onclick="tdToggleHighlight_new('+gemVal+')"><font style="color: rgba('+numcol+')">' + gemSum + '</font></td>'
+				//ms += '<td class="phraseValue" onclick="tdToggleHighlight('+gemVal+')"><font style="color: rgba('+numcol+')">' + gemSum + '</font></td>'
 				ms += '<td class="phraseValue"><font style="color: rgba('+numcol+')">' + gemSum + '</font></td>'
 			}
 		}
@@ -387,125 +255,6 @@ function Open_History() {
 
 	ms += '</tbody></table>'
 	tArea.innerHTML = ms
-	miscContents = "history"
-}
-
-// old Highlighter function, table is rebuilt, no jQuery
-function tdToggleHighlight(val){ // click on value in history table to toggle highlighter
-    //console.log('Clicked on: '+val)
-	highlt = document.getElementById("Highlight").value.replace(/ +/g," ") // get value, remove double spaces
-	lastchar = highlt.substring(highlt.length-1,highlt.length)
-	
-	highlt_num = highlt.split(" ") // create array, space delimited numbers
-	highlt_num = highlt_num.map(function (x) { // parse string array as integer array to exclude quotes
-		return parseInt(x, 10); 
-	});
-	
-	i = highlt_num.indexOf(val)
-	
-	// disable
-	var hlt_val
-	if (i > -1) { // if value is present
-		highlt_num.splice(i,1) // remove value
-		hlt_val = JSON.stringify(highlt_num).replace(/,/g, " ") // to string
-		hlt_val = hlt_val.substring(1, hlt_val.length-1) // remove brackets
-		document.getElementById("Highlight").value = hlt_val // update values inside textbox
-		Open_History() // update table
-		return
-	}
-	
-	// enable
-	if (lastchar !== " " && highlt.length > 0) {
-		document.getElementById("Highlight").value += " " // append space if necessary
-	}
-	document.getElementById("Highlight").value += val // append clicked value to Highlight textbox
-	Open_History() // update table
-};
-
-function Open_HistoryAutoHlt() {
-	var x, y, aCipher
-
-	avail_val = [] // reinit
-	values_arr = []
-	
-	if (sHistory.length == 0) {return}
-	
-	for (x = 0; x < sHistory.length; x++) { // calculate gematria for all phrases
-		for (y = 0; y < ciphersOn.length; y++) {
-			aCipher = ciphersOn[y]
-			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
-			phrase_val.push(gemVal) // append all values of this phrase
-		}
-		values_arr.push(phrase_val) // append all values of each phrase
-		phrase_val = [] // reinit	
-	}
-	
-	freq = []
-						
-	//auto highlighter, all available values
-	var cur_phrase_arr = []
-	var cur_phrase_arr2 = []
-	var cur_val // current word value
-	
-	var pos = 0 // save position to mark value as finished searching
-	var once_in_row // match can't be counted in the same row twice
-	var freq_tmp = []
-	
-	for (i = 0; i < values_arr.length; i++){ // loop array
-		cur_phrase_arr = values_arr[i] // select row with phrase values
-		for (n = 0; n < cur_phrase_arr.length; n++){
-			cur_val = cur_phrase_arr[n] // took the first value of the first phrase
-			for (m = 0; m < values_arr.length; m++){ // loop array again to find matches
-				if (m!=i){ // can't be same row
-					//console.log("m:"+m+" i:"+i)
-					cur_phrase_arr2 = values_arr[m] // select another row
-					once_in_row = 0 // match can't be counted in the same row twice
-					for (p = 0; p < cur_phrase_arr2.length; p++){ // loop values in that row
-						if (cur_val == cur_phrase_arr2[p]) { // if matching value is found in other rows (phrases)
-							if (avail_val.indexOf(cur_val) == -1) { // avoid duplicate matches
-								avail_val.push(cur_val) // push to array
-								freq_tmp = [cur_val, 1, 0]
-								freq.push(freq_tmp) // new Array [current value, nummber of occurrences, finished search]
-								pos = 0 // set to the first element
-								once_in_row = 1
-							}
-							// when next value is checked we can't do increments for the previously numbered matches
-							for (z = 0; z < freq.length; z++) { // for each value available in frequency array
-								if (freq[z][0] == cur_val && freq[z][2] == 0 && once_in_row == 0 ) { // for corresponding value if search for that value is not finished and not same row
-									freq[z][1] += 1 // increment number of occurrencies found
-									pos = z // save position
-								}
-							}
-						}
-					}
-				}
-			}
-			//console.log("freq.length:"+freq.length+" pos:"+pos)
-			if (freq.length !== 0) freq[pos][2] = 1 // after search is done inside each row of phrase values, mark that value as "finished"
-		}
-	}
-	cur_phrase_arr = [] // reinit
-	cur_phrase_arr2 = []
-	cur_val = ""
-	
-	avail_val.sort(function(a, b) { // sort ascending order
-		return a - b; //  b - a, for descending sort
-	});
-	
-	freq.sort(function(a, b) {
-		return a[1] - b[1]; // sort based on index 1 values ("freq" is array of arrays), (b-a) descending order, (a-b) ascending
-	});
-
-	//console.log(values_arr) // print all phrase values 2d array
-	console.log(JSON.stringify(avail_val).replace(/,/g, " ").slice(1, -1)) // print available matches
-	console.log(JSON.stringify(freq).replace(/\],\[/g, "\n").slice(2, -2)) // print frequency of available matches
-	
-	// paste available values inside Highlight textbox
-	str = JSON.stringify(avail_val).replace(/,/g, " ") // replace comma with space
-	substr = str.substring(1, str.length - 1) // remove brackets
-	document.getElementById("Highlight").value = substr
-
-	Open_History() // update table
 }
 
 function getSum(total, num) {
@@ -831,7 +580,6 @@ function cipherHead_mouseOver(impName) {
 			Populate_Breakdown(aCipher.Nickname, false)
 		}
 	}
-	//newHistory() // phrase is not added on mouse over
 }
 
 function cipherHead_click(impName) {
@@ -966,7 +714,7 @@ function Build_CharTable(impCipher) {
 function Open_Options () {
 	var cSpot = document.getElementById("MenuSpot")
 	var os = ""
-	var oC, oR, oQ, oSC, oH, oS, oLW, oSHT, oWH, oMCR
+	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR
 
 	if (opt_Chart == true) {oC = " checked"}
 	if (opt_LetterCount == true) {oLW = " checked"}
@@ -975,18 +723,17 @@ function Open_Options () {
 	if (opt_Shortcuts == true) {oSC = " checked"}
 	if (opt_Headers == true) {oH = " checked"}
 	if (opt_Summ == true) {oS = " checked"}
-	if (opt_SeamlessHistoryTable == true) {oSHT = " checked"}
+	if (opt_CompactHistoryTable == true) {oCHT = " checked"}
 	if (opt_WeightedAutoHlt == true) {oWH = " checked"}
 	if (opt_MatrixCodeRain == true) {oMCR = " checked"}
 
 	os += '<center><table id="OptionsTable"><tr><td colspan="2"><center>'
-	//os += '<button id="SaveOptions" onclick="UpdateOptions()" value="Save Options"><B>Save Settings</B></button>  '
-	//os += '<div id="SaveMsg"></div>'
+
 	os += '<div class="MenuLink" style="float: right;"><font style="font-size: 90%;"><a href="javascript:Populate_MenuBar()">Close Options</a></font></div></center></td></tr><tr><td>'
 	os += 'Show Letter/Word Count <input type="checkbox" id="o_LWBox" value="Show Letter/Word Count" onclick="click_Opt()"' + oLW + '></input><BR>'
 	os += 'Show Reduction <input type="checkbox" id="o_RBox" value="Show Reductions" onclick="click_Opt()"' + oR + '></input><BR>'
 	os += 'Keyboard Shortcuts <input type="checkbox" id="o_SCBox" value="Keyboard Shortcuts" onclick="click_Opt()"' + oSC + '></input><BR>'
-	os += 'Seamless History Table <input type="checkbox" id="o_SHTBox" value="Seamless History Table" onclick="click_Opt()"' + oSHT + '></input><BR>'
+	os += 'Compact History Table <input type="checkbox" id="o_CHTBox" value="Compact History Table" onclick="click_Opt()"' + oCHT + '></input><BR>'
 	os += 'Weighted Auto Highlighter <input type="checkbox" id="o_WHBox" value="Weighted Auto Highlighter" onclick="click_Opt()"' + oWH + '></input><BR>'
 	os += 'Matrix Code Rain <input type="checkbox" id="o_MCRBox" value="Matrix Code Rain" onclick="click_Opt()"' + oMCR + '></input><P>'
 	os += '<center>' + OBox_Ciphers() + '</center><p>'
@@ -1014,7 +761,7 @@ function click_Opt() {
 	HBox = document.getElementById("o_HBox")
 	QBox = document.getElementById("o_QBox")
 	LWBox = document.getElementById("o_LWBox")
-	SHTBox = document.getElementById("o_SHTBox")
+	CHTBox = document.getElementById("o_CHTBox")
 	WHBox = document.getElementById("o_WHBox")
 	MCRBox = document.getElementById("o_MCRBox")
 
@@ -1053,17 +800,18 @@ function click_Opt() {
 	} else {
 		opt_LetterCount = false
 	}
-	if (SHTBox.checked == true) {
-		opt_SeamlessHistoryTable = true
+	if (CHTBox.checked == true) {
+		opt_CompactHistoryTable = true
 		Open_History()
 	} else {
-		opt_SeamlessHistoryTable = false
+		opt_CompactHistoryTable = false
 		Open_History()
 	}
 	if (WHBox.checked == true) {
 		opt_WeightedAutoHlt = true
 		Open_History()
 	} else {
+		freq = [] // reset previously found matches
 		opt_WeightedAutoHlt = false
 		Open_History()
 	}
@@ -1158,7 +906,7 @@ function Set_Breakdown() {
 //	console.log(split)
 //}
 
-function PromptCustomValues() {
+function PromptCustomValues() { // English Custom cipher
 	//empty = false
 	if (customvalues[0] == null) {
 		examplevalues = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26";
@@ -1256,7 +1004,7 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 	}
 
 	if (cOption == "Custom") {
-		//hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomCharacters()" value="CusotmCharacters"><B>Characters</B></button>'
+		//hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomCharacters()" value="CustomCharacters"><B>Characters</B></button>'
 		hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="PromptCustomValues()" value="CustomValues"><B>Custom</B></button>'
 		hStr += '<button class="CipherButton" onclick="No_Ciphers(true)" value="NoCiphers"><B>Empty</B></button>'
 		hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
@@ -1264,7 +1012,6 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 		hStr += '<BR></td></tr></table></center>'
 	}
 	
-
 	if (cOption !== "Custom") { // populate buttons for all categories except custom
 		hStr += '<div class="ButtonSection"><button class="CipherButton" onclick="No_Ciphers(true)" value="NoCiphers"><B>Empty</B></button>'
 		hStr += '<button class="CipherButton" onclick="Add_BaseCiphers(true)" value="BaseCiphers"><B>Base Ciphers</B></button>'
@@ -1408,64 +1155,6 @@ function NumberArray() {
 	return isNum
 }
 
-function Match_Table() {
-	var ms, x, y, aCipher, gemSum, cs, isBold, isSame
-
-	ms = '<div class="MenuLink"><a href="javascript:Open_History()">Show History</a></div><BR>'
-	ms += '<table class="MTable"><tr><td>'
-
-	for (x = 0; x < mArr.length - 1 && x < 250; x++) {
-
-		if (x % 25 == 0) {
-			ms += '<tr><td class="MPhrase"><font style="color: orange;">Word or Phrase</font></td>'
-			for (z = 0; z < ciphersOn.length; z++) {
-				ms += '<td class="CipherHead" style="color: RGB(' + ciphersOn[z].RGB.join() +')">'
-				ms += ciphersOn[z].Nickname
-				ms += "</td>"
-			}
-			ms += "</tr>"
-		}
-
-		ms += '<tr><td class="MPhrase">' + mArr[x] + '</td>'
-
-		for (y = 0; y < ciphersOn.length; y++) {
-
-			aCipher = ciphersOn[y]
-			gemSum = aCipher.Gematria(mArr[x], 1)
-			cs = replaceAll(aCipher.Nickname, " ", "_")
-
-			if (gemArr[y] == gemSum || pArr.indexOf(gemSum) > -1) {isSame = true} else {isSame = false}
-			if (gemArr.indexOf(gemSum) > -1) {isBold = true} else {isBold = false}
-
-			ms += '<td class="MSum'
-			if (isSame == true) {
-				ms += ' MSumFull'
-			} else if (isBold == true) {
-				ms += ' MSumPart'
-			}
-			ms += '">'
-
-			if (isSame == true) {ms += '<font style="color: RGB(' + aCipher.RGB.join() + '")>'}
-			ms += gemSum
-			if (isSame == true) {ms += '</font>'}
-			ms += '</td>'
-		}
-		ms += '</tr>'
-	}
-
-	ms += '</table>'
-	return ms
-}
-function Match_Table2() {
-	tArea = document.getElementById("MiscSpot")
-	if (mArr.length > 0) {
-		tArea.innerHTML = Match_Table()
-	} else {
-		tArea.innerHTML = '<font style="color: RGB(223, 0, 0)">You must first click "Match" to build this table</font>'
-	}
-	miscContents = "match"
-}
-
 function ValClass(impType = 1) {if (impType == 1) {return ' class="GemVal"'} else {return ' class="GemVal2"'}}
 function ValID (impCipher) {return ' id="' + impCipher.Nickname + '_Sum"'}
 function CipherColor(impCipher) {return ' style="color: RGB(' + impCipher.RGB.join() +'); text-shadow: 0px 0px 20px rgb('+impCipher.RGB.join()+');"'}
@@ -1482,37 +1171,4 @@ function HeadLink(impCipher) {
 }
 function replaceAll(sS, fS, rS) {
   return sS.replace(new RegExp(fS, 'g'), rS);
-}
-function UpdateUserHistory() {
-	var cString, x
-
-	cString = sHistory[0]
-
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-    	if (this.readyState == 4 && this.status == 200) {}
-    };
-    //xhttp.open("POST", "http://www.gematrinator.com/usersettings/updatehistory.php?history=" + cString, true);
-    //xhttp.send();
-}
-function UpdateOptions() {
-	var oString, cString, x
-
-	cString = ""
-	for (x = 0; x < openCiphers.length; x++) {
-		cString += openCiphers[x] + "|"
-	}
-
-	tempArr = [cString, opt_NumCalculation, opt_Breakdown, ciphers_per_row, opt_Reduce, opt_Quotes, opt_Summ, opt_Chart, opt_Shortcuts, opt_Headers]
-	oString = tempArr.join(";")
-
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-    	if (this.readyState == 4 && this.status == 200) {
-    		respText = xhttp.responseText
-    		document.getElementById("SaveMsg").innerHTML = respText
-    	}
-    };
-    //xhttp.open("POST", "http://www.gematrinator.com/usersettings/updateoptions.php?options=" + oString, true);
-    //xhttp.send();
 }
