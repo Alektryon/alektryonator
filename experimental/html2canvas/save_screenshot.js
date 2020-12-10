@@ -5,25 +5,48 @@ function addScrInterface() {
 	var ScrInt = document.getElementById("screenshotToolbar");
 	o = '</td></tr></table></center>'
 	o += '</td></tr></table></center>'
-	o += '<input id="btn-Preview-Image" type="button" value="Preview" />'
-	o += '<input id="btn-Convert-Html2Image" type="button" value="Save Image" </>'
-	o += '<h3>Preview :</h3>'
+	
+	// buttons
+	o += '<input id="btn-prev-cipher-png" type="button" value="Cipher Table" />' // cipher breakdown preview
+	o += '<input id="btn-prev-history-png" type="button" value="History Table" />' // history table preview
+	o += '<input id="btn-save-png" type="button" value="Save Image" </>' // save image
+	
 	o += '<div id="previewImage">'
 	o += '</div>'
 	ScrInt.innerHTML = o
 }
 
 //$("#btn-Preview-Image").on('click', function () {
-$("body").on("click", "#btn-Preview-Image", function () {
+$("body").on("click", "#btn-prev-cipher-png", function () {
 	$("#previewImage").empty(); // empty element contents
-	html2canvas($("#ChartTable")[0]).then((canvas) => {
-		console.log("done ... ");
-		$("#previewImage").append(canvas);
-		getCanvas = canvas;
-	});
+	if ( $( "#ChartTable" ).length ) { // if element exists
+		html2canvas($("#ChartTable")[0]).then((canvas) => {
+			console.log("done ... ");
+			$("#previewImage").append(canvas);
+			getCanvas = canvas;
+		});
+	};
+	if ( $( "#ChartTableThin" ).length ) {
+		html2canvas($("#ChartTableThin")[0]).then((canvas) => {
+			console.log("done ... ");
+			$("#previewImage").append(canvas);
+			getCanvas = canvas;
+		});
+	}
 });
 
-$("body").on("click", "#btn-Convert-Html2Image", function () {
+$("body").on("click", "#btn-prev-history-png", function () {
+	$("#previewImage").empty(); // empty element contents
+	if ( $( "#ChartTable" ).length ) {
+		html2canvas($("#HistoryTable_scr")[0]).then((canvas) => {
+			console.log("done ... ");
+			$("#previewImage").append(canvas);
+			getCanvas = canvas;
+		});
+	};
+});
+
+$("body").on("click", "#btn-save-png", function () {
 	console.log("download");
 	var imageData = getCanvas.toDataURL("image/png");
 	// Now browser starts downloading it instead of just showing it
