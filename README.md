@@ -23,7 +23,7 @@
 
 ### Experimental:
 - Option to render cipher chart or history table as an image (easier to share decodes)
-- Click letters/numbers inside cipher chart to highlight them
+- Click on letters/numbers inside cipher chart to highlight them
 - Left click ("tap" on mobile) on cell in history table makes all similar cells blink
 - Right click ("tap and hold" on mobile) on cell in history table toggles visibility for that particular cell
 - CSS changes (visual style)
