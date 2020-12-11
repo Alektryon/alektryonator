@@ -1,5 +1,15 @@
 $(document).ready(function(){
 	
+	$(document).keydown(function(event){
+		if(event.which=="17")
+		ctrlIsPressed = true;
+	});
+	$(document).keyup(function(){
+		ctrlIsPressed = false;
+	});
+
+	var ctrlIsPressed = false; // allow Ctrl modifier key
+
     $("#Highlight").keyup(function(event){ // inside Highlight box
 		if ( event.which == 46 ) { // "Delete" - clear box
 			freq = [] // reset previously found matches, weighted auto highlighter
@@ -41,7 +51,11 @@ $(document).ready(function(){
 	$("body").on("click", ".phraseValue", function (e) {
 		//console.log($(this).find(".cellvalue").html()); // inner html of .cellvalue found in "this"
 		var val = $(this).find(".cellvalue").html(); // get gematria value from element
-		$( "table.HistoryTable td:contains('"+val+"')" ).toggleClass('highlightValue');
+		if(ctrlIsPressed) { // Ctrl + Left Click
+			tdToggleHighlight(parseInt(val.trim())); // remove spaces, parse as integer and add (remove) to highlight box
+		} else { // Left Click only
+			$( "table.HistoryTable td:contains('"+val+"')" ).toggleClass('highlightValueBlink'); // add blinking effect
+		}
 	});
 	
 });
@@ -173,7 +187,7 @@ function Open_HistoryAutoHlt() {
 	Open_History() // update table
 }
 
-// old Highlighter function, table is rebuilt, click on element, no jQuery
+// add number to Highlight box (history table is rebuilt)
 function tdToggleHighlight(val){ // click on value in history table to toggle highlighter
     //console.log('Clicked on: '+val)
 	highlt = document.getElementById("Highlight").value.replace(/ +/g," ") // get value, remove double spaces
@@ -184,7 +198,8 @@ function tdToggleHighlight(val){ // click on value in history table to toggle hi
 		return parseInt(x, 10); 
 	});
 	
-	i = highlt_num.indexOf(val)
+	var i = highlt_num.indexOf(val) // val needs to be an integer
+	//console.log("val:"+val+" i:"+i+" highlt_num:"+JSON.stringify(highlt_num))
 	
 	// disable
 	var hlt_val

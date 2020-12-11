@@ -59,9 +59,8 @@ body {
 	border-color: rgb(77,77,77);
 }
 
-.highlightValue{
+.highlightValueBlink{
 	/* background-color: rgb(255,255,0) !important; */
-	color: rgb(255,255,0) !important;
 	animation: blink 500ms linear infinite;
 }
 
@@ -417,10 +416,10 @@ body {
 	width: 115px;
 	background-color: rgb(16,16,16);
 }
-#btn-prev-cipher-png, #btn-prev-history-png, #btn-save-png  {
+#btn-print-cipher-png, #btn-print-history-png {
 	display: inline-block;
 	color: rgb(222,222,222);
-	width: 115px;
+	width: 150px;
 	background-color: rgb(16,16,16);
 }
 .ButtonSection {float: right;}
