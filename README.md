@@ -27,6 +27,7 @@
 - "Left click" ("tap" on mobile) on cell in history table makes all similar cells blink
 - "Ctrl + Left click" adds cell value to highlight box (note: history table is recalculated)
 - "Right click" ("tap and hold" on mobile) on cell in history table toggles visibility for that particular cell
+- Press "Page Down" inside the right textbox to display only matching phrases (filter, non-destructive)
 - CSS changes (visual style)
 - Fixed "Russian E" ciphers (the only difference to Ordinal is that Е=Ё, all other letters have the same values now)
 - New option: "Compact History Table" - no cipher names, no break every 25 words, only values are displayed
