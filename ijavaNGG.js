@@ -23,7 +23,9 @@ function Populate_MenuBar() {
 
 	hStr = '<center><div class="MenuLink"><a href="javascript:Open_Ciphers()">Ciphers</a></div>  |  '
 	hStr += '<div class="MenuLink"><a href="javascript:Open_Options()">Options</a></div>  |  '
-	hStr += '<div class="MenuLink"><a href="experimental/index.html">Experimental</a></div>'
+	hStr += '<div class="MenuLink"><a href="experimental/index.html">Experimental</a></div>  |  '
+	hStr += '<div class="MenuLink"><a href="https://github.com/ravic-norsou/test197824.github.io">GitHub (changelog)</a></div>  |  '
+	hStr += '<div class="MenuLink"><a href="https://gematrinator.com/index.php">Gematrinator.com</a></div>'
 	if (opt_InTable == true) {
 		hStr += '  |  ' + '<div class="MenuLink"><a href="javascript:Load_Options(true)">Load My Settings</a></div><BR></center>'
 	}
