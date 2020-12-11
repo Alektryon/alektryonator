@@ -24,8 +24,9 @@
 ### Experimental:
 - Option to render cipher chart or history table as an image (easier to share decodes)
 - Click on letters/numbers inside cipher chart to highlight them
-- Left click ("tap" on mobile) on cell in history table makes all similar cells blink
-- Right click ("tap and hold" on mobile) on cell in history table toggles visibility for that particular cell
+- "Left click" ("tap" on mobile) on cell in history table makes all similar cells blink
+- "Ctrl + Left click" adds cell value to highlight box (note: history table is recalculated)
+- "Right click" ("tap and hold" on mobile) on cell in history table toggles visibility for that particular cell
 - CSS changes (visual style)
 - Fixed "Russian E" ciphers (the only difference to Ordinal is that Е=Ё, all other letters have the same values now)
 - New option: "Compact History Table" - no cipher names, no break every 25 words, only values are displayed
