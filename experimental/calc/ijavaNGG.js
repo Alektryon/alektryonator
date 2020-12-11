@@ -144,12 +144,15 @@ function newHistory(phr, upd_table) { // called from function navHistory(impNum)
 	
 	if (upd_table) Open_History() // update table or not
 }
-function Open_History() {
+function Open_History(match_only) {
 	var ms, x, y, aCipher, gemSum
 	tArea = document.getElementById("MiscSpot")
 
-	if (sHistory.length == 0) {return}
+	var curHistory = []
 	
+	if (sHistory.length == 0) {return}
+	curHistory = sHistory // use regular history array all the time
+	if (match_only == "display_only_matches") {curHistory = matchHistory} // use a copy of history array to display only matching phrases
 
 	ms = '<table class="HistoryTable" id="HistoryTable_scr"><tbody>'
 	highlt = document.getElementById("Highlight").value // value of Highlight textbox
@@ -160,7 +163,7 @@ function Open_History() {
 		hlt = true
 	}
 	
-	for (x = 0; x < sHistory.length; x++) {
+	for (x = 0; x < curHistory.length; x++) {
 
 		if (x % 25 == 0 && !opt_CompactHistoryTable) {
 			ms += '<tr><td class="MPhrase"><font style="color: orange;">Word or Phrase</font></td>'
@@ -172,7 +175,7 @@ function Open_History() {
 			ms += "</tr>"
 		}
 
-		ms += '<tr><td class="historyPhrase">' + sHistory[x] + '</td>'
+		ms += '<tr><td class="historyPhrase">' + curHistory[x] + '</td>'
 
 		if (opt_WeightedAutoHlt && freq.length !== 0) { // if option is enabled and array is initialized
 			
@@ -181,8 +184,8 @@ function Open_History() {
 			for (y = 0; y < ciphersOn.length; y++) {
 			
 				aCipher = ciphersOn[y]
-				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(sHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
-				gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
+				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(curHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
+				gemVal = aCipher.Gematria(curHistory[x], 2, false, true) // value only
 
 				// r = aCipher.R;
 				// g = aCipher.G;
@@ -191,11 +194,11 @@ function Open_History() {
 				col = "0,255,0"
 				a = 1.0
 				
-				//console.log("highlt_num.includes('"+aCipher.Gematria(sHistory[x], 2, false, true)+"'))")
-				//console.log(highlt_num.indexOf((aCipher.Gematria(sHistory[x], 2, false, true)).toString()))
+				//console.log("highlt_num.includes('"+aCipher.Gematria(curHistory[x], 2, false, true)+"'))")
+				//console.log(highlt_num.indexOf((aCipher.Gematria(curHistory[x], 2, false, true)).toString()))
 				//console.log(highlt_num)
 				
-				if (hlt && !highlt_num.includes((aCipher.Gematria(sHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
+				if (hlt && !highlt_num.includes((aCipher.Gematria(curHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
 					// r *= 0.3
 					// g *= 0.3
 					// b *= 0.3
@@ -223,8 +226,8 @@ function Open_History() {
 			for (y = 0; y < ciphersOn.length; y++) {
 			
 				aCipher = ciphersOn[y]
-				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(sHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
-				gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
+				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(curHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
+				gemVal = aCipher.Gematria(curHistory[x], 2, false, true) // value only
 
 				// r = aCipher.R;
 				// g = aCipher.G;
@@ -232,11 +235,11 @@ function Open_History() {
 				col = aCipher.RGB
 				a = 1.0
 				
-				//console.log("highlt_num.includes('"+aCipher.Gematria(sHistory[x], 2, false, true)+"'))")
-				//console.log(highlt_num.indexOf((aCipher.Gematria(sHistory[x], 2, false, true)).toString()))
+				//console.log("highlt_num.includes('"+aCipher.Gematria(curHistory[x], 2, false, true)+"'))")
+				//console.log(highlt_num.indexOf((aCipher.Gematria(curHistory[x], 2, false, true)).toString()))
 				//console.log(highlt_num)
 				
-				if (hlt && !highlt_num.includes((aCipher.Gematria(sHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
+				if (hlt && !highlt_num.includes((aCipher.Gematria(curHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
 					// r *= 0.3
 					// g *= 0.3
 					// b *= 0.3
@@ -1158,7 +1161,13 @@ function NumberArray() {
 
 function ValClass(impType = 1) {if (impType == 1) {return ' class="GemVal"'} else {return ' class="GemVal2"'}}
 function ValID (impCipher) {return ' id="' + impCipher.Nickname + '_Sum"'}
-function CipherColor(impCipher) {return ' style="color: RGB(' + impCipher.RGB.join() +'); text-shadow: 0px 0px 20px rgb('+impCipher.RGB.join()+');"'}
+function CipherColor(impCipher) {
+	if (opt_MatrixCodeRain) {
+		return ' style="color: RGB(' + impCipher.RGB.join() +'); text-shadow: 0px 0px 20px rgb('+impCipher.RGB.join()+');"'
+	} else {
+		return ' style="color: RGB(' + impCipher.RGB.join() +');"' // no shadow for static background
+	}
+}
 function HeadClass() {return ' class="GemHead"'}
 function HeadID(impCipher) {return ' id="'+ impCipher.Nickname + '_Head"'}
 function HeadLink(impCipher) {

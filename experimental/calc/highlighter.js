@@ -1,3 +1,5 @@
+var matchHistory = [] // a copy of sHistory used to display only matching phrases
+
 $(document).ready(function(){
 	
 	$(document).keydown(function(event){
@@ -12,11 +14,12 @@ $(document).ready(function(){
 
     $("#Highlight").keyup(function(event){ // inside Highlight box
 		if ( event.which == 46 ) { // "Delete" - clear box
-			freq = [] // reset previously found matches, weighted auto highlighter
+			freq = []; // reset previously found matches, weighted auto highlighter
 			document.getElementById("Highlight").value = "";
 		}
 		if ( event.which == 34 ) { // "Page Down" - show only phrases that match
 			RemoveNotMatchingPhrases();
+			return // don't update history as function is different
 		}
 		Open_History();
     });
@@ -68,18 +71,20 @@ function RemoveNotMatchingPhrases() {
 		return parseInt(x, 10); 
 	});
 	
+	matchHistory = [...sHistory] // create a copy of history, since matching is destructive
+	
 	var phr_values = []
 	var match = false
 	var x = 0
-	// for (x = 0; x < sHistory.length; x++) { // for each phrase in history
-	while (x < sHistory.length) { // for each phrase in history
+	// for (x = 0; x < matchHistory.length; x++) { // for each phrase in history
+	while (x < matchHistory.length) { // for each phrase in history
 	
 		phr_values = [] // reinit
 		match = false
 		
 		for (y = 0; y < ciphersOn.length; y++) { // for each enabled cipher
 			aCipher = ciphersOn[y]
-			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
+			gemVal = aCipher.Gematria(matchHistory[x], 2, false, true) // value only
 			phr_values.push(gemVal) // build an array of all gematria values of current phrase
 		}
 		//console.log(phr_values)
@@ -90,14 +95,14 @@ function RemoveNotMatchingPhrases() {
 		}
 		//console.log(match)
 		if (!match) { // if no match is found, don't do x++ as array indices shift
-			//console.log("removed: '"+sHistory[x]+"'")
-			sHistory.splice(x,1) // remove phrase
+			//console.log("removed: '"+matchHistory[x]+"'")
+			matchHistory.splice(x,1) // remove phrase
 		} else {
 			x++ // check next item if match is found
 		}
 	}
 	
-	Open_History() // rebuild table
+	Open_History("display_only_matches") // rebuild table
 }
 
 function Open_HistoryAutoHlt() {
