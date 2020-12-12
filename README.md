@@ -1,19 +1,47 @@
 # Gematria Calculator
-### (based on https://www.gematrinator.com/calculator/index.php)
 
-### Minor improvements:
-- Removed 100 entries history limit
-- Textbox is cleared on "Enter" after new word is added to history (press "Del" to clear manually)
-- New entries are no longer added on mouse over ciphers (unfinished phrases cannot be added accidentally)
-- History table is automatically updated on cipher toggle
+### Based on [Gematrinator.com](https://www.gematrinator.com/calculator/index.php) (original calculator by Derek Tikkuri)
+---
+> NOTE: Classic design version is no longer updated, use "Experimental" version!
 
-### New features:
-- Old history entries can be separately removed with "Del", use Up/Down arrows to cycle through history
-- Press "Home" inside the left textbox to clear all history, no need to reload page
-- Sentence can be added as a list of words and phrases (press "End" instead of "Enter")
-- Dynamic highlighter, type space delimited numbers in the right textbox ("Del" to clear)
-- Press "Insert" inside the left textbox to automatically highlight all available matches
-- Click on values inside history table to toggle highlighter for a specific value
+### List of features:
+<ul>
+<li>Phrase Box
+  <ul>
+  <li>Press "Enter" to add phrase to history table</li>
+  <li>Box is cleared automatically on "Enter", press "Del" to clear manually</li>
+  <li>Phrase can be removed from history with "Del" if it is present (use Up/Down arrows to cycle through history)</li>
+  <li>Press "End" to add current phrase (sentence) as a list of words and phrases</li>
+  <li>Press "Home" to remove all entries from history table</li>
+  </ul>
+</li>
+<li>Highlight Box
+  <ul>
+  <li>Highlight values inside history table, type space delimited numbers (e.g - 8 10 12)</li>
+  <li>Press "Del" to clear box and disable highlighter feature</li>
+  <li>Press "Insert" to automatically highlight all available matches</li>
+  <li>Press "Enter" to display only matching phrases (press any non-character key to clear filter, e.g. "Shift", arrow keys, etc.)</li>
+  <li>New option: "Weighted Auto Highlighter" - auto highlighter ("Insert") is color graded based on frequency of matches (non-linear)</li>
+  </ul>
+</li>
+<li>Cipher Chart
+  <ul>
+  <li>"Left Click" on letters/numbers to highlight cells</li>
+  </ul>
+</li>
+<li>History Table
+  <ul>
+  <li>"Left click" on value makes all matching values blink</li>
+  <li>"Ctrl + Left Click" adds cell value to highlight box (note: history table is recalculated)</li>
+  <li>"Right Click" on cell to hide/show that particular cell</li>
+  <li>"Ctrl + Left Click" on phrase in history table selects that phrase and loads it into search box (press "Del" to remove phraase)</li>
+  <li>New option: "Compact History Table" - no cipher names, no break every 25 phrases, only values are displayed</li>
+  </ul>
+</li>
+</ul>
+
+### Additional Functionality:
+- Copy/save cipher chart or history table as an image (no need to do screenshots)
 
 ### Ciphers:
 - Added "Empty" button to disable all active ciphers
@@ -21,20 +49,11 @@
 - Added "Custom" cipher category (English alphabet, fully customizable)
 - Added "Russian" cipher category
 
-# NOTE: Old design is no longer updated, use "Experimental" version!
-
-### Experimental:
-- Option to render cipher chart or history table as an image (easier to share decodes)
-- Click on letters/numbers inside cipher chart to highlight them
-- "Left click" ("tap" on mobile) on cell in history table makes all similar cells blink
-- "Ctrl + Left click" adds cell value to highlight box (note: history table is recalculated)
-- "Right click" ("tap and hold" on mobile) on cell in history table toggles visibility for that particular cell
-- Press "Page Down" inside the right textbox to display only matching phrases (filter, non-destructive)
-- CSS changes (visual style)
-- Fixed "Russian E" ciphers (the only difference to Ordinal is that Е=Ё, all other letters have the same values now)
-- Additional ciphers in "English (Special)" category
-- New option: "Compact History Table" - no cipher names, no break every 25 words, only values are displayed
-- New option: "Weighted Auto Highlighter" - auto highlighter ("Insert" button) does color grading based on frequency of matches (non-linear)
-- New option: "Matrix Code Rain" - disable dynamic background if you prefer "classic" gray color background
+### Miscellaneous:
+- Removed history limit (100 items)
+- Phrase is no longer added to history on mouse over ciphers (unfinished phrases cannot be added accidentally)
+- History table is automatically updated on cipher toggle
 - All available matches found with auto highlighter are displayed in console (debug)
-- Removed unused original code
+- New option: "Matrix Code Rain" - disable dynamic background if you prefer "classic" gray color background
+- CSS changes (visual style)
+- Removed unused code
