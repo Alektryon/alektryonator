@@ -107,7 +107,9 @@ class cipher {
 		if (impMods.indexOf("BaconReverse") > -1) {this.Make_BaconReverse()}
 		if (impMods.indexOf("BaconShort") > -1) {this.Make_BaconShort()}
 		if (impMods.indexOf("BaconKaye") > -1) {this.Make_BaconKaye()}
+		if (impMods.indexOf("ModernKaye") > -1) {this.Make_ModernKaye()}
 		if (impMods.indexOf("IlluminatiNovice") > -1) {this.Make_IlluminatiNovice()}
+		if (impMods.indexOf("ReverseIlluminatiNovice") > -1) {this.Make_ReverseIlluminatiNovice()}
 		if (impMods.indexOf("BeatusOrdinal") > -1) {this.Make_BeatusOrdinal()}
 		if (impMods.indexOf("BeatusReduction") > -1) {this.Make_BeatusReduction()}
 		if (impMods.indexOf("BeatusExtended") > -1) {this.Make_BeatusExtended()}
@@ -533,9 +535,17 @@ class cipher {
 		this.vArr = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
 		this.vArr2 = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
 	}
+	Make_ModernKaye() {
+		this.vArr = [27,28,29,30,31,32,33,34,35,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+		this.vArr2 = [27,28,29,30,31,32,33,34,35,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+	}
 	Make_IlluminatiNovice() {
 		this.vArr = [12,11,10,9,8,7,6,5,4,4,3,2,1,13,14,15,16,17,18,19,20,20,21,22,23,24]
 		this.vArr2 = [12,11,10,9,8,7,6,5,4,4,3,2,1,13,14,15,16,17,18,19,20,20,21,22,23,24]
+	}
+	Make_ReverseIlluminatiNovice() {
+		this.vArr = [24,23,22,21,20,19,18,17,16,16,15,14,13,1,2,3,4,5,6,7,8,8,9,10,11,12]
+		this.vArr2 = [24,23,22,21,20,19,18,17,16,16,15,14,13,1,2,3,4,5,6,7,8,8,9,10,11,12]
 	}
 	Make_BeatusOrdinal() {
 		this.vArr = [1,2,3,4,5,6,7,8,9,9,10,11,12,13,14,15,16,17,18,19,20,20,20,21,22,23]
@@ -735,7 +745,9 @@ function Build_Ciphers() {
 			case "Bacon Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconReverse"); break;
 			case "Bacon Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "BaconShort"); break;
 			case "Bacon Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 93, 73, "BaconKaye"); break;
+			case "Modern Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 230, 153, 163, "ModernKaye"); break;
 			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 201, 171, "IlluminatiNovice"); break;
+			case "Reverse Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 241, 191, "ReverseIlluminatiNovice"); break;
 			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 163, 70, "BeatusExtended"); break;
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 200, 171, 16, "BeatusReduction"); break;
 			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "BeatusOrdinal"); break;
@@ -838,7 +850,9 @@ function Set_Categories() {
 	cipherArray["Bacon Reverse"] = "English (Special)"
 	cipherArray["Bacon Short"] = "English (Special)"
 	cipherArray["Bacon Kaye"] = "English (Special)"
+	cipherArray["Modern Kaye"] = "English (Special)"
 	cipherArray["Illuminati Novice"] = "English (Special)"
+	cipherArray["Reverse Illuminati Novice"] = "English (Special)"
 	cipherArray["Beatus of Liebana"] = "English (Special)"
 	cipherArray["Beatus Reduction"] = "English (Special)"
 	cipherArray["Beatus Ordinal"] = "English (Special)"
@@ -888,7 +902,7 @@ function Add_AllCiphers(impBool = false) {
 		cN = allCiphers[x].Nickname
 		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1
 		&& cN.indexOf("RU") == -1 && cN.indexOf("Custom") == -1 &&
-		cN.indexOf("Bacon Simple") == -1 && cN.indexOf("Bacon Reverse") == -1 && cN.indexOf("Bacon Short") == -1 && cN.indexOf("Bacon Kaye") == -1 && cN.indexOf("Illuminati Novice") == -1 &&
+		cN.indexOf("Bacon Simple") == -1 && cN.indexOf("Bacon Reverse") == -1 && cN.indexOf("Bacon Short") == -1 && cN.indexOf("Kaye") == -1 && cN.indexOf("Illuminati Novice") == -1 &&
 		cN.indexOf("Beatus") == -1) {
 			for (z = 0; z < allCiphers.length; z++) {
 				if (allCiphers[z].Nickname == cN) {
