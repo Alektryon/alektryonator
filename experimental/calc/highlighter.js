@@ -61,6 +61,19 @@ $(document).ready(function(){
 		}
 	});
 	
+	// Ctrl + Click on phrase in history table
+	$("body").on("click", ".historyPhrase", function (e) {
+		console.log($(this).html()); // inner html of "this"
+		var val = $(this).html(); // get gematria value from element
+		if(ctrlIsPressed) { // Ctrl + Left Click
+			document.getElementById("SearchField").value = val; // insert phrase into search box
+			FieldChange(sVal()); // update breakdown for current phrase
+			document.getElementById("SearchField").focus(); // focus input
+		} else { // Left Click only
+			return;
+		}
+	});
+	
 });
 
 function RemoveNotMatchingPhrases() {
