@@ -21,6 +21,8 @@
 - Added "Custom" cipher category (English alphabet, fully customizable)
 - Added "Russian" cipher category
 
+# NOTE: Old design is no longer updated, use "Experimental" version!
+
 ### Experimental:
 - Option to render cipher chart or history table as an image (easier to share decodes)
 - Click on letters/numbers inside cipher chart to highlight them
@@ -30,6 +32,7 @@
 - Press "Page Down" inside the right textbox to display only matching phrases (filter, non-destructive)
 - CSS changes (visual style)
 - Fixed "Russian E" ciphers (the only difference to Ordinal is that Е=Ё, all other letters have the same values now)
+- Additional ciphers in "English (Special)" category
 - New option: "Compact History Table" - no cipher names, no break every 25 words, only values are displayed
 - New option: "Weighted Auto Highlighter" - auto highlighter ("Insert" button) does color grading based on frequency of matches (non-linear)
 - New option: "Matrix Code Rain" - disable dynamic background if you prefer "classic" gray color background
