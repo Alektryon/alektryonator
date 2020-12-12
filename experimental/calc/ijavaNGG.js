@@ -116,12 +116,6 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 			}
 			Open_History() // update table only once after all phrases are added
 			break;
-		case 45:// Insert, auto available values highlighter
-			Open_HistoryAutoHlt()
-			break;
-		// case 34:// Page Down, remove phrases that don't match
-			// RemoveNotMatchingPhrases()
-			// break;
 	}
 }
 

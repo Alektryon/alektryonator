@@ -17,9 +17,13 @@ $(document).ready(function(){
 			freq = []; // reset previously found matches, weighted auto highlighter
 			document.getElementById("Highlight").value = "";
 		}
-		if ( event.which == 34 ) { // "Page Down" - show only phrases that match
+		if ( event.which == 13 ) { // "Enter" - show only phrases that match
 			RemoveNotMatchingPhrases();
 			return // don't update history as function is different
+		}
+		if ( event.which == 45 ) { // "Insert" - auto highlighter, find all available matches
+			Open_HistoryAutoHlt();
+			return // don't update history
 		}
 		Open_History();
     });
