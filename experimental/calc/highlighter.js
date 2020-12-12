@@ -165,7 +165,7 @@ function Open_HistoryAutoHlt() {
 						if (cur_val == cur_phrase_arr2[p]) { // if matching value is found in other rows (phrases)
 							if (avail_val.indexOf(cur_val) == -1) { // avoid duplicate matches
 								avail_val.push(cur_val) // push to array
-								freq_tmp = [cur_val, 1, 0]
+								freq_tmp = [cur_val, 2, 0] // first match means 2 values were found
 								freq.push(freq_tmp) // new Array [current value, nummber of occurrences, finished search]
 								pos = 0 // set to the first element
 								once_in_row = 1

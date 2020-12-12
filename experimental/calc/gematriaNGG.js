@@ -84,6 +84,10 @@ class cipher {
 				this.cArr2 = [1040,1041,1042,1043,1044,1045,1025,1046,1047,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071] // caps
 				Build_GemVals(this)
 				break;
+			case "Korean":
+				this.cArr = [12615,12623,12610,12619,12619,12619,12599,12628,12624,12621,12621,12593,12622,12643,12616,12616,12601,12601,12609,12596,12631,12613,12620,12627,12636,12635,12625,12634,12634,12633,12638,12639,12642,12626,12624]
+				Build_GemVals(this)
+				break;
 		}
 
 		if (impMods.indexOf("Exception") > -1) {this.Exception = true}
@@ -109,13 +113,14 @@ class cipher {
 		if (impMods.indexOf("BaconKaye") > -1) {this.Make_BaconKaye()}
 		if (impMods.indexOf("ModernKaye") > -1) {this.Make_ModernKaye()}
 		if (impMods.indexOf("IlluminatiNovice") > -1) {this.Make_IlluminatiNovice()}
-		if (impMods.indexOf("ReverseIlluminatiNovice") > -1) {this.Make_ReverseIlluminatiNovice()}
+		if (impMods.indexOf("IlluminatiReverse") > -1) {this.Make_IlluminatiReverse()}
 		if (impMods.indexOf("BeatusOrdinal") > -1) {this.Make_BeatusOrdinal()}
 		if (impMods.indexOf("BeatusReduction") > -1) {this.Make_BeatusReduction()}
 		if (impMods.indexOf("BeatusExtended") > -1) {this.Make_BeatusExtended()}
 		if (impMods.indexOf("RussianE") > -1) {this.Make_RussianE()}
 		if (impMods.indexOf("RussianRevE") > -1) {this.Make_RussianRevE()}
 		if (impMods.indexOf("EnglishCustom") > -1) {this.Make_CustomCipher()}
+		//if (impMods.indexOf("KoreanOrdinal") > -1) {this.Make_KoreanOrdinal()}
 	}
 
 	Gematria(impVal, impType, wLink = false, impHistory = false) {
@@ -543,7 +548,7 @@ class cipher {
 		this.vArr = [12,11,10,9,8,7,6,5,4,4,3,2,1,13,14,15,16,17,18,19,20,20,21,22,23,24]
 		this.vArr2 = [12,11,10,9,8,7,6,5,4,4,3,2,1,13,14,15,16,17,18,19,20,20,21,22,23,24]
 	}
-	Make_ReverseIlluminatiNovice() {
+	Make_IlluminatiReverse() {
 		this.vArr = [24,23,22,21,20,19,18,17,16,16,15,14,13,1,2,3,4,5,6,7,8,8,9,10,11,12]
 		this.vArr2 = [24,23,22,21,20,19,18,17,16,16,15,14,13,1,2,3,4,5,6,7,8,8,9,10,11,12]
 	}
@@ -741,18 +746,20 @@ function Build_Ciphers() {
 			case "RU Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 128, 0, "RussianE"); break;
 			case "RU Reverse Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 160, 20, "RussianRevE"); break;
 			
-			case "Bacon Simple": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "BaconSimple"); break;
-			case "Bacon Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconReverse"); break;
+			case "Bacon Simple": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconSimple"); break;
+			case "Bacon Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "BaconReverse"); break;
 			case "Bacon Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "BaconShort"); break;
 			case "Bacon Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 93, 73, "BaconKaye"); break;
 			case "Modern Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 230, 153, 163, "ModernKaye"); break;
-			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 201, 171, "IlluminatiNovice"); break;
-			case "Reverse Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 156, 241, 191, "ReverseIlluminatiNovice"); break;
-			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 163, 70, "BeatusExtended"); break;
-			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 200, 171, 16, "BeatusReduction"); break;
-			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "BeatusOrdinal"); break;
+			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "IlluminatiNovice"); break;
+			case "Illuminati Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 189, 2, "IlluminatiReverse"); break;
+			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 148, 0, 211, "BeatusExtended"); break;
+			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 153, 50, 204, "BeatusReduction"); break;
+			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 186, 85, 211, "BeatusOrdinal"); break;
 			
 			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 224, 224, 32, "EnglishCustom"); break;
+			
+			//case "Korean Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Korean", 0, 186, 0); break;
 
 		}
 	}
@@ -761,6 +768,7 @@ function Build_Ciphers() {
 }
 
 function Set_Categories() {
+	//catArr = ["English", "English (Special)", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian", "Korean", "Custom"]
 	catArr = ["English", "English (Special)", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian", "Custom"]
 
 	cipherArray["English Ordinal"] = "English"
@@ -852,10 +860,12 @@ function Set_Categories() {
 	cipherArray["Bacon Kaye"] = "English (Special)"
 	cipherArray["Modern Kaye"] = "English (Special)"
 	cipherArray["Illuminati Novice"] = "English (Special)"
-	cipherArray["Reverse Illuminati Novice"] = "English (Special)"
+	cipherArray["Illuminati Reverse"] = "English (Special)"
 	cipherArray["Beatus of Liebana"] = "English (Special)"
 	cipherArray["Beatus Reduction"] = "English (Special)"
 	cipherArray["Beatus Ordinal"] = "English (Special)"
+	
+	cipherArray["Korean Ordinal"] = "Korean"
 	
 	cipherArray["English Custom"] = "Custom"
 	
@@ -902,8 +912,8 @@ function Add_AllCiphers(impBool = false) {
 		cN = allCiphers[x].Nickname
 		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1
 		&& cN.indexOf("RU") == -1 && cN.indexOf("Custom") == -1 &&
-		cN.indexOf("Bacon Simple") == -1 && cN.indexOf("Bacon Reverse") == -1 && cN.indexOf("Bacon Short") == -1 && cN.indexOf("Kaye") == -1 && cN.indexOf("Illuminati Novice") == -1 &&
-		cN.indexOf("Beatus") == -1) {
+		cN.indexOf("Bacon Simple") == -1 && cN.indexOf("Bacon Reverse") == -1 && cN.indexOf("Bacon Short") == -1 && cN.indexOf("Kaye") == -1 && cN.indexOf("Illuminati") == -1 &&
+		cN.indexOf("Beatus") == -1 && cN.indexOf("Korean") == -1) {
 			for (z = 0; z < allCiphers.length; z++) {
 				if (allCiphers[z].Nickname == cN) {
 					openCiphers.splice(q, 0, cN)

@@ -1,6 +1,7 @@
 body {
 	background-color: rgb(34,34,34);
-	font-family: "Bookman Old Style", Arial;
+	/* font-family: "Bookman Old Style", Arial; */
+	font-family: Arial;
 	color: rgb(222,222,222);
 	/* replace cursor */
 	/* cursor: url("cursor.png"), auto; */
