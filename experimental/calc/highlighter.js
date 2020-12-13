@@ -125,10 +125,10 @@ function RemoveNotMatchingPhrases() {
 function Open_HistoryAutoHlt() {
 	var x, y, aCipher
 
-	var phrase_val = [] // gematria values for a single phrase
-	avail_val = [] // reinit
-	values_arr = []
-	freq = []
+	var rows_arr = [] // array of arrays, each array (row) has gematria values for a single phrase
+	var phrase_values = [] // array of gematria values for a single phrase
+	avail_match = [] // reinit (var declared in ijavaNGG.js)
+	avail_match_freq = [] // var declared in ijavaNGG.js
 	
 	if (sHistory.length == 0) {return}
 	
@@ -136,73 +136,86 @@ function Open_HistoryAutoHlt() {
 		for (y = 0; y < ciphersOn.length; y++) {
 			aCipher = ciphersOn[y]
 			gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
-			phrase_val.push(gemVal) // append all values of this phrase
+			phrase_values.push(gemVal) // append all values of this phrase
 		}
-		values_arr.push(phrase_val) // append all values of each phrase
-		phrase_val = [] // reinit	
+		rows_arr.push(phrase_values) // append all values of each phrase
+		phrase_values = [] // reinit	
 	}
 	
 						
 	//auto highlighter, all available values
-	var cur_phrase_arr = []
-	var cur_phrase_arr2 = []
-	var cur_val // current word value
+	var this_row = [] // match this row
+	var against_row = [] // against another row
+	var val = 0 // value that is checked (try "")
 	
-	var pos = 0 // save position to mark value as finished searching
-	var once_in_row // match can't be counted in the same row twice
-	var freq_tmp = []
+	var p = 0 // position (column) in against_row
+	var index = 0 // index of val in array of previously found matches
 	
-	for (i = 0; i < values_arr.length; i++){ // loop array
-		cur_phrase_arr = values_arr[i] // select row with phrase values
-		for (n = 0; n < cur_phrase_arr.length; n++){
-			cur_val = cur_phrase_arr[n] // took the first value of the first phrase
-			for (m = 0; m < values_arr.length; m++){ // loop array again to find matches
-				if (m!=i){ // can't be same row
-					//console.log("m:"+m+" i:"+i)
-					cur_phrase_arr2 = values_arr[m] // select another row
-					once_in_row = 0 // match can't be counted in the same row twice
-					for (p = 0; p < cur_phrase_arr2.length; p++){ // loop values in that row
-						if (cur_val == cur_phrase_arr2[p]) { // if matching value is found in other rows (phrases)
-							if (avail_val.indexOf(cur_val) == -1) { // avoid duplicate matches
-								avail_val.push(cur_val) // push to array
-								freq_tmp = [cur_val, 2, 0] // first match means 2 values were found
-								freq.push(freq_tmp) // new Array [current value, nummber of occurrences, finished search]
-								pos = 0 // set to the first element
-								once_in_row = 1
+	var n_rows = rows_arr.length // number of phrases
+	var n_cols = rows_arr[0].length // number of values (ciphers) for each phrase (same value)
+	
+	var steps = 0 // number of steps taken
+	
+	for (i = 0; i < n_rows; i++) { // loop array
+		this_row = rows_arr[i] // select row with phrase values
+		for (n = 0; n < n_cols; n++) {
+			if (avail_match.indexOf(this_row[n]) == -1) { // take value that hasn't been checked
+				val = this_row[n] // take the first value of the first phrase
+				//console.log("# row:"+(i+1)+" column:"+(n+1)+" value:"+val)
+				for (m = i+1; m < n_rows; m++) { // loop array again to find matches, start check from the next row
+					against_row = rows_arr[m] // select another row
+					p = 0 // reset position in row
+					while (p < n_cols) { // loop values in that row
+						steps++
+						if (val == against_row[p]) { // if matching value is found in other rows (phrases)
+							index = avail_match.indexOf(val) // save index
+							//console.log("    matches with:"+against_row[p]+" at "+(m+1)+":"+(p+1)) // at row/column
+							if (index == -1) { // if value is not in array of available matches yet
+								avail_match.push(val) // push to array, so number is not selected again during the first (selection) loop of the array
+								avail_match_freq.push(2) // first match means 2 values were found
+								//console.log("        new value found, making a new array to count "+against_row[p])
+								//console.log("            "+against_row[p]+" has position "+avail_match.indexOf(val)+" in "+JSON.stringify(avail_match))
+							} else { // if value already exists in array of matches
+								avail_match_freq[index] += 1 // increment number of occurrencies found at correspondent index
+								//console.log("        found match at "+(m+1)+":"+(p+1)+" incrementing "+against_row[p]+" to "+avail_match_freq[index])
 							}
-							// when next value is checked we can't do increments for the previously numbered matches
-							for (z = 0; z < freq.length; z++) { // for each value available in frequency array
-								if (freq[z][0] == cur_val && freq[z][2] == 0 && once_in_row == 0 ) { // for corresponding value if search for that value is not finished and not same row
-									freq[z][1] += 1 // increment number of occurrencies found
-									pos = z // save position
-								}
+							if (m+1 < n_rows) { // switch to next row (if possible) after match is found
+								m++
+								against_row = rows_arr[m] // against_row = rows_arr[m+1] - gets stuck in an infinite increment loop
+								p = 0 // switch to first value in next row
+							} else {
+								break // break infinite loop on the last row check
 							}
+						} else {
+							p++ // if no match is found, check next value of the same row
 						}
 					}
 				}
 			}
-			//console.log("freq.length:"+freq.length+" pos:"+pos)
-			if (freq.length !== 0) freq[pos][2] = 1 // after search is done inside each row of phrase values, mark that value as "finished"
 		}
 	}
-	cur_phrase_arr = [] // reinit
-	cur_phrase_arr2 = []
-	cur_val = ""
+	console.log("rows:"+n_rows+" columns:"+n_cols+" values:"+(n_rows*n_cols)+" steps_taken:"+steps)
 	
-	avail_val.sort(function(a, b) { // sort ascending order
-		return a - b; //  b - a, for descending sort
-	});
+	freq = [] // frequency of matches found with auto highlighter (var declared in ijavaNGG.js)
+	var tmp = []
+	for (i = 0; i < avail_match.length; i++) { // join values and frequency
+		tmp = new Array(avail_match[i],avail_match_freq[i])
+		freq.push(tmp)
+	}
 	
 	freq.sort(function(a, b) {
 		return a[1] - b[1]; // sort based on index 1 values ("freq" is array of arrays), (b-a) descending order, (a-b) ascending
 	});
-
-	//console.log(values_arr) // print all phrase values 2d array
-	console.log(JSON.stringify(avail_val).replace(/,/g, " ").slice(1, -1)) // print available matches
+	
+	avail_match.sort(function(a, b) { // sort ascending order
+		return a - b; //  b - a, for descending sort
+	});
+	
+	console.log(JSON.stringify(avail_match).replace(/,/g, " ").slice(1, -1)) // print available matches
 	console.log(JSON.stringify(freq).replace(/\],\[/g, "\n").slice(2, -2)) // print frequency of available matches
 	
 	// paste available values inside Highlight textbox
-	str = JSON.stringify(avail_val).replace(/,/g, " ") // replace comma with space
+	str = JSON.stringify(avail_match).replace(/,/g, " ") // replace comma with space
 	substr = str.substring(1, str.length - 1) // remove brackets
 	document.getElementById("Highlight").value = substr
 

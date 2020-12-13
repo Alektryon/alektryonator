@@ -10,8 +10,8 @@ var opt_WeightedAutoHlt = false; // color grade matches found with auto highligh
 var opt_MatrixCodeRain = true; // set to true to enable by default
 
 // used inside highlighter.js
-var values_arr = []; // array of arrays, each array has gematria values for a single phrase
-var avail_val = []; // all matches found with auto highligher
+var avail_match = []; // all matches found with auto highligher
+var avail_match_freq = []; // frequency of matches found with auto highligher
 var freq = []; // frequency of matches found with auto highlighter
 
 function Page_Launch() {
