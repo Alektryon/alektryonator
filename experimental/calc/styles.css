@@ -1,5 +1,6 @@
 body {
 	background-color: rgb(34,34,34);
+	background-image: url("./merkaba_tile.png");
 	/* font-family: "Bookman Old Style", Arial; */
 	font-family: Arial;
 	color: rgb(222,222,222);
@@ -425,3 +426,36 @@ body {
 }
 .ButtonSection {float: right;}
 .hideValue {display: none;}
+
+#overlay {
+	position: fixed; /* Sit on top of the page content */
+	display: none; /* Hidden by default */
+	width: 100%; /* Full width (cover the whole page) */
+	height: 100%; /* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+	z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+	cursor: pointer; /* Add a pointer on hover */
+}
+
+#highlight_panel {
+	background-color: #101010;
+	background-image: url("./merkaba_tile.png");
+	border: 2px solid RGB(77,77,77);
+	padding: 0;
+	width: 600px;
+	overflow: hidden;
+	position: relative;
+	top: 15%;
+	left: calc(50% - 50px);
+	margin: 0 0 0 -250px;
+	cursor: default;
+	border-radius: 6px;
+	z-index: 2;
+	padding-bottom: 20px;
+	min-height: 366px;
+	text-align: center;
+}

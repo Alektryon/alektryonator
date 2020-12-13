@@ -2,8 +2,8 @@
 
 var height_html = $(window).height();
 
-const canvas = document.getElementById('canv');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("canv");
+const ctx = canvas.getContext("2d");
 
 // set the width and height of the canvas
 const w = canvas.width = document.body.offsetWidth;
@@ -50,11 +50,13 @@ function matrix() {
 function toggle_code_rain() {
 	if (opt_MatrixCodeRain && !code_rain_active) {
 		code_rain = setInterval(matrix, 50)
+		document.getElementById("canv").style.display = ""
 		code_rain_active = true
 	} else if (!opt_MatrixCodeRain && code_rain_active) {
 		clearInterval(code_rain);
 		ctx.fillStyle = '#202020' // static bg, lighter color
 		ctx.fillRect(0, 0, w, h)
+		document.getElementById("canv").style.display = "none"
 		code_rain_active = false
 	}
 }

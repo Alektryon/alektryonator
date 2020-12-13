@@ -5,6 +5,8 @@ var pixelcount = 0; breakArr = []; pArr= []; mArr = []
 var opt_Reduce = true; opt_Quotes = true; opt_Summ = true; opt_Breakdown = "Chart"; opt_LetterCount = true
 var opt_Chart = true; opt_Shortcuts = true; opt_Headers = true;
 
+var opt_PhraseLimit = 5 // word limit to enter input as separate phrases, "End" key
+
 var opt_CompactHistoryTable = false; // disable Cipher names, no 25 phrase break, compact mode
 var opt_WeightedAutoHlt = false; // color grade matches found with auto highlighter (most frequest is the brightest)
 var opt_MatrixCodeRain = true; // set to true to enable by default
@@ -88,7 +90,7 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 			// thisTerm = thisTerm.replace(/(\.|,|:|;|\\|)/g, "") // remove special characters, last are one is "|"
 			
 			wordarray = thisTerm.split(" ")
-			phr_len = 5 // max phrase length
+			phr_len = opt_PhraseLimit // max phrase length
 			var phrase; // init variable outside of for cycle, memory efficient
 			// for (i = 0; i < wordarray.length; i++) { // phrases in normal order
 				// k = 1 // init variable
@@ -735,7 +737,8 @@ function Open_Options () {
 	os += 'Weighted Auto Highlighter <input type="checkbox" id="o_WHBox" value="Weighted Auto Highlighter" onclick="click_Opt()"' + oWH + '></input><BR>'
 	os += 'Matrix Code Rain <input type="checkbox" id="o_MCRBox" value="Matrix Code Rain" onclick="click_Opt()"' + oMCR + '></input><P>'
 	os += '<center>' + OBox_Ciphers() + '</center><p>'
-	os += '<center>' + OBox_NumCalc() + '</center>'
+	os += '<center>' + OBox_NumCalc() + '</center><p>'
+	os += '<center>' + OBox_PhraseLimit() + '</center>'
 
 	os += '</td><td>'
 
@@ -862,6 +865,20 @@ function OBox_NumCalc() {
 	ns += '</select>'
 	return ns
 }
+function OBox_PhraseLimit() {
+	var ns = ""
+	var nArr = [1,2,3,4,5,6,7,8,9,10]
+	ns += '<font style="color: orange; size: 90%">Phrase Limit ("End"):</font><BR>'
+	ns += '<select id="PhraseLimit" onchange="Set_PhraseLimit()">'
+	for (x = 0; x < nArr.length; x++) {
+		ns += '<option value="' + nArr[x] + '"'
+		if (nArr[x] == opt_PhraseLimit) {ns += ' selected="selected"'}
+		if (nArr[x] == 1) {ns += '>'+nArr[x]+' word</option>'}
+		else {ns += '>'+nArr[x]+' words</option>'}
+	}
+	ns += '</select>'
+	return ns
+}
 function OBox_Breakdown() {
 	var ns = ""
 	var nArr = ["Chart", "Classic", "Off"]
@@ -888,6 +905,10 @@ function Set_NumCalc() {
 	opt_NumCalculation = nCalc.value
 	Build_Table(opt_Headers)
 	Populate_Breakdown()
+}
+function Set_PhraseLimit() {
+	var pLimit = document.getElementById("PhraseLimit")
+	opt_PhraseLimit = pLimit.value
 }
 function Set_Breakdown() {
 	var bdType = document.getElementById("Breakdown_Type")
