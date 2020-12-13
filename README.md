@@ -34,7 +34,7 @@
   <li>"Left click" on value makes all matching values blink</li>
   <li>"Ctrl + Left Click" adds cell value to highlight box (note: history table is recalculated)</li>
   <li>"Right Click" on cell to hide/show that particular cell</li>
-  <li>"Ctrl + Left Click" on phrase in history table selects that phrase and loads it into search box (press "Del" to remove phraase)</li>
+  <li>"Ctrl + Left Click" on phrase in history table selects that phrase and loads it into search box (press "Del" to remove phrase)</li>
   <li>New option: "Compact History Table" - no cipher names, no break every 25 phrases, only values are displayed</li>
   </ul>
 </li>
