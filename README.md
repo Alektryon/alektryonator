@@ -50,7 +50,7 @@
 - Added "Russian" cipher category
 
 ### Miscellaneous:
-- Characters with diacritic marks are recognized properly (e.g. Greek)
+- Characters with diacritic marks are recognized properly (Latin, Greek)
 - Removed history limit (100 items)
 - Phrase is no longer added to history on mouse over ciphers (unfinished phrases cannot be added accidentally)
 - History table is automatically updated on cipher toggle
