@@ -38,7 +38,9 @@ function Populate_MenuBar() {
 
 function sVal() {
 	var phr = document.getElementById("SearchField").value.trim() // get value
-	phr = phr.normalize('NFD').replace(/[\u0300-\u036f]/g, "") // remove any diacritic marks (works as you type for word breakdown)
+	if (ciphersOn.find(o => o.Nickname.includes("RU")) == undefined) { // if Russian ciphers are not enabled (otherwise "е=ё", "и=й")
+		phr = phr.normalize('NFD').replace(/[\u0300-\u036f]/g, "") // remove any diacritic marks (works as you type for word breakdown)
+	}
 	return phr
 }
 
