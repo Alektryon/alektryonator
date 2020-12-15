@@ -1,6 +1,6 @@
 body {
 	background-color: rgb(34,34,34);
-	background-image: url("./merkaba_tile.png");
+	/* background-image: url("./merkaba_tile.png"); */
 	/* font-family: "Bookman Old Style", Arial; */
 	font-family: Arial;
 	color: rgb(222,222,222);
@@ -443,7 +443,7 @@ body {
 
 #highlight_panel {
 	background-color: #101010;
-	background-image: url("./merkaba_tile.png");
+	/* background-image: url("./merkaba_tile.png"); */
 	border: 2px solid RGB(77,77,77);
 	padding: 0;
 	width: 600px;

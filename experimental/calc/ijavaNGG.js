@@ -37,8 +37,9 @@ function Populate_MenuBar() {
 }
 
 function sVal() {
-	var sBox = document.getElementById("SearchField")
-	return sBox.value.trim()
+	var phr = document.getElementById("SearchField").value.trim() // get value
+	phr = phr.normalize('NFD').replace(/[\u0300-\u036f]/g, "") // remove any diacritic marks (works as you type for word breakdown)
+	return phr
 }
 
 function navHistory(impNum) { // run on each keystroke inside text box - onkeydown="navHistory(event.keyCode) - from index.html
@@ -125,7 +126,7 @@ function newHistory(phr, upd_table) { // called from function navHistory(impNum)
 	var hSpot
 
 	if (phr !== "") { // if input is not empty
-
+	
 		if (Number(phr) > 0) { // if a number is entered, do not add it to history
 
 		} else {
