@@ -975,6 +975,8 @@ function No_Ciphers(impBool = false) {
 	} else {
 		Populate_MenuBar()
 	}
+	
+	document.getElementById("Gematria_Table").innerHTML = "" // empty cipher table
 	Open_History() // update table
 }
 function Add_RussianCiphers(impBool = false) {

@@ -80,6 +80,7 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 				sHistory.splice(hPlace, 1) // if a match is found, delete entry
 			}
 			tBox.value = "" // empty text box, so the old value us not added again
+			FieldChange(sVal()) // update values and breakdown
 			Open_History() // update table
 			break;
 		case 36: // Home, clear all history
@@ -1004,7 +1005,7 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 				}
 			}
 			hStr += '<input type="checkbox" id="' + replaceAll(key, " ", "") + '_Box" onclick="set_Ciphers()" value="' + key + '" '
-			hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
+			hStr += keyOn + '><span class="checkboxCipherFont" style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</span></input><BR>'
 		}
 		if (thisCat == cOption && thisCat == "Custom") { // special menu for Custom category
 				keyOn = "unchecked"
@@ -1021,7 +1022,7 @@ function Open_Ciphers(impOpt = cOption, impBool = false) {
 					}
 				}
 				hStr += '<input type="checkbox" id="' + replaceAll(key, " ", "") + '_Box" onclick="set_Ciphers()" value="' + key + '" '
-				hStr += keyOn + '><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></input><BR>'
+				hStr += keyOn + '><span class="checkboxCipherFont" style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</span></input><BR>'
 		}
 	}
 
@@ -1051,13 +1052,13 @@ function Category_Links() {
 	for (x = 0; x < catArr.length; x++) {
 		thisCat = catArr[x]
 		if (thisCat == cOption) {
-			rStr += '<font style="color: RGB(255, 255, 0)">' + thisCat + '</font><P>'
+			rStr += '<span class="cipherCategoryActive">' + thisCat + '</span><br>'
 		} else {
-			rStr += '<a href="javascript:Open_Ciphers('
+			rStr += '<a class="cipherCategory" href="javascript:Open_Ciphers('
 			rStr += "'" + thisCat + "')"
 			rStr += '" onmouseover="javascript:Open_Ciphers('
 			rStr += "'" + thisCat + "')"
-			rStr += '">' + thisCat + '</a><P>'
+			rStr += '">' + thisCat + '</a><br>'
 		}
 	}
 	return rStr

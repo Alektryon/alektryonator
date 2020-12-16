@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	
 	$("#Highlight").bind('contextmenu', function() { // ".bind" for existing elements, ".live" for future

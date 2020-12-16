@@ -1,11 +1,81 @@
 body {
-	background-color: rgb(34,34,34);
-	/* background-image: url("./merkaba_tile.png"); */
+	/* background-color: rgb(34,34,34); */
+	/* background-image: -webkit-linear-gradient(180deg, hsl(120 30% 8% / 0.95), hsl(180 50% 8% / 0.95)), url(./merkaba-tile.png); */
+	/* background-image: -o-linear-gradient(180deg, hsl(120 30% 8% / 0.95), hsl(180 50% 8% / 0.95)), url(./merkaba-tile.png); */
+	/* background-image: -moz-linear-gradient(180deg, hsl(120 30% 8% / 0.95), hsl(180 50% 8% / 0.95)), url(./merkaba-tile.png); */
+	/* background-image: linear-gradient(180deg, hsl(120 30% 8% / 0.95), hsl(180 50% 8% / 0.95)), url(./merkaba-tile.png); */
+	background-image: linear-gradient(180deg, hsl(120 0% 7% / 0.95), hsl(180 0% 7% / 0.95)), url(./flower-of-life-tile.png);
+	background-attachment: fixed; /* no scroll */
 	/* font-family: "Bookman Old Style", Arial; */
-	font-family: Arial;
+	font-family: Arial, sans-serif;
 	color: rgb(222,222,222);
 	/* replace cursor */
 	/* cursor: url("cursor.png"), auto; */
+}
+
+.CategoryList, .CategoryList2, #OptionsTable {
+	/* background-image: linear-gradient(180deg, hsl(120 30% 15% / 0.5), hsl(180 50% 8% / 1)), url(./flower-of-life-tile.png); */
+}
+
+.checkboxCipherFont {
+	/* font-weight: bold; */
+	/* font-family: Verdana, sans-serif */
+}
+
+.cipherCategoryActive {
+	color: hsl(60 100% 50% / 1);
+	display: inline-block; /* change the display type */
+	margin: 5px 0; /* apply the needed vertical margins */
+}
+
+.cipherCategory {
+	display: inline-block; /* change the display type */
+	margin: 5px 0; /* apply the needed vertical margins */
+}
+
+#CipherChart a:link {color: hsl(187 100% 69% / 1)}
+#CipherChart a:visited {color: hsl(187 100% 69% / 1)}
+#CipherChart a:hover {color: hsl(180 100% 80% / 1)}
+#CipherChart a:active {color: hsl(60 100% 50% / 1)}
+
+.MenuLink a:link {color: hsl(187 100% 69% / 1)}
+.MenuLink a:visited {color: hsl(187 100% 69% / 1)}
+.MenuLink a:hover {color: hsl(180 100% 80% / 1)}
+.MenuLink a:active {color: hsl(60 100% 50% / 1)}
+
+/* ---------------- cipher table ------------------ */
+
+#Gematria_Table {
+	padding-top: 5px;
+}
+
+#GemTable {
+	background-color: rgba(16,16,16,0.5);
+	/* background-image: linear-gradient(180deg, hsl(120 30% 15% / 0.9), hsl(180 20% 10% / 1)), url(./flower-of-life-tile.png); */
+	border: 2px solid;
+	border-color: rgb(77,77,77);
+	border-radius: 20px;
+	padding: 5px;
+}
+#GemTable td {
+	min-width: 125px;
+	max-width: 125px;
+	text-align: center;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+#GemTable2 {
+	background-color: rgb(16,16,16);
+	border: 2px solid;
+	border-color: rgb(77,77,77);
+	padding: 5px;
+}
+#GemTable2 td {
+	min-width: 50px;
+	max-width: 125px;
+	text-align: center;
+	padding-right: 5px;
+	padding-left: 5px;
 }
 
 /* ---------------- text selection ---------------- */
@@ -50,6 +120,10 @@ body {
 	border-radius: 4px;
 	border-color: rgb(77,77,77);
 }
+#Highlight:focus{
+	outline: none !important;
+	border:2px solid rgb(192,192,192);
+}
 
 #SearchField {
 	background-color: rgb(16,16,16);
@@ -59,6 +133,10 @@ body {
 	border-width: 2px;
 	border-radius: 4px;
 	border-color: rgb(77,77,77);
+}
+#SearchField:focus {
+	outline: none !important;
+	border:2px solid rgb(192,192,192);
 }
 
 .highlightValueBlink{
@@ -116,48 +194,17 @@ body {
 	font-size: 108%;
 	font-weight: bold;
 }
-.MenuLink a:link {color: rgb(140,250,243)}
-.MenuLink a:visited {color: rgb(140,250,243)}
-.MenuLink a:hover {color: rgb(255,255,255)}
-.MenuLink a:active {color: rgb(255,255,0)}
-
-#Gematria_Table {
-	padding-top: 5px;
-}
-
-#GemTable {
-	background-color: rgba(16,16,16,0.5);
-	border: 2px solid;
-	border-color: rgb(77,77,77);
-	border-radius: 20px;
-	padding: 5px;
-}
-#GemTable td {
-	min-width: 125px;
-	max-width: 125px;
-	text-align: center;
-	padding-right: 5px;
-	padding-left: 5px;
-}
-#GemTable2 {
-	background-color: rgb(16,16,16);
-	border: 2px solid;
-	border-color: rgb(77,77,77);
-	padding: 5px;
-}
-#GemTable2 td {
-	min-width: 50px;
-	max-width: 125px;
-	text-align: center;
-	padding-right: 5px;
-	padding-left: 5px;
-}
 
 .GemHead a {
 	color: inherit !important;
 	text-decoration: inherit !important;
 }
-.GemHead {padding-top: 8px; vertical-align: bottom;}
+.GemHead {
+	padding-top: 8px;
+	vertical-align: bottom;
+	/* font-weight: bold; */
+	/* font-family: Verdana, sans-serif */
+}
 .GemHead:hover {
 	text-decoration: underline;
 }
@@ -364,7 +411,7 @@ body {
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
-
+	
 #CipherChart {
 	min-width: 500px;
 }
@@ -379,10 +426,6 @@ body {
 	border: 2px solid rgb(77,77,77);
 	border-radius: 10px;
 }
-#CipherChart a:link {color: rgb(95,235,255)}
-#CipherChart a:visited {color: rgb(95,235,255)}
-#CipherChart a:hover {color: rgb(131,255,255)}
-#CipherChart a:active {color: rgb(255,255,0)}
 
 .CategoryList {
 	width: 150px;
@@ -443,7 +486,7 @@ body {
 
 #highlight_panel {
 	background-color: #101010;
-	/* background-image: url("./merkaba_tile.png"); */
+	/* background-image: url("./merkaba-tile.png"); */
 	border: 2px solid RGB(77,77,77);
 	padding: 0;
 	width: 600px;
