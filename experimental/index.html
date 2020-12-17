@@ -9,6 +9,7 @@
 <script src="calc/ijavaNGG.js"></script>
 <script src="calc/highlighter.js"></script>
 <script src="calc/hltboxpanel.js"></script>
+<script src="calc/history.js"></script>
 
 </head>
 
@@ -36,7 +37,7 @@
 
 	</tr><tr>
 
-	<td><center><input id="SearchField" autofocus type="text" oninput="FieldChange(sVal())" style="width: 500px; font-size: 125%" onkeydown="navHistory(event.keyCode);"></input>
+	<td><center><input id="SearchField" autofocus type="text" oninput="FieldChange(sVal())" style="width: 500px; font-size: 125%" onkeydown="navHistory(event.keyCode) "ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></input>
 	<right><input id="Highlight" type="text" style="width: 200px; font-size: 125%"></input>
 
 	</center><P>
