@@ -49,8 +49,9 @@ function dropHandler(ev) {
 		//})
 		
 		var uCiph = [] // user saved ciphers
+		uCiph = userhist[0].split(";") // table header to array, semicolon separator
+		
 		if (opt_loadUserHistCiphers) { // enable ciphers available in user history
-			uCiph = userhist[0].split(";") // table header to array, semicolon separator
 			// uCiph = uCiph.slice(1, uCiph.length) // remove "Work or Phrase"
 			
 			openCiphers = [] // clear active ciphers
