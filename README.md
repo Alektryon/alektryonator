@@ -13,6 +13,7 @@
   <li>Phrase can be removed from history with "Del" if it is present (use Up/Down arrows to cycle through history)</li>
   <li>Press "End" to add current phrase (sentence) as a list of words and phrases</li>
   <li>Press "Home" to remove all entries from history table</li>
+  <li>Drag & Drop a .txt file to load phrases into history table (line by line, option to load saved ciphers)</li>
   </ul>
 </li>
 <li>Highlight Box
@@ -42,6 +43,7 @@
 
 ### Additional Functionality:
 - Copy/save cipher chart or history table as an image (no need to do screenshots)
+- Export history table as a CSV file (semicolon as delimiter), can be loaded back into the calculator or Excel
 
 ### Ciphers:
 - Added "Empty" button to disable all active ciphers
