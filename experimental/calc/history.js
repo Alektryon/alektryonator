@@ -48,9 +48,10 @@ function dropHandler(ev) {
 		//	console.log(line)
 		//})
 		
+		var uCiph = [] // user saved ciphers
 		if (opt_loadUserHistCiphers) { // enable ciphers available in user history
-			var uCiph = userhist[0].split(";") // table header to array, semicolon separator
-			uCiph = uCiph.slice(1, uCiph.length) // remove "Work or Phrase"
+			uCiph = userhist[0].split(";") // table header to array, semicolon separator
+			// uCiph = uCiph.slice(1, uCiph.length) // remove "Work or Phrase"
 			
 			openCiphers = [] // clear active ciphers
 
@@ -64,8 +65,10 @@ function dropHandler(ev) {
 		}
 
 		var uPhr = []
-		// i > -1 to add all phrases, i > 0 to ignore first line (table header)
-		for (i = userhist.length-1; i > 0; i--) { // add lines in reverse order, so you don't have to read backwards
+		var a = -1 // i > -1 to add all phrases, i > 0 to ignore first line (table header)
+		if (uCiph[0] == "Word or Phrase") a = 0 // ignore table header
+		
+		for (i = userhist.length-1; i > a; i--) { // add lines in reverse order, so you don't have to read backwards
 			uPhr = userhist[i].split(";") // user phrase, load as array
 			newHistory(uPhr[0], false) // load only phrase (first item), false flag doesn't update history
 			//newHistory(userhist[i], false) // false flag doesn't update history after a new phrase is added
