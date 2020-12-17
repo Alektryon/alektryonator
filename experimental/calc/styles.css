@@ -43,6 +43,9 @@ body {
 .MenuLink a:hover {color: hsl(180 100% 80% / 1)}
 .MenuLink a:active {color: hsl(60 100% 50% / 1)}
 
+.dragOver {
+	border: 2px solid hsl(187 100% 69% / 1) !important;
+}
 /* ---------------- cipher table ------------------ */
 
 #Gematria_Table {
@@ -461,7 +464,7 @@ body {
 	width: 115px;
 	background-color: rgb(16,16,16);
 }
-#btn-print-cipher-png, #btn-print-history-png {
+#btn-print-cipher-png, #btn-print-history-png, #btn-save-history-png {
 	display: inline-block;
 	color: rgb(222,222,222);
 	width: 150px;

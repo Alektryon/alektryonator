@@ -7,6 +7,7 @@ function addScrInterface() {
 	// buttons
 	var o = '<input id="btn-print-cipher-png" type="button" value="Print Cipher Table" />' // cipher breakdown preview
 	o += '<input id="btn-print-history-png" type="button" value="Print History Table" />' // history table preview
+	o += '<input id="btn-save-history-png" type="button" value="Save History (CSV)" />' // save history as text file
 	//o += '<input id="btn-save-png" type="button" value="Save Image" </>' // save image
 	
 	ScrInt.innerHTML = o
@@ -29,6 +30,10 @@ $("body").on("click", "#btn-print-history-png", function () {
 	open_img_window("#HistoryTable_scr");
 });
 
+$("body").on("click", "#btn-save-history-png", function () {
+	saveHistory();
+});
+
 //$("body").on("click", "#btn-save-png", function () {
 //	console.log("download");
 //	var imageData = getCanvas.toDataURL("image/png");
@@ -38,25 +43,25 @@ $("body").on("click", "#btn-print-history-png", function () {
 //	download(Date.now()+".png", newData);
 //});
 
-//function download(fileName, fileData) {
-//
-//	//creating an invisible element
-//	var element = document.createElement('a');
-//	
-//	//element.setAttribute('href', 'data:text/plain;charset=utf-8, '+encodeURIComponent(filedata));
-//	element.setAttribute('href', fileData);
-//	element.setAttribute('download', fileName);
-//
-//	// Above code is equivalent to
-//	// <a href="path of file" download="file name">
-//
-//	document.body.appendChild(element);
-//
-//	//onClick property
-//	element.click();
-//
-//	document.body.removeChild(element);
-//}
+function download(fileName, fileData) {
+
+	//creating an invisible element
+	var element = document.createElement('a');
+	
+	//element.setAttribute('href', 'data:text/plain;charset=utf-8, '+encodeURIComponent(filedata));
+	element.setAttribute('href', fileData);
+	element.setAttribute('download', fileName);
+
+	// Above code is equivalent to
+	// <a href="path of file" download="file name">
+
+	document.body.appendChild(element);
+
+	//onClick property
+	element.click();
+
+	document.body.removeChild(element);
+}
 
 function open_img_window(s_element) {
 	var imageURL,imgName, win

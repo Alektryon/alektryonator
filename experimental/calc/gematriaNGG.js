@@ -959,7 +959,7 @@ function Add_BaseCiphers(impBool = false) {
 	Open_History() // update table
 }
 function No_Ciphers(impBool = false) {
-	var x, q, cN, z
+	var z
 	var baseCiphers = []
 
 	openCiphers = []

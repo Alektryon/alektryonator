@@ -106,7 +106,7 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 					// k++
 				// }
 			// }
-			for (i = wordarray.length-1; i > 0; i--) { // add phrases in reverse order, so you don't have to read backwards
+			for (i = wordarray.length-1; i > -1; i--) { // add phrases in reverse order, so you don't have to read backwards
 				k = 1 // init variable
 				phrase = wordarray[i]
 				
@@ -718,7 +718,7 @@ function Build_CharTable(impCipher) {
 function Open_Options () {
 	var cSpot = document.getElementById("MenuSpot")
 	var os = ""
-	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR
+	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR, oLUHC
 
 	if (opt_Chart == true) {oC = " checked"}
 	if (opt_LetterCount == true) {oLW = " checked"}
@@ -730,6 +730,7 @@ function Open_Options () {
 	if (opt_CompactHistoryTable == true) {oCHT = " checked"}
 	if (opt_WeightedAutoHlt == true) {oWH = " checked"}
 	if (opt_MatrixCodeRain == true) {oMCR = " checked"}
+	if (opt_loadUserHistCiphers == true) {oLUHC = " checked"}
 
 	os += '<center><table id="OptionsTable"><tr><td colspan="2"><center>'
 
@@ -740,6 +741,7 @@ function Open_Options () {
 	os += 'Compact History Table <input type="checkbox" id="o_CHTBox" value="Compact History Table" onclick="click_Opt()"' + oCHT + '></input><BR>'
 	os += 'Weighted Auto Highlighter <input type="checkbox" id="o_WHBox" value="Weighted Auto Highlighter" onclick="click_Opt()"' + oWH + '></input><BR>'
 	os += 'Matrix Code Rain <input type="checkbox" id="o_MCRBox" value="Matrix Code Rain" onclick="click_Opt()"' + oMCR + '></input><P>'
+	os += 'Load User History Ciphers <input type="checkbox" id="oLUHCBox" value="Load User History Ciphers" onclick="click_Opt()"' + oLUHC + '></input><P>'
 	os += '<center>' + OBox_Ciphers() + '</center><p>'
 	os += '<center>' + OBox_NumCalc() + '</center><p>'
 	os += '<center>' + OBox_PhraseLimit() + '</center>'
@@ -769,6 +771,7 @@ function click_Opt() {
 	CHTBox = document.getElementById("o_CHTBox")
 	WHBox = document.getElementById("o_WHBox")
 	MCRBox = document.getElementById("o_MCRBox")
+	LUHCBox = document.getElementById("oLUHCBox")
 
 	if (RBox.checked == true) {
 		opt_Reduce = true
@@ -828,6 +831,12 @@ function click_Opt() {
 		opt_MatrixCodeRain = false
 		toggle_code_rain()
 	}
+	if (LUHCBox.checked == true) {
+		opt_loadUserHistCiphers = true
+	} else {
+		opt_loadUserHistCiphers = false
+	}
+	
 	Set_ChartMax()
 	Build_Table(opt_Headers)
 	Populate_Sums(sVal())
