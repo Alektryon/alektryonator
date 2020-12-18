@@ -15,11 +15,15 @@ $(document).ready(function(){
 
     $("#Highlight").keyup(function(event){ // inside Highlight box
 		if ( event.which == 46 ) { // "Delete" - clear box
-			freq = []; // reset previously found matches, weighted auto highlighter
-			document.getElementById("Highlight").value = "";
+			if(ctrlIsPressed) { // Ctrl + Delete
+				removeActiveFilter(); // clear filter
+			} else { // Left Click only
+				freq = []; // reset previously found matches, weighted auto highlighter
+				document.getElementById("Highlight").value = "";
+			}
 		}
 		if ( event.which == 13 ) { // "Enter" - show only phrases that match
-			RemoveNotMatchingPhrases();
+			if (document.getElementById("Highlight").value !== "") RemoveNotMatchingPhrases(); // no action if empty
 			return // don't update history as function is different
 		}
 		if ( event.which == 45 ) { // "Insert" - auto highlighter, find all available matches
@@ -28,6 +32,18 @@ $(document).ready(function(){
 		}
 		Open_History();
     });
+	
+	$("body").on("click", ".HistoryHead", function () {
+		if(ctrlIsPressed) { // Ctrl + Left Click
+			valueToRemove = $(this).html(); // cipher name
+			//console.log("    disabled: "+valueToRemove);
+			openCiphers = openCiphers.filter(function(item) { // list of active ciphers
+				return item !== valueToRemove; // remove selected cipher
+			})
+			Build_Open_Ciphers(); // update ciphers
+			Open_History(); // update history
+		}
+	});
 	
 	// table row/column lit on mouse hover
 	//$("body").on("click", ".column100", function () {
@@ -139,7 +155,7 @@ function RemoveNotMatchingPhrases() {
 			}
 		
 			if (!match) { // if not match is found
-				console.log("    disabled: '"+ciphersOn[i].Nickname+"'")
+				//console.log("    disabled: '"+ciphersOn[i].Nickname+"'")
 				valueToRemove = ciphersOn[i].Nickname
 				openCiphers = openCiphers.filter(function(item) { // list of active ciphers
 					return item !== valueToRemove // remove current cipher
