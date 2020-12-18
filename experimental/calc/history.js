@@ -61,8 +61,8 @@ function dropHandler(ev) {
 					openCiphers.push(allCiphers[z].Nickname)
 				}
 			}
-			Build_Open_Ciphers()
-			Open_Ciphers() // update ciphers
+			Build_Open_Ciphers() // update ciphers
+			//Open_Ciphers()
 		}
 
 		var uPhr = []

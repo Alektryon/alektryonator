@@ -10,6 +10,7 @@ var opt_PhraseLimit = 5 // word limit to enter input as separate phrases, "End" 
 var opt_CompactHistoryTable = false; // disable Cipher names, no 25 phrase break, compact mode
 var opt_WeightedAutoHlt = false; // color grade matches found with auto highlighter (most frequest is the brightest)
 var opt_MatrixCodeRain = true; // set to true to enable by default
+var opt_filtShowMatchingCiphers = true; // filter shows only ciphers that have matching values
 
 // used inside highlighter.js
 var avail_match = []; // all matches found with auto highligher
@@ -144,15 +145,11 @@ function newHistory(phr, upd_table) { // called from function navHistory(impNum)
 	
 	if (upd_table) Open_History() // update table or not
 }
-function Open_History(match_only) {
+function Open_History() {
 	var ms, x, y, aCipher, gemSum
 	tArea = document.getElementById("MiscSpot")
-
-	var curHistory = []
 	
 	if (sHistory.length == 0) {return}
-	curHistory = sHistory // use regular history array all the time
-	if (match_only == "display_only_matches") {curHistory = matchHistory} // use a copy of history array to display only matching phrases
 
 	ms = '<table class="HistoryTable" id="HistoryTable_scr"><tbody>'
 	highlt = document.getElementById("Highlight").value // value of Highlight textbox
@@ -163,7 +160,7 @@ function Open_History(match_only) {
 		hlt = true
 	}
 	
-	for (x = 0; x < curHistory.length; x++) {
+	for (x = 0; x < sHistory.length; x++) {
 
 		if (x % 25 == 0 && !opt_CompactHistoryTable) {
 			ms += '<tr><td class="MPhrase"><font style="color: orange;">Word or Phrase</font></td>'
@@ -175,7 +172,7 @@ function Open_History(match_only) {
 			ms += "</tr>"
 		}
 
-		ms += '<tr><td class="historyPhrase">' + curHistory[x] + '</td>'
+		ms += '<tr><td class="historyPhrase">' + sHistory[x] + '</td>'
 
 		if (opt_WeightedAutoHlt && freq.length !== 0) { // if option is enabled and array is initialized
 			
@@ -184,8 +181,8 @@ function Open_History(match_only) {
 			for (y = 0; y < ciphersOn.length; y++) {
 			
 				aCipher = ciphersOn[y]
-				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(curHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
-				gemVal = aCipher.Gematria(curHistory[x], 2, false, true) // value only
+				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(sHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
+				gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
 
 				// r = aCipher.R;
 				// g = aCipher.G;
@@ -194,11 +191,11 @@ function Open_History(match_only) {
 				col = "0,255,0"
 				a = 1.0
 				
-				//console.log("highlt_num.includes('"+aCipher.Gematria(curHistory[x], 2, false, true)+"'))")
-				//console.log(highlt_num.indexOf((aCipher.Gematria(curHistory[x], 2, false, true)).toString()))
+				//console.log("highlt_num.includes('"+aCipher.Gematria(sHistory[x], 2, false, true)+"'))")
+				//console.log(highlt_num.indexOf((aCipher.Gematria(sHistory[x], 2, false, true)).toString()))
 				//console.log(highlt_num)
 				
-				if (hlt && !highlt_num.includes((aCipher.Gematria(curHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
+				if (hlt && !highlt_num.includes((aCipher.Gematria(sHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
 					// r *= 0.3
 					// g *= 0.3
 					// b *= 0.3
@@ -226,8 +223,8 @@ function Open_History(match_only) {
 			for (y = 0; y < ciphersOn.length; y++) {
 			
 				aCipher = ciphersOn[y]
-				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(curHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
-				gemVal = aCipher.Gematria(curHistory[x], 2, false, true) // value only
+				gemSum = '<font style="font-size: 115%"><b class="cellvalue"> ' + aCipher.Gematria(sHistory[x], 2, false, true) + ' </b></font>' // actual value displayed
+				gemVal = aCipher.Gematria(sHistory[x], 2, false, true) // value only
 
 				// r = aCipher.R;
 				// g = aCipher.G;
@@ -235,11 +232,11 @@ function Open_History(match_only) {
 				col = aCipher.RGB
 				a = 1.0
 				
-				//console.log("highlt_num.includes('"+aCipher.Gematria(curHistory[x], 2, false, true)+"'))")
-				//console.log(highlt_num.indexOf((aCipher.Gematria(curHistory[x], 2, false, true)).toString()))
+				//console.log("highlt_num.includes('"+aCipher.Gematria(sHistory[x], 2, false, true)+"'))")
+				//console.log(highlt_num.indexOf((aCipher.Gematria(sHistory[x], 2, false, true)).toString()))
 				//console.log(highlt_num)
 				
-				if (hlt && !highlt_num.includes((aCipher.Gematria(curHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
+				if (hlt && !highlt_num.includes((aCipher.Gematria(sHistory[x], 2, false, true)).toString()) ) { // if highlight not empty and doesn't match value
 					// r *= 0.3
 					// g *= 0.3
 					// b *= 0.3
@@ -718,7 +715,7 @@ function Build_CharTable(impCipher) {
 function Open_Options () {
 	var cSpot = document.getElementById("MenuSpot")
 	var os = ""
-	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR, oLUHC
+	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR, oLUHC, oFSMS
 
 	if (opt_Chart == true) {oC = " checked"}
 	if (opt_LetterCount == true) {oLW = " checked"}
@@ -731,6 +728,7 @@ function Open_Options () {
 	if (opt_WeightedAutoHlt == true) {oWH = " checked"}
 	if (opt_MatrixCodeRain == true) {oMCR = " checked"}
 	if (opt_loadUserHistCiphers == true) {oLUHC = " checked"}
+	if (opt_filtShowMatchingCiphers == true) {oFSMS = " checked"}
 
 	os += '<center><table id="OptionsTable"><tr><td colspan="2"><center>'
 
@@ -741,7 +739,8 @@ function Open_Options () {
 	os += 'Compact History Table <input type="checkbox" id="o_CHTBox" value="Compact History Table" onclick="click_Opt()"' + oCHT + '></input><BR>'
 	os += 'Weighted Auto Highlighter <input type="checkbox" id="o_WHBox" value="Weighted Auto Highlighter" onclick="click_Opt()"' + oWH + '></input><BR>'
 	os += 'Matrix Code Rain <input type="checkbox" id="o_MCRBox" value="Matrix Code Rain" onclick="click_Opt()"' + oMCR + '></input><P>'
-	os += 'Load User History Ciphers <input type="checkbox" id="oLUHCBox" value="Load User History Ciphers" onclick="click_Opt()"' + oLUHC + '></input><P>'
+	os += 'Load User History Ciphers <input type="checkbox" id="oLUHCBox" value="Load User History Ciphers" onclick="click_Opt()"' + oLUHC + '></input><BR>'
+	os += 'Filter Shows Matching Ciphers <input type="checkbox" id="oFSMSBox" value="Filter Shows Matching Ciphers" onclick="click_Opt()"' + oFSMS + '></input><P>'
 	os += '<center>' + OBox_Ciphers() + '</center><p>'
 	os += '<center>' + OBox_NumCalc() + '</center><p>'
 	os += '<center>' + OBox_PhraseLimit() + '</center>'
@@ -772,6 +771,7 @@ function click_Opt() {
 	WHBox = document.getElementById("o_WHBox")
 	MCRBox = document.getElementById("o_MCRBox")
 	LUHCBox = document.getElementById("oLUHCBox")
+	FSMSBox = document.getElementById("oFSMSBox")
 
 	if (RBox.checked == true) {
 		opt_Reduce = true
@@ -835,6 +835,11 @@ function click_Opt() {
 		opt_loadUserHistCiphers = true
 	} else {
 		opt_loadUserHistCiphers = false
+	}
+	if (FSMSBox.checked == true) {
+		opt_filtShowMatchingCiphers = true
+	} else {
+		opt_filtShowMatchingCiphers = false
 	}
 	
 	Set_ChartMax()

@@ -46,6 +46,16 @@ body {
 .dragOver {
 	border: 2px solid hsl(187 100% 69% / 1) !important;
 }
+
+#btn-clear-active-filter {
+	left: 5px;
+    bottom: 2px;
+    position: relative;
+	color: rgb(222,222,222);
+	height: 25px;
+	background-color: rgb(16,16,16);
+	font-weight: bold;
+}
 /* ---------------- cipher table ------------------ */
 
 #Gematria_Table {

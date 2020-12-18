@@ -1,4 +1,5 @@
-var matchHistory = [] // a copy of sHistory used to display only matching phrases
+var userHistory = [] // a copy of user's history before filtering is applied
+var userOpenCiphers = [] // a copy of user's choice of ciphers
 
 $(document).ready(function(){
 	
@@ -88,20 +89,20 @@ function RemoveNotMatchingPhrases() {
 		return parseInt(x, 10); 
 	});
 	
-	matchHistory = [...sHistory] // create a copy of history, since matching is destructive
+	// create a copy of history, since matching is destructive
+	if (userHistory.length == 0) userHistory = [...sHistory] // don't make new copies until filter is reset
 	
 	var phr_values = []
 	var match = false
 	var x = 0
-	// for (x = 0; x < matchHistory.length; x++) { // for each phrase in history
-	while (x < matchHistory.length) { // for each phrase in history
+	// for (x = 0; x < sHistory.length; x++) { // for each phrase in history
+	while (x < sHistory.length) { // for each phrase in history
 	
 		phr_values = [] // reinit
 		match = false
 		
-		for (y = 0; y < ciphersOn.length; y++) { // for each enabled cipher
-			aCipher = ciphersOn[y]
-			gemVal = aCipher.Gematria(matchHistory[x], 2, false, true) // value only
+		for (i = 0; i < ciphersOn.length; i++) { // for each enabled cipher
+			gemVal = ciphersOn[i].Gematria(sHistory[x], 2, false, true) // value only
 			phr_values.push(gemVal) // build an array of all gematria values of current phrase
 		}
 		//console.log(phr_values)
@@ -112,14 +113,62 @@ function RemoveNotMatchingPhrases() {
 		}
 		//console.log(match)
 		if (!match) { // if no match is found, don't do x++ as array indices shift
-			//console.log("removed: '"+matchHistory[x]+"'")
-			matchHistory.splice(x,1) // remove phrase
+			//console.log("removed: '"+sHistory[x]+"'")
+			sHistory.splice(x,1) // remove phrase
 		} else {
 			x++ // check next item if match is found
 		}
 	}
 	
-	Open_History("display_only_matches") // rebuild table
+	if (opt_filtShowMatchingCiphers) {
+		// make a copy of user's choice of ciphers
+		if (userOpenCiphers.length == 0) userOpenCiphers = [...openCiphers] // don't make new copies until filter is reset
+		
+		for (i = 0; i < ciphersOn.length; i++) { // for each enabled cipher
+			var ciph_values = [] // init
+			match = false
+			
+			for (x = 0; x < sHistory.length; x++) { // for each phrase
+				ciph_values.push(ciphersOn[i].Gematria(sHistory[x], 2, false, true))
+			}
+			
+			for (z = 0; z < highlt_num.length; z++) { // for each value to be highlighted
+				if (ciph_values.indexOf(highlt_num[z]) > -1 && !match) { // if any value is found for that cipher
+					match = true // match is found
+				}
+			}
+		
+			if (!match) { // if not match is found
+				console.log("    disabled: '"+ciphersOn[i].Nickname+"'")
+				valueToRemove = ciphersOn[i].Nickname
+				openCiphers = openCiphers.filter(function(item) { // list of active ciphers
+					return item !== valueToRemove // remove current cipher
+				})
+			}
+		}		
+		//Open_Ciphers()
+		Build_Open_Ciphers() // update ciphers
+	}
+	
+	var o = '<input id="btn-clear-active-filter" type="button" value="X" onclick="removeActiveFilter()"/>'
+	$("#clearFilterButton").html(o) // clear active fitler button
+	
+	Open_History() // rebuild table
+}
+
+function removeActiveFilter() {
+	$("#clearFilterButton").html("") // remove clear button
+	$("#Highlight").val("") // clear Highlight box
+	
+	openCiphers = [...userOpenCiphers] // restore user ciphers
+	sHistory = [...userHistory] // restore user history table
+	
+	userHistory = [] // clear saved user history
+	userOpenCiphers = [] // clear saved user ciphers
+	
+	//Open_Ciphers()
+	Build_Open_Ciphers() // update ciphers
+	Open_History() // update history
 }
 
 function Open_HistoryAutoHlt() {
