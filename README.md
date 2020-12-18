@@ -19,9 +19,10 @@
 <li>Highlight Box
   <ul>
   <li>Highlight values inside history table, type space delimited numbers (e.g - 8 10 12)</li>
-  <li>Press "Del" to clear box and disable highlighter feature</li>
+  <li>Press "Del" to clear highlight box contents</li>
   <li>Press "Insert" to automatically highlight all available matches</li>
-  <li>Press "Enter" to filter only matching phrases (snapshot of history is saved, any changes can be reverted with "X" button)</li>
+  <li>Press "Enter" to filter only matching phrases (snapshot of history is saved)</li>
+  <li>Press "Ctrl - Delete" to clear filter and revert any changes to history (or press "X" button next to the highlight box)</li>
   <li>New option: "Filter Shows Matching Ciphers" (ciphers with no matches are not displayed, enabled by default)</li>
   <li>New option: "Weighted Auto Highlighter" - auto highlighter ("Insert") is color graded based on frequency of matches (non-linear)</li>
   </ul>
@@ -37,6 +38,7 @@
   <li>"Ctrl + Left Click" adds cell value to highlight box (note: history table is recalculated)</li>
   <li>"Right Click" on cell to hide/show that particular cell</li>
   <li>"Ctrl + Left Click" on phrase in history table selects that phrase and loads it into search box (press "Del" to remove phrase)</li>
+  <li>"Ctrl + Left Click" on cipher name in history table disabled that cipher</li>
   <li>New option: "Compact History Table" - no cipher names, no break every 25 phrases, only values are displayed</li>
   </ul>
 </li>
