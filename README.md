@@ -21,7 +21,8 @@
   <li>Highlight values inside history table, type space delimited numbers (e.g - 8 10 12)</li>
   <li>Press "Del" to clear box and disable highlighter feature</li>
   <li>Press "Insert" to automatically highlight all available matches</li>
-  <li>Press "Enter" to display only matching phrases (press any non-character key to clear filter, e.g. "Shift", arrow keys, etc.)</li>
+  <li>Press "Enter" to filter only matching phrases (snapshot of history is saved, any changes can be reverted with "X" button)</li>
+  <li>New option: "Filter Shows Matching Ciphers" (ciphers with no matches are not displayed, enabled by default)</li>
   <li>New option: "Weighted Auto Highlighter" - auto highlighter ("Insert") is color graded based on frequency of matches (non-linear)</li>
   </ul>
 </li>
