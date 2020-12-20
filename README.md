@@ -23,7 +23,8 @@
   <li>Press "Insert" to automatically highlight all available matches</li>
   <li>Press "Enter" to filter only matching phrases (snapshot of history is saved)</li>
   <li>Press "Ctrl - Delete" to clear filter and revert any changes to history (or press "X" button next to the highlight box)</li>
-  <li>New option: "Filter Shows Matching Ciphers" (ciphers with no matches are not displayed, enabled by default)</li>
+  <li>New option: "Filter - Show Matching Ciphers" (ciphers with no matches are not displayed, enabled by default)</li>
+  <li>New option: "Filter - Same Cipher Match" (show only phrases that match in the same cipher, note: choose only one option)</li>
   <li>New option: "Weighted Auto Highlighter" - auto highlighter ("Insert") is color graded based on frequency of matches (non-linear)</li>
   </ul>
 </li>
