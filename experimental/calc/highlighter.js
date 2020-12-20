@@ -162,12 +162,73 @@ function RemoveNotMatchingPhrases() {
 				})
 			}
 		}		
-		//Open_Ciphers()
+
+		Build_Open_Ciphers() // update ciphers
+	}
+	
+	if (opt_filtSameCipherMatch) {
+		
+		// mark all phrases to false
+		// search each column for unique
+		// for each unique, if more than 1 match mark phrases as true, if none are found remove cipher
+		// build new history with phrases marked as true
+		
+		// make a copy of user's choice of ciphers
+		if (userOpenCiphers.length == 0) userOpenCiphers = [...openCiphers] // don't make new copies until filter is reset
+		
+		var phrase_match = Array(sHistory.length).fill(false); // mark phrases that match in same cipher, same value
+		//console.log("phrase_match:"+JSON.stringify(phrase_match))
+		
+		for (var i = 0; i < ciphersOn.length; i++) { // for each enabled cipher, var i - so it can be referenced later
+		
+			var ciph_values = [] // values for each phrase in one cipher
+			var ciph_matches = [] // frequency of matches in one cipher
+			
+			for (x = 0; x < sHistory.length; x++) { // for each phrase
+				ciph_values.push(ciphersOn[i].Gematria(sHistory[x], 2, false, true)) // add value for that phrase
+			}
+			
+			ciph_matches = countMatches(ciph_values) // number of occurrences of values
+			//console.log("ciph_values:"+JSON.stringify(ciph_values))
+			//console.log("ciph_matches:"+JSON.stringify(ciph_matches))
+			
+			var cipher_has_no_matches = true
+			for (n = 0; n < ciph_matches.length; n++) { // for each value in cipher column
+				if (ciph_matches[n][1] > 1) { // if 2 or more matches are available
+					for (x = 0; x < sHistory.length; x++) { // for each phrase
+						if (ciphersOn[i].Gematria(sHistory[x], 2, false, true) == ciph_matches[n][0] &&
+						highlt_num.indexOf(ciphersOn[i].Gematria(sHistory[x], 2, false, true)) > -1) { // if gematria for phrase matches given number and number is in highlight box
+							phrase_match[x] = true // mark phrase as matching
+							cipher_has_no_matches = false // cipher doesn't need to be disabled
+							//console.log(sHistory[x]+" ("+ciphersOn[i].Nickname+") = "+ciphersOn[i].Gematria(sHistory[x], 2, false, true)+" - marked as 'true'")
+						}
+					}
+				}
+			}
+			
+			if (cipher_has_no_matches) { // remove current cipher if no phrases match with same value
+				valueToRemove = ciphersOn[i].Nickname
+				openCiphers = openCiphers.filter(function(item) { // list of active ciphers
+					return item !== valueToRemove // remove current cipher
+				})
+				//console.log("'"+ciphersOn[i].Nickname+"' was disabled")
+			}
+		}
+		
+		var MatchingPhrases = []
+		for (m = 0; m < phrase_match.length; m++) { // for each phrase checked
+			if (phrase_match[m] == true) { // if matching
+				MatchingPhrases.unshift(sHistory[m]) // insert in the beginning of array
+			}
+		}
+		
+		sHistory = MatchingPhrases // switch sHistory to set of phrases that match
+
 		Build_Open_Ciphers() // update ciphers
 	}
 	
 	var o = '<input id="btn-clear-active-filter" type="button" value="X" onclick="removeActiveFilter()"/>'
-	$("#clearFilterButton").html(o) // clear active fitler button
+	$("#clearFilterButton").html(o) // clear active filter button
 	
 	Open_History() // rebuild table
 }
@@ -185,6 +246,33 @@ function removeActiveFilter() {
 	//Open_Ciphers()
 	Build_Open_Ciphers() // update ciphers
 	Open_History() // update history
+}
+
+// number of items in array
+function countMatches(arr) {
+	var values = []
+	var counts = []
+	var index = 0
+	
+	for (i = 0; i < arr.length; i++) {
+		index = values.indexOf(arr[i])
+		if (index == -1) { // new value
+			values.push(arr[i]) // add entry
+			counts.push(1) // first occurrence
+		} else { // if same value found again
+			counts[index] += 1 // increment number of matches
+		}
+	}
+	
+	var result = [] // frequency of matches
+	var tmp = []
+
+	for (i = 0; i < values.length; i++) { // join values and counts
+		tmp = new Array(values[i], counts[i])
+		result.push(tmp)
+	}
+	
+	return result // 2D array [number, frequency]
 }
 
 function Open_HistoryAutoHlt() {

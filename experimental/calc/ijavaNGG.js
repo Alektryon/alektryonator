@@ -10,7 +10,10 @@ var opt_PhraseLimit = 5 // word limit to enter input as separate phrases, "End" 
 var opt_CompactHistoryTable = false; // disable Cipher names, no 25 phrase break, compact mode
 var opt_WeightedAutoHlt = false; // color grade matches found with auto highlighter (most frequest is the brightest)
 var opt_MatrixCodeRain = true; // set to true to enable by default
+
+// only one active
 var opt_filtShowMatchingCiphers = true; // filter shows only ciphers that have matching values
+var opt_filtSameCipherMatch = false; // filter shows only phrases that match in the same cipher
 
 // used inside highlighter.js
 var avail_match = []; // all matches found with auto highligher
@@ -715,7 +718,7 @@ function Build_CharTable(impCipher) {
 function Open_Options () {
 	var cSpot = document.getElementById("MenuSpot")
 	var os = ""
-	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR, oLUHC, oFSMS
+	var oC, oR, oQ, oSC, oH, oS, oLW, oCHT, oWH, oMCR, oLUHC, oFSMS, oFSCM
 
 	if (opt_Chart == true) {oC = " checked"}
 	if (opt_LetterCount == true) {oLW = " checked"}
@@ -729,6 +732,7 @@ function Open_Options () {
 	if (opt_MatrixCodeRain == true) {oMCR = " checked"}
 	if (opt_loadUserHistCiphers == true) {oLUHC = " checked"}
 	if (opt_filtShowMatchingCiphers == true) {oFSMS = " checked"}
+	if (opt_filtSameCipherMatch == true) {oFSCM = " checked"}
 
 	os += '<center><table id="OptionsTable"><tr><td colspan="2"><center>'
 
@@ -740,7 +744,8 @@ function Open_Options () {
 	os += 'Weighted Auto Highlighter <input type="checkbox" id="o_WHBox" value="Weighted Auto Highlighter" onclick="click_Opt()"' + oWH + '></input><BR>'
 	os += 'Matrix Code Rain <input type="checkbox" id="o_MCRBox" value="Matrix Code Rain" onclick="click_Opt()"' + oMCR + '></input><P>'
 	os += 'Load User History Ciphers <input type="checkbox" id="oLUHCBox" value="Load User History Ciphers" onclick="click_Opt()"' + oLUHC + '></input><BR>'
-	os += 'Filter Shows Matching Ciphers <input type="checkbox" id="oFSMSBox" value="Filter Shows Matching Ciphers" onclick="click_Opt()"' + oFSMS + '></input><P>'
+	os += 'Filter - Show Matching Ciphers <input type="checkbox" id="oFSMSBox" value="Filter - Show Matching Ciphers" onclick="click_Opt()"' + oFSMS + '></input><BR>'
+	os += 'Filter - Same Cipher Match <input type="checkbox" id="oFSCMBox" value="Filter - Same Cipher Match" onclick="click_Opt()"' + oFSCM + '></input><P>'
 	os += '<center>' + OBox_Ciphers() + '</center><p>'
 	os += '<center>' + OBox_NumCalc() + '</center><p>'
 	os += '<center>' + OBox_PhraseLimit() + '</center>'
@@ -772,6 +777,7 @@ function click_Opt() {
 	MCRBox = document.getElementById("o_MCRBox")
 	LUHCBox = document.getElementById("oLUHCBox")
 	FSMSBox = document.getElementById("oFSMSBox")
+	FSCMBox = document.getElementById("oFSCMBox")
 
 	if (RBox.checked == true) {
 		opt_Reduce = true
@@ -838,8 +844,17 @@ function click_Opt() {
 	}
 	if (FSMSBox.checked == true) {
 		opt_filtShowMatchingCiphers = true
+		// opt_filtSameCipherMatch = false // both can't be active
+		// FSCMBox.checked = false // uncheck
 	} else {
 		opt_filtShowMatchingCiphers = false
+	}
+	if (FSCMBox.checked == true) {
+		opt_filtSameCipherMatch = true
+		// opt_filtShowMatchingCiphers = false
+		// FSMSBox.checked = false
+	} else {
+		opt_filtSameCipherMatch = false
 	}
 	
 	Set_ChartMax()
