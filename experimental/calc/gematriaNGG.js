@@ -742,17 +742,19 @@ function Build_Ciphers() {
 			case "Jewish Reduction Square": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction", "SquareNum"); break
 */
 			case "RU Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 186, 0); break;
+			case "RU Extended": allCiphers[allCiphers.length] = new cipher(key, "Russian", 218, 226, 0, "Extend"); break;
 			case "RU Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 88, 125, 254, "FullReduction"); break;
 			case "RU Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 140, 171, 227, "SingleReduction"); break;
 			case "RU Sumerian": allCiphers[allCiphers.length] = new cipher(key, "Russian", 169, 208, 142, "SumerianNum"); break;
 
 			case "RU Reverse Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 235, 21, "Reverse"); break;
+			case "RU Reverse Extended": allCiphers[allCiphers.length] = new cipher(key, "Russian", 253, 255, 119, "Reverse", "Extend"); break;
 			case "RU Reverse Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 100, 226, 226, "Reverse", "FullReduction"); break;
 			case "RU Reverse Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 100, 216, 209, "Reverse", "SingleReduction"); break;
 			case "RU Reverse Sumerian": allCiphers[allCiphers.length] = new cipher(key, "Russian", 220, 208, 148, "Reverse", "SumerianNum"); break;
 			
-			case "RU Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 128, 0, "RussianE"); break;
-			case "RU Reverse Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 160, 20, "RussianRevE"); break;
+			// case "RU Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 128, 0, "RussianE"); break;
+			// case "RU Reverse Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 160, 20, "RussianRevE"); break;
 			
 			case "Bacon Simple": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconSimple"); break;
 			case "Bacon Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "BaconReverse"); break;
@@ -855,9 +857,12 @@ function Set_Categories() {
 	cipherArray["RU Reverse Full Reduction"] = "Russian"
 	cipherArray["RU Reverse Single Reduction"] = "Russian"
 	cipherArray["RU Reverse Sumerian"] = "Russian"
+	
+	cipherArray["RU Extended"] = "Russian"
+	cipherArray["RU Reverse Extended"] = "Russian"
 
-	cipherArray["RU Ordinal E"] = "Russian"
-	cipherArray["RU Reverse Ordinal E"] = "Russian"
+	// cipherArray["RU Ordinal E"] = "Russian"
+	// cipherArray["RU Reverse Ordinal E"] = "Russian"
 	
 	cipherArray["Bacon Simple"] = "English (Special)"
 	cipherArray["Bacon Reverse"] = "English (Special)"
@@ -981,7 +986,7 @@ function No_Ciphers(impBool = false) {
 }
 function Add_RussianCiphers(impBool = false) {
 	var x, q, cN, z
-	var baseCiphers = ["RU Ordinal", "RU Full Reduction", "RU Single Reduction", "RU Sumerian", "RU Reverse Ordinal", "RU Reverse Full Reduction", "RU Reverse Single Reduction", "RU Reverse Sumerian"]
+	var baseCiphers = ["RU Ordinal", "RU Full Reduction", "RU Single Reduction", "RU Sumerian", "RU Reverse Ordinal", "RU Reverse Full Reduction", "RU Reverse Single Reduction", "RU Reverse Sumerian", "RU Extended", "RU Reverse Extended"]
 
 	openCiphers = []
 	for (z = 0; z < allCiphers.length; z++) {
