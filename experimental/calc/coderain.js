@@ -23,7 +23,7 @@ if (!opt_MatrixCodeRain) code_rain_active = true; // if code rain is initially d
 function matrix() {
 
 	// Draw a semitransparent black rectangle on top of previous drawing
-	ctx.fillStyle = "rgba(0,0,0,0.04)"; // #0001
+	ctx.fillStyle = "#0001"; // rgba(0,0,0,0.04) - leaves traces of dark rows
 	ctx.fillRect(0, 0, w, h);
 
 	// Set color to green and font to 15pt monospace in the drawing context
