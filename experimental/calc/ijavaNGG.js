@@ -405,9 +405,9 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 				}
 			}
 			rStr += '</tr><tr><td colspan=' + tdCount + ' class="CipherEnd"><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></td></tr></table>'
-		} else {
-			rStr = ""
 		}
+	} else {
+		rStr = ""
 	}
 
 	document.getElementById("BreakdownSpot").innerHTML = rStr
