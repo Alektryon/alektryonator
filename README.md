@@ -10,6 +10,7 @@
   <ul>
   <li>Press "Enter" to add phrase to history table</li>
   <li>Box is cleared automatically on "Enter", press "Del" to clear manually</li>
+  <li>Press "Shift - Enter" to preserve contents when a new phrase is added</li>
   <li>Phrase can be removed from history with "Del" if it is present (use Up/Down arrows to cycle through history)</li>
   <li>Press "End" to add current phrase (sentence) as a list of words and phrases</li>
   <li>Press "Home" to remove all entries from history table</li>
@@ -47,7 +48,9 @@
 
 ### Additional Functionality:
 - Copy/save cipher chart or history table as an image (no need to do screenshots)
+- Copy/save word breakdown chart as an image
 - Export history table as a CSV file (semicolon as delimiter), can be loaded back into the calculator or Excel
+- Added "Compact" word breakdown option from test version by Gematrinator
 
 ### Ciphers:
 - Added "Empty" button to disable all active ciphers
