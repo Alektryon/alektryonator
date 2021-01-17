@@ -337,7 +337,7 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 								rStr += '<td class="BreakVal">' + aCipher.cv[z] + '</td>'
 							}
 						}
-						rStr += '</tr></table>'
+						rStr += '</tr></tbody></table><br><table class="BreakTable"><tbody class="printBreakTable"><tr>'
 					}
 					wCount++
 				}
