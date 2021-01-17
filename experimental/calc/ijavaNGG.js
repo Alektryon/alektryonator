@@ -2,7 +2,7 @@ var ciphers_per_row = 6; ChartMax = 36
 var cOption = "English"
 var breakCipher
 var pixelcount = 0; breakArr = []; pArr= []; mArr = []
-var opt_Reduce = true; opt_Quotes = true; opt_Summ = true; opt_Breakdown = "Chart"; opt_LetterCount = true
+var opt_Reduce = true; opt_Quotes = true; opt_Summ = true; opt_Breakdown = "Compact"; opt_LetterCount = true
 var opt_Chart = true; opt_Shortcuts = true; opt_Headers = true;
 
 var opt_PhraseLimit = 5 // word limit to enter input as separate phrases, "End" key
@@ -58,7 +58,7 @@ function navHistory(impNum) { // run on each keystroke inside text box - onkeydo
 	switch (impNum) {
 		case 13: // Enter
 			newHistory(thisTerm, true) // enter as single phrase
-			tBox.value = "" // clear textbox
+			if (!shiftIsPressed) tBox.value = "" // clear textbox on Enter, "Shift - Enter" preserves contents
 			break;
 		case 38: // Up Arrow
 			if (hPlace > 0) {
@@ -318,7 +318,7 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 
 		if (opt_Breakdown == "Chart") {
 
-			rStr += '<table class="BreakTable"><tr>'
+			rStr += '<table class="BreakTable"><tbody class="printBreakTable"><tr>'
 			for (x = 0; x < aCipher.cp.length; x++) {
 
 				if (aCipher.cp[x] !== " ") {
@@ -337,7 +337,7 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 								rStr += '<td class="BreakVal">' + aCipher.cv[z] + '</td>'
 							}
 						}
-						rStr += '</tr></table><BR><table class="BreakTable"><tr>'
+						rStr += '</tr></table>'
 					}
 					wCount++
 				}
@@ -349,7 +349,7 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 					rStr += '<td class="BreakVal">' + aCipher.cv[z] + '</td>'
 				}
 			}
-			rStr += '</tr></table>'
+			rStr += '</tr></tbody></table>'
 
 		} else if (opt_Breakdown == "Classic") {
 			var isFirst = true
@@ -369,6 +369,42 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 			}
 			rStr += ' = </div> <div class="breakSum">' + aCipher.sumArr.reduce(getSum) + '</div> <div class="breakCipher"><font style="color: RGB(' + aCipher.RGB.join() + ')">(' + aCipher.Nickname + ')</font></div>'
 
+		} else if (opt_Breakdown = "Compact") {
+			var tdCount
+			tdCount = 0
+
+			rStr += '<table class="BreakTable"><tbody class="printBreakTable"><tr>'
+			for (x = 0; x < aCipher.cp.length; x++) {
+
+				if (aCipher.cp[x] !== " ") {
+					if (String(aCipher.cp[x]).substring(0, 3) == "num") {
+						rStr += '<td class="BreakChar2">' + aCipher.cp[x].substring(3, aCipher.cp[x].length) + '</td>'
+					} else {
+						rStr += '<td class="BreakChar2">' + String.fromCharCode(aCipher.cp[x]) + '</td>'
+					}
+				} else {
+					rStr += '<td class="BreakWordSum" rowspan="2">' + aCipher.sumArr[wCount] + '</td>'
+
+					/*if (breakArr.indexOf(wCount) > -1) {
+						for (z; z < x; z++) {
+							if (aCipher.cv[z] !== " ") {
+								rStr += '<td class="BreakVal">' + aCipher.cv[z] + '</td>'
+							}
+						}
+					}*/
+					wCount++
+				}
+				tdCount++
+			}
+			rStr += '<td class="BreakPhraseSum" rowspan="2"><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.sumArr.reduce(getSum) + '</font></td>'
+			rStr += '</tr><tr>'
+			tdCount++
+			for (z; z < x; z++) {
+				if (aCipher.cv[z] !== " ") {
+					rStr += '<td class="BreakVal">' + aCipher.cv[z] + '</td>'
+				}
+			}
+			rStr += '</tr><tr><td colspan=' + tdCount + ' class="CipherEnd"><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></td></tr></table>'
 		}
 	} else {
 		rStr = ""
@@ -914,7 +950,7 @@ function OBox_PhraseLimit() {
 }
 function OBox_Breakdown() {
 	var ns = ""
-	var nArr = ["Chart", "Classic", "Off"]
+	var nArr = ["Chart", "Classic", "Compact", "Off"]
 	ns += '<select id="Breakdown_Type" onchange="Set_Breakdown()">'
 	for (x = 0; x < nArr.length; x++) {
 		if (nArr[x] == opt_Breakdown) {

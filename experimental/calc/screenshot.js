@@ -7,6 +7,7 @@ function addScrInterface() {
 	// buttons
 	var o = '<input id="btn-print-cipher-png" type="button" value="Print Cipher Table" />' // cipher breakdown preview
 	o += '<input id="btn-print-history-png" type="button" value="Print History Table" />' // history table preview
+	o += '<input id="btn-print-word-break-png" type="button" value="Print Word Breakdown" />' // print word breakdown table
 	o += '<input id="btn-save-history-png" type="button" value="Save History (CSV)" />' // save history as text file
 	//o += '<input id="btn-save-png" type="button" value="Save Image" </>' // save image
 	
@@ -28,6 +29,11 @@ $("body").on("click", "#btn-print-cipher-png", function () { // for future eleme
 
 $("body").on("click", "#btn-print-history-png", function () {
 	open_img_window("#HistoryTable_scr");
+});
+
+$("body").on("click", "#btn-print-word-break-png", function () {
+	// open_img_window(".BreakTable");
+	open_img_window(".printBreakTable");
 });
 
 $("body").on("click", "#btn-save-history-png", function () {

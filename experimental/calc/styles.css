@@ -324,6 +324,21 @@ body {
 	padding-right: 2px;
 	padding-left: 2px;
 }
+.BreakChar2 {
+	text-align: center;
+	font-size: 114%;
+	color: orange;
+	background: RGB(30,30,30);
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.CipherEnd {
+	font-size: 90%;
+	text-align: center;
+	background: RGB(21,21,21);
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
 .BreakWordSum {
 	font-size: 115%;
 	background: rgb(25,25,25);
@@ -474,7 +489,7 @@ body {
 	width: 115px;
 	background-color: rgb(16,16,16);
 }
-#btn-print-cipher-png, #btn-print-history-png, #btn-save-history-png {
+#btn-print-cipher-png, #btn-print-history-png, #btn-save-history-png, #btn-print-word-break-png {
 	display: inline-block;
 	color: rgb(222,222,222);
 	width: 150px;

@@ -1,8 +1,11 @@
 var userHistory = [] // a copy of user's history before filtering is applied
 var userOpenCiphers = [] // a copy of user's choice of ciphers
+var ctrlIsPressed = false; // allow Ctrl modifier key
+var shiftIsPressed = false; // allow Shift modifier key
 
 $(document).ready(function(){
 	
+	// Ctrl key modifier
 	$(document).keydown(function(event){
 		if(event.which=="17")
 		ctrlIsPressed = true;
@@ -10,8 +13,15 @@ $(document).ready(function(){
 	$(document).keyup(function(){
 		ctrlIsPressed = false;
 	});
-
-	var ctrlIsPressed = false; // allow Ctrl modifier key
+	
+	// Shift key modifier
+	$(document).keydown(function(event){
+		if(event.which=="16")
+		shiftIsPressed = true;
+	});
+	$(document).keyup(function(){
+		shiftIsPressed = false;
+	});
 
     $("#Highlight").keyup(function(event){ // inside Highlight box
 		if ( event.which == 46 ) { // "Delete" - clear box
