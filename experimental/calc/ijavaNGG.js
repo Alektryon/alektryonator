@@ -369,7 +369,7 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 			}
 			rStr += ' = </div> <div class="breakSum">' + aCipher.sumArr.reduce(getSum) + '</div> <div class="breakCipher"><font style="color: RGB(' + aCipher.RGB.join() + ')">(' + aCipher.Nickname + ')</font></div>'
 
-		} else if (opt_Breakdown = "Compact") {
+		} else if (opt_Breakdown == "Compact") {
 			var tdCount
 			tdCount = 0
 
@@ -405,9 +405,9 @@ function Populate_Breakdown(impName = breakCipher, impBool = false) {
 				}
 			}
 			rStr += '</tr><tr><td colspan=' + tdCount + ' class="CipherEnd"><font style="color: RGB(' + aCipher.RGB.join() + ')">' + aCipher.Nickname + '</font></td></tr></table>'
+		} else {
+			rStr = ""
 		}
-	} else {
-		rStr = ""
 	}
 
 	document.getElementById("BreakdownSpot").innerHTML = rStr
