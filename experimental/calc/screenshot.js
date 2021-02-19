@@ -69,20 +69,22 @@ function download(fileName, fileData) {
 	document.body.removeChild(element);
 }
 
-function open_img_window(s_element) {
-	var imageURL,imgName, win
-	if ( $( s_element ).length ) { // if specified element exists
-		html2canvas($(s_element)[0]).then((canvas) => { // e.g. html2canvas($("#ChartTable")[0]).then ...
+function open_img_window(element) {
+	var imageURL,imgName, wnd
+	if ( $(element).length ) { // if specified element exists
+		html2canvas($(element)[0], {allowTaint: true, backgroundColor: "rgba(30,30,30,0)", width: $(element).outerWidth(), height: $(element).outerHeight()} ).then((canvas) => { // e.g. html2canvas($("#ChartTable")[0]).then ...
+			//allowTaint: true, backgroundColor: "rgba(0,0,0,0)" - render white bg as transparent
+			//width: $(element).width(), height: $(element).height() - get proper element dimensions
 			//console.log("done ... ");
 			//$("#previewImage").append(canvas);
 			
 			imageURL = canvas.toDataURL("image/png"); // canvas to "data:image/png;base64, ..."
 			imgName = getTimestamp()+".png"; // filename for download button
 
-			win = window.open(""); // open new window
+			wnd = window.open(""); // open new window
 			// add download button and image data inside centered <div>
-			win.document.body.innerHTML = "<div style='max-height: 100%; max-width: 100%; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%);'><center><br><a href='"+imageURL+"' download='"+imgName+"' style='font-family: arial, sans-serif; color: #DEDEDE' >Download</a></center><br><img src="+canvas.toDataURL("image/png")+"></div>";
-			win.document.body.style.backgroundColor = "#000000"; // black background
+			wnd.document.body.innerHTML = "<div style='max-height: 100%; max-width: 100%; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%);'><center><br><a href='"+imageURL+"' download='"+imgName+"' style='font-family: arial, sans-serif; color: #dedede' >Download</a></center><br><img src="+canvas.toDataURL("image/png")+"></div>";
+			wnd.document.body.style.backgroundColor = "#000000"; // black background
 		});
 	}
 }
