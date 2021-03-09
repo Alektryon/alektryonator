@@ -86,6 +86,14 @@ class cipher {
 				this.vArr = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9]
 				this.vArr2 = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9]
 				break;
+			case "Fibonacci":
+				for (y = 0; y < 26; y++) {
+					this.cArr[y] = (y + 97)
+					this.cArr2[y] = (y + 65)
+				}
+				this.vArr = [1,1,2,3,5,8,13,21,34,55,89,144,233,233,144,89,55,34,21,13,8,5,3,2,1,1]
+				this.vArr2 = [1,1,2,3,5,8,13,21,34,55,89,144,233,233,144,89,55,34,21,13,8,5,3,2,1,1]
+				break;
 			case "Russian":
 				this.cArr = [1072,1073,1074,1075,1076,1077,1105,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103]
 				this.cArr2 = [1040,1041,1042,1043,1044,1045,1025,1046,1047,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071] // caps
@@ -712,6 +720,7 @@ function Build_Ciphers() {
 			case "Septenary": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 153, 77, "SeptenaryNum"); break;
 			case "Chaldean": allCiphers[allCiphers.length] = new cipher(key, "Chald", 166, 166, 99); break;
 			case "Keypad": allCiphers[allCiphers.length] = new cipher(key, "Keypad", 255, 126, 255); break;
+			case "Fibonacci": allCiphers[allCiphers.length] = new cipher(key, "Fibonacci", 233, 202, 148); break;
 			//case "Telephone-No QZ": allCiphers[allCiphers.length] = new cipher(key, "Telephone", 255, 153, 255, "PhoneNum"); break;
 
 			case "Hebrew Reduction": allCiphers[allCiphers.length] = new cipher(key, "Hebrew G", 255, 189, 2, "FullReduction"); break;
@@ -825,6 +834,7 @@ function Set_Categories() {
 	cipherArray["Septenary"] = "Other"
 	cipherArray["Chaldean"] = "Other"
 	cipherArray["Keypad"] = "Other"
+	cipherArray["Fibonacci"] = "Other"
 	//cipherArray["Telephone-No QZ"] = "Other"
 
 	cipherArray["Hebrew Reduction"] = "Foreign"
