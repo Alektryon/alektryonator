@@ -10,10 +10,10 @@ const w = canvas.width = document.body.offsetWidth;
 const h = canvas.height = height_html;
 
 // draw a plain color rectangle of width and height same as that of the canvas
-ctx.fillStyle = '#202020';
+ctx.fillStyle = "#202020"; // "#202020"
 ctx.fillRect(0, 0, w, h);
 
-const cols = Math.floor(w / 12) + 1; // 20px
+const cols = Math.floor(w / 14) + 1; // 20px
 const ypos = Array(cols).fill(0);
 
 var code_rain; // var to clear interval
@@ -46,7 +46,7 @@ function matrix() {
 		const text = String.fromCharCode(matrixChars[rndInt(0,aLen-1)]);
 
 		// x coordinate of the column, y coordinate is already given
-		const x = ind * 12; // 20px
+		const x = ind * 14; // 20px
 		// render the character at (x, y)
 		ctx.fillText(text, x, y);
 
