@@ -13,7 +13,7 @@ const h = canvas.height = height_html;
 ctx.fillStyle = '#202020';
 ctx.fillRect(0, 0, w, h);
 
-const cols = Math.floor(w / 20) + 1;
+const cols = Math.floor(w / 12) + 1; // 20px
 const ypos = Array(cols).fill(0);
 
 var code_rain; // var to clear interval
@@ -29,7 +29,7 @@ function matrix() {
 	ctx.fillRect(0, 0, w, h);
 
 	// Set color and font in the drawing context
-	ctx.fillStyle = "#004400"; // "#004400"
+	ctx.fillStyle = "#003300"; // "#004400"
 	ctx.font = "bold 15pt matrix-font"; // monospace
 	ctx.shadowColor = "rgba(0,255,0,0.2)";
 	ctx.shadowBlur = 4;
@@ -46,14 +46,14 @@ function matrix() {
 		const text = String.fromCharCode(matrixChars[rndInt(0,aLen-1)]);
 
 		// x coordinate of the column, y coordinate is already given
-		const x = ind * 20;
+		const x = ind * 12; // 20px
 		// render the character at (x, y)
 		ctx.fillText(text, x, y);
 
 		// randomly reset the end of the column if it's at least 100px high
 		if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
 		// otherwise just move the y coordinate for the column 20px down,
-		else ypos[ind] = y + 20;
+		else ypos[ind] = y + 18; // 20px
 	});
 }
 
