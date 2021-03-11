@@ -44,6 +44,7 @@ function dropHandler(ev) {
 		var file = event.target.result // full file contents
 		userhist = file.split(/\r\n|\n/) // to string array, line break as separator
 		
+		if (typeof databaseMode !== 'undefined' && databaseMode) { exportDatabaseCSV(userhist); return } // line by line, only phrases
 		//userhist.forEach((line) => { // print line by line
 		//	console.log(line)
 		//})
@@ -122,4 +123,26 @@ function saveHistory() {
 	
 	t = 'data:text/plain;charset=utf-8,'+encodeURIComponent(t) // format as text file
 	download(getTimestamp()+"_gematria.txt", t); // download file
+}
+
+function exportDatabaseCSV(phrArrData) {
+
+	// table header (csv format, semicolon as separator)
+	var t = "Word or Phrase"
+	for (i = 0; i < ciphersOn.length; i++) {
+		t += ";"+ciphersOn[i].Nickname // list of enabled ciphers
+	}
+	t += "\n" // line break
+	
+	// table contents
+	for (i = 0; i < phrArrData.length; i++) {
+		t += phrArrData[i].replace(";", "") // add phrase, remove semicolons (it is a separator)
+		for (n = 0; n < ciphersOn.length; n++) {
+			t += ";"+ciphersOn[n].Gematria(phrArrData[i], 2, false, true) // gematria value for each enabled cipher
+		}
+		if (i+1 < phrArrData.length) t += "\n" // line break, exclude last line
+	}
+	
+	t = 'data:text/plain;charset=utf-8,'+encodeURIComponent(t) // format as text file
+	download(getTimestamp()+"_gemDatabase.csv", t); // download file
 }
