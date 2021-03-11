@@ -14,6 +14,11 @@ body {
 	/* cursor: url("cursor.png"), auto; */
 }
 
+@font-face {
+    font-family: "matrix-font";
+    src: url("../font/matrix-font.woff2") format('woff2');
+}
+
 .CategoryList, .CategoryList2, #OptionsTable {
 	/* background-image: linear-gradient(180deg, hsl(120 30% 15% / 0.5), hsl(180 50% 8% / 1)), url(./flower-of-life-tile.png); */
 }
