@@ -2,7 +2,7 @@
 
 ### Based on [Gematrinator.com](https://www.gematrinator.com/calculator/index.php) (original calculator by Derek Tikkuri)
 ---
-> NOTE: Classic design version is no longer updated, use "Experimental" version!
+> NOTE: This version is no longer updated, use [https://github.com/ravic-norsou/gematria.github.io](https://ravic-norsou.github.io/gematria.github.io/)
 
 ### List of features:
 <ul>
