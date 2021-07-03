@@ -482,7 +482,6 @@ class cipher {
 	}
 	Make_Trigonal() {
 		var x
-		this.vArr[0] = 1
 		for (x = 0; x < this.vArr.length; x++) {
 			this.vArr[x] = this.vArr[x] * (this.vArr[x] + 1) / 2
 		}
