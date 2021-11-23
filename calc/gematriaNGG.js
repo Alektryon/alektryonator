@@ -2,7 +2,7 @@ var catArr = []; gemArr = []
 var cipherArray = [];
 var openCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
 var ciphersOn = []; allCiphers = []; sHistory = []
-var opt_NumCalculation = "Reduced"
+var opt_NumCalculation = "Full"
 var primeArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 
 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251]
 var ignoreArr = [1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473]
@@ -114,6 +114,7 @@ class cipher {
 		if (impMods.indexOf("Bacon") > -1) {this.Make_Bacon()}
 		if (impMods.indexOf("Baconis") > -1) {this.Make_Baconis()}
 		if (impMods.indexOf("SatanicNum") > -1) {this.Make_Satanic()}
+		if (impMods.indexOf("AQ") > -1) {this.Make_AQ()}
 		if (impMods.indexOf("FullReduction") > -1) {this.Reduce_Full()}
 		if (impMods.indexOf("SingleReduction") > -1) {this.Reduce_Single()}
 		if (impMods.indexOf("Extend") > -1) {this.Extend()}
@@ -447,6 +448,22 @@ class cipher {
 			}
 		}
 	}
+	Make_AQ() {
+		var x
+		for (x = 0; x < this.vArr.length; x++) {
+			this.vArr[x] += 9
+		}
+		if (this.vArr2.length > 0) {
+			for (x = 0; x < this.vArr2.length; x++) {
+				this.vArr2[x] += 9
+			}
+		}
+		if (this.vArr3.length > 0) {
+			for (x = 0; x < this.vArr3.length; x++) {
+				this.vArr3[x] += 9
+			}
+		}
+	}
 	Make_ALW() {
 		this.cArr = [97, 108, 119, 104, 115, 100, 111, 122, 107, 118, 103, 114, 99, 110, 121, 106, 117, 102, 113, 98, 109, 120, 105, 116, 101, 112]
 		this.cArr2 = [65, 76, 87, 72, 83, 68, 79, 90, 75, 86, 71, 82, 67, 78, 89, 74, 85, 70, 81, 66, 77, 88, 73, 84, 69, 80]
@@ -690,6 +707,7 @@ function Build_Ciphers() {
 			case "Francis Bacon": allCiphers[allCiphers.length] = new cipher(key, "English", 150, 244, 77, "Bacon"); break;
 			case "Franc Baconis": allCiphers[allCiphers.length] = new cipher(key, "English", 93, 187, 88, "Baconis"); break;
 			case "Satanic": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 0, 0, "SatanicNum"); break;
+			case "Alphanumeric": allCiphers[allCiphers.length] = new cipher(key, "English", 191, 195, 127, "AQ"); break;
 
 			case "Reverse Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 226, 226, "Reverse", "FullReduction"); break;
 			case "Reverse Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "Reverse", "SingleReduction"); break;
@@ -823,6 +841,7 @@ function Set_Categories() {
 	cipherArray["ALW Kabbalah"] = "Kabbalah"
 	cipherArray["KFW Kabbalah"] = "Kabbalah"
 	cipherArray["LCH Kabbalah"] = "Kabbalah"
+	cipherArray["Alphanumeric"] = "Kabbalah"
 
 	cipherArray["English Sumerian"] = "Mathematical"
 	cipherArray["Reverse English Sumerian"] = "Mathematical"
