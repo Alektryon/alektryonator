@@ -1,8 +1,8 @@
 var catArr = []; gemArr = []
 var cipherArray = [];
-var openCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
+var openCiphers = ["Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Modern Kaye", "Illuminati Novice", "Illuminati Reverse", "Jewish", "Beatus of Liebana", "Alphanumeric"]
 var ciphersOn = []; allCiphers = []; sHistory = []
-var opt_NumCalculation = "Full"
+var opt_NumCalculation = "Reduced"
 var primeArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 
 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251]
 var ignoreArr = [1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473]
@@ -41,8 +41,8 @@ class cipher {
 				Build_GemVals(this)
 				break;
 			case "Jewish":
-				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 38, 119]
-				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 38, 87]
+				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 10680, 119]
+				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 10680, 87]
 				Build_GemVals(this)
 				break;
 			case "Hebrew G":
@@ -126,6 +126,7 @@ class cipher {
 		if (impMods.indexOf("BaconSimple") > -1) {this.Make_BaconSimple()}
 		if (impMods.indexOf("BaconReverse") > -1) {this.Make_BaconReverse()}
 		if (impMods.indexOf("BaconShort") > -1) {this.Make_BaconShort()}
+		if (impMods.indexOf("BaconShortRev") > -1) {this.Make_BaconShortRev()}
 		if (impMods.indexOf("BaconKaye") > -1) {this.Make_BaconKaye()}
 		if (impMods.indexOf("ModernKaye") > -1) {this.Make_ModernKaye()}
 		if (impMods.indexOf("IlluminatiNovice") > -1) {this.Make_IlluminatiNovice()}
@@ -567,6 +568,10 @@ class cipher {
 		this.vArr = [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,1,2,2,3,4,5,6]
 		this.vArr2 = [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,1,2,2,3,4,5,6]
 	}
+	Make_BaconShortRev() {
+		this.vArr = [6,5,4,3,2,1,9,8,7,7,6,5,4,3,2,1,9,8,7,6,5,5,4,3,2,1]
+		this.vArr2 = [6,5,4,3,2,1,9,8,7,7,6,5,4,3,2,1,9,8,7,6,5,5,4,3,2,1]
+	}
 	Make_BaconKaye() {
 		this.vArr = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
 		this.vArr2 = [27,28,29,30,31,32,33,34,35,35,10,11,12,13,14,15,16,17,18,19,20,20,21,22,23,24]
@@ -788,6 +793,7 @@ function Build_Ciphers() {
 			case "Bacon Simple": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconSimple"); break;
 			case "Bacon Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "BaconReverse"); break;
 			case "Bacon Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "BaconShort"); break;
+			case "Bacon Short Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 88, 125, 254, "BaconShortRev"); break;
 			case "Bacon Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 93, 73, "BaconKaye"); break;
 			case "Modern Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 230, 153, 163, "ModernKaye"); break;
 			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "IlluminatiNovice"); break;
@@ -796,7 +802,7 @@ function Build_Ciphers() {
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 153, 50, 204, "BeatusReduction"); break;
 			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 186, 85, 211, "BeatusOrdinal"); break;
 			
-			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 224, 224, 32, "EnglishCustom"); break;
+			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 195, 195, 195, "EnglishCustom"); break;
 			
 			case "KR Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Korean", 0, 186, 0); break;
 			case "KR Reverse Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Korean", 80, 235, 21, "Reverse"); break;
@@ -898,6 +904,7 @@ function Set_Categories() {
 	cipherArray["Bacon Simple"] = "English (Special)"
 	cipherArray["Bacon Reverse"] = "English (Special)"
 	cipherArray["Bacon Short"] = "English (Special)"
+	cipherArray["Bacon Short Reverse"] = "English (Special)"
 	cipherArray["Bacon Kaye"] = "English (Special)"
 	cipherArray["Modern Kaye"] = "English (Special)"
 	cipherArray["Illuminati Novice"] = "English (Special)"
@@ -977,7 +984,7 @@ function Add_AllCiphers(impBool = false) {
 }
 function Add_BaseCiphers(impBool = false) {
 	var x, q, cN, z
-	var baseCiphers = ["English Ordinal", "Full Reduction", "Reverse Ordinal", "Reverse Full Reduction"]
+	var baseCiphers = ["Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Modern Kaye", "Illuminati Novice", "Illuminati Reverse", "Jewish", "Beatus of Liebana", "Alphanumeric"]
 
 	openCiphers = []
 	for (z = 0; z < allCiphers.length; z++) {
