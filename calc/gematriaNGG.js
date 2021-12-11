@@ -40,7 +40,7 @@ class cipher {
 				}
 				Build_GemVals(this)
 				break;
-			case "Jewish":
+			case "Latin":
 				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 10680, 119]
 				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 10680, 87]
 				Build_GemVals(this)
@@ -724,14 +724,14 @@ function Build_Ciphers() {
 			case "Reverse Franc Baconis": allCiphers[allCiphers.length] = new cipher(key, "English", 111, 193, 121, "Reverse", "Baconis"); break;
 			case "Reverse Satanic": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 51, 51, "Reverse", "SatanicNum"); break;
 
-			case "Jewish Reduction": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction"); break;
-			case "Jewish Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 154, 121, 227); break;
-			case "Jewish": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 153, 102, 255, "Extend"); break;
-			//case "Reverse Jewish": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 153, 102, 255, "Reverse", "Extend"); break;
+			case "Agrippa": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Extend"); break;
+			case "Agrippa Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Latin", 154, 121, 227); break;
+			case "Agrippa Reduction": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction"); break;
+			//case "Reverse Agrippa": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Reverse", "Extend"); break;
 
-			case "ALW Kabbalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 64, 0, "ALW"); break;
-			case "KFW Kabbalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 88, 0, "KFW"); break;
-			case "LCH Kabbalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "LCH"); break;
+			case "English Qaballa": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 64, 0, "ALW"); break;
+			case "Cipher X": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 88, 0, "KFW"); break;
+			case "Trigram Qabalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "LCH"); break;
 
 			case "English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 169, 208, 142, "SumerianNum"); break;
 			case "Reverse English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 208, 148, "Reverse", "SumerianNum"); break;
@@ -771,9 +771,9 @@ function Build_Ciphers() {
 			case "Greek Isopsephy": allCiphers[allCiphers.length] = new cipher(key, "Greek", 139, 200, 163, "Extend"); break;
 			case "Greek Ordinal 24": allCiphers[allCiphers.length] = new cipher(key, "Greek24", 200, 200, 40); break;
 
-			/*case "Jewish Reduction Prime": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction", "PrimeNum"); break;
-			case "Jewish Reduction Trigonal": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction", "TriangleNum"); break;
-			case "Jewish Reduction Square": allCiphers[allCiphers.length] = new cipher(key, "Jewish", 159, 99, 197, "FullReduction", "SquareNum"); break
+			/*case "Agrippa Reduction Prime": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction", "PrimeNum"); break;
+			case "Agrippa Reduction Trigonal": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction", "TriangleNum"); break;
+			case "Agrippa Reduction Square": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction", "SquareNum"); break
 */
 			case "RU Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 186, 0); break;
 			case "RU Extended": allCiphers[allCiphers.length] = new cipher(key, "Russian", 218, 226, 0, "Extend"); break;
@@ -814,7 +814,7 @@ function Build_Ciphers() {
 }
 
 function Set_Categories() {
-	catArr = ["English", "English (Special)", "Reverse", "Jewish", "Kabbalah", "Mathematical", "Other", "Foreign", "Russian", "Korean", "Custom"]
+	catArr = ["English", "English (Special)", "Reverse", "Latin", "Thelemic", "Mathematical", "Other", "Foreign", "Russian", "Korean", "Custom"]
 
 	cipherArray["English Ordinal"] = "English"
 	cipherArray["Full Reduction"] = "English"
@@ -836,18 +836,18 @@ function Set_Categories() {
 	cipherArray["Reverse Franc Baconis"] = "Reverse"
 	cipherArray["Reverse Satanic"] = "Reverse"
 
-	cipherArray["Jewish Reduction"] = "Jewish"
-	cipherArray["Jewish Ordinal"] = "Jewish"	
-	cipherArray["Jewish"] = "Jewish"
-	//cipherArray["Reverse Jewish"] = "Jewish"
-	//cipherArray["Jewish Reduction Prime"] = "Jewish"
-	//cipherArray["Jewish Reduction Trigonal"] = "Jewish"
-	//cipherArray["Jewish Reduction Square"] = "Jewish"
+	cipherArray["Agrippa"] = "Latin"
+	cipherArray["Agrippa Ordinal"] = "Latin"	
+	cipherArray["Agrippa Reduction"] = "Latin"
+	//cipherArray["Reverse Agrippa"] = "Latin"
+	//cipherArray["Agrippa Reduction Prime"] = "Latin"
+	//cipherArray["Agrippa Reduction Trigonal"] = "Latin"
+	//cipherArray["Agrippa Reduction Square"] = "Latin"
 
-	cipherArray["ALW Kabbalah"] = "Kabbalah"
-	cipherArray["KFW Kabbalah"] = "Kabbalah"
-	cipherArray["LCH Kabbalah"] = "Kabbalah"
-	cipherArray["Alphanumeric"] = "Kabbalah"
+	cipherArray["English Qaballa"] = "Thelemic"
+	cipherArray["Cipher X"] = "Thelemic"
+	cipherArray["Trigram Qabalah"] = "Thelemic"
+	cipherArray["Alphanumeric"] = "Thelemic"
 
 	cipherArray["English Sumerian"] = "Mathematical"
 	cipherArray["Reverse English Sumerian"] = "Mathematical"
