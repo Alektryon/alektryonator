@@ -814,7 +814,7 @@ function Build_Ciphers() {
 }
 
 function Set_Categories() {
-	catArr = ["English", "English (Special)", "Reverse", "Latin", "Thelemic", "Mathematical", "Other", "Foreign", "Russian", "Korean", "Custom"]
+	catArr = ["English", "Reverse", "Baconian", "Latin", "Thelemic", "Mathematical", "Other", "Foreign", "Russian", "Korean", "Custom"]
 
 	cipherArray["English Ordinal"] = "English"
 	cipherArray["Full Reduction"] = "English"
@@ -836,6 +836,15 @@ function Set_Categories() {
 	cipherArray["Reverse Franc Baconis"] = "Reverse"
 	cipherArray["Reverse Satanic"] = "Reverse"
 
+	cipherArray["Bacon Simple"] = "Baconian"
+	cipherArray["Bacon Reverse"] = "Baconian"
+	cipherArray["Bacon Short"] = "Baconian"
+	cipherArray["Bacon Short Reverse"] = "Baconian"
+	cipherArray["Bacon Kaye"] = "Baconian"
+	cipherArray["Modern Kaye"] = "Baconian"
+	cipherArray["Illuminati Novice"] = "Baconian"
+	cipherArray["Illuminati Reverse"] = "Baconian"
+	
 	cipherArray["Agrippa"] = "Latin"
 	cipherArray["Agrippa Ordinal"] = "Latin"	
 	cipherArray["Agrippa Reduction"] = "Latin"
@@ -903,15 +912,6 @@ function Set_Categories() {
 
 	// cipherArray["RU Ordinal E"] = "Russian"
 	// cipherArray["RU Reverse Ordinal E"] = "Russian"
-	
-	cipherArray["Bacon Simple"] = "English (Special)"
-	cipherArray["Bacon Reverse"] = "English (Special)"
-	cipherArray["Bacon Short"] = "English (Special)"
-	cipherArray["Bacon Short Reverse"] = "English (Special)"
-	cipherArray["Bacon Kaye"] = "English (Special)"
-	cipherArray["Modern Kaye"] = "English (Special)"
-	cipherArray["Illuminati Novice"] = "English (Special)"
-	cipherArray["Illuminati Reverse"] = "English (Special)"
 	
 	cipherArray["KR Ordinal"] = "Korean"
 	cipherArray["KR Reverse Ordinal"] = "Korean"
