@@ -70,6 +70,12 @@ class cipher {
 				this.vArr3 = [1, 5, 8, 10, 18, 16, 22, 26, 6, 6, 1, 5, 7, 10, 16, 22, 26, 5, 16, 9, 22, 22]
 				Build_GemVals(this)
 				break;
+			case "Arabic":
+				this.cArr = [1575, 1576, 1580, 1583, 1607, 1608, 1586, 1581, 1591, 1610, 1603, 1604, 1605, 1606, 1587, 1593, 1601, 1589, 1602, 1585, 1588, 1578, 1579, 1582, 1584, 1590, 1592, 1594]
+				for (y = 0; y < 28; y++) {
+					this.vArr.push(y + 1)
+				}
+				break;
 			case "Chald":
 				for (y = 0; y < 26; y++) {
 					this.cArr[y] = (y + 97)
@@ -775,6 +781,11 @@ function Build_Ciphers() {
 			case "Agrippa Reduction Trigonal": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction", "TriangleNum"); break;
 			case "Agrippa Reduction Square": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction", "SquareNum"); break
 */
+			
+            		case "Arabic": allCiphers[allCiphers.length] = new cipher(key, "Arabic", 255, 180, 180, "Extend"); break;
+			case "Arabic Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Arabic", 240, 200, 195,); break;
+			case "Arabic Reduction": allCiphers[allCiphers.length] = new cipher(key, "Arabic", 235, 200, 200, "FullReduction"); break;
+
 			case "RU Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 186, 0); break;
 			case "RU Extended": allCiphers[allCiphers.length] = new cipher(key, "Russian", 218, 226, 0, "Extend"); break;
 			case "RU Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "Russian", 88, 125, 254, "FullReduction"); break;
@@ -896,6 +907,11 @@ function Set_Categories() {
 	cipherArray["Greek Ordinal"] = "Foreign"
 	cipherArray["Greek Isopsephy"] = "Foreign"
 	cipherArray["Greek Ordinal 24"] = "Foreign"
+	
+	cipherArray["Arabic"] = "Foreign"
+	cipherArray["Arabic Ordinal"] = "Foreign"
+	cipherArray["Arabic Reduction"] = "Foreign"
+
 	
 	cipherArray["RU Ordinal"] = "Russian"
 	cipherArray["RU Full Reduction"] = "Russian"
