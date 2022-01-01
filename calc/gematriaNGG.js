@@ -813,7 +813,7 @@ function Build_Ciphers() {
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 153, 50, 204, "BeatusReduction"); break;
 			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 186, 85, 211, "BeatusOrdinal"); break;
 			
-			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 195, 195, 195, "EnglishCustom"); break;
+			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 236, 236, 177, "EnglishCustom"); break;
 			
 			case "KR Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Korean", 0, 186, 0); break;
 			case "KR Reverse Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Korean", 80, 235, 21, "Reverse"); break;
@@ -887,9 +887,9 @@ function Set_Categories() {
 	cipherArray["Fibonacci"] = "Other"
 	//cipherArray["Telephone-No QZ"] = "Other"
 
-	cipherArray["Hebrew Reduction"] = "Foreign"
-	cipherArray["Hebrew Ordinal"] = "Foreign"
 	cipherArray["Hebrew Gematria"] = "Foreign"
+	cipherArray["Hebrew Ordinal"] = "Foreign"
+	cipherArray["Hebrew Reduction"] = "Foreign"
 	cipherArray["Hebrew Soffits"] = "Foreign"
 
 	/*cipherArray["Hebrew Primes"] = "Foreign"
@@ -903,9 +903,9 @@ function Set_Categories() {
 	cipherArray["Hebrew Reverse Trigonal"] = "Foreign"
 	cipherArray["Hebrew Reverse Squares"] = "Foreign"*/
 	
-	cipherArray["Greek Reduction"] = "Foreign"
-	cipherArray["Greek Ordinal"] = "Foreign"
 	cipherArray["Greek Isopsephy"] = "Foreign"
+	cipherArray["Greek Ordinal"] = "Foreign"
+	cipherArray["Greek Reduction"] = "Foreign"
 	cipherArray["Greek Ordinal 24"] = "Foreign"
 	
 	cipherArray["Arabic"] = "Foreign"
