@@ -75,7 +75,7 @@ class cipher {
 				for (y = 0; y < 28; y++) {
 					this.vArr.push(y + 1)
 				}
-				this.vArr[28] = 1; this.vArr[29] = 22
+				this.vArr[28] = 10; this.vArr[29] = 5
 				break;
 			case "Chald":
 				for (y = 0; y < 26; y++) {
