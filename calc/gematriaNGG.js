@@ -810,9 +810,9 @@ function Build_Ciphers() {
 			case "Modern Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 230, 153, 163, "ModernKaye"); break;
 			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "IlluminatiNovice"); break;
 			case "Illuminati Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 189, 2, "IlluminatiReverse"); break;
-			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 148, 0, 211, "BeatusExtended"); break;
-			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 153, 50, 204, "BeatusOrdinal"); break;
-			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 186, 85, 211, "BeatusReduction"); break;
+			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 192, 66, 255, "BeatusExtended"); break;
+			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 210, 87, 255, "BeatusOrdinal"); break;
+			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 225, 107, 255, "BeatusReduction"); break;
 			
 			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 236, 236, 177, "EnglishCustom"); break;
 			
