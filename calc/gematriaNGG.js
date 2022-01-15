@@ -976,10 +976,8 @@ function Add_AllCiphers(impBool = false) {
 	for (x = 0; x < allCiphers.length; x++) {
 		q = 0
 		cN = allCiphers[x].Nickname
-		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1
-		&& cN.indexOf("RU") == -1 && cN.indexOf("Custom") == -1 &&
-		cN.indexOf("Bacon Simple") == -1 && cN.indexOf("Bacon Reverse") == -1 && cN.indexOf("Bacon Short") == -1 && cN.indexOf("Kaye") == -1 && cN.indexOf("Illuminati") == -1 &&
-		cN.indexOf("Beatus") == -1 && cN.indexOf("KR") == -1) {
+		if (openCiphers.indexOf(cN) == -1 && cN.indexOf("Hebrew") == -1 && cN.indexOf("Greek") == -1 && cN.indexOf("Arabic") == -1
+		&& cN.indexOf("RU") == -1 && cN.indexOf("Custom") == -1 && cN.indexOf("KR") == -1) {
 			for (z = 0; z < allCiphers.length; z++) {
 				if (allCiphers[z].Nickname == cN) {
 					openCiphers.splice(q, 0, cN)
