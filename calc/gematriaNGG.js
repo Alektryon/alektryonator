@@ -716,8 +716,8 @@ function Build_Ciphers() {
 			case "Single Reduction KV": allCiphers[allCiphers.length] = new cipher(key, "English", 70, 175, 244, "SingleReduction", "Exception"); break;
 			case "English Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0); break;
 			case "English Extended": allCiphers[allCiphers.length] = new cipher(key, "English", 218, 226, 0, "Extend"); break;
-			case "Francis Bacon": allCiphers[allCiphers.length] = new cipher(key, "English", 150, 244, 77, "Bacon"); break;
-			case "Franc Baconis": allCiphers[allCiphers.length] = new cipher(key, "English", 93, 187, 88, "Baconis"); break;
+			case "Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 150, 244, 77, "Bacon"); break;
+			case "Alt Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 93, 187, 88, "Baconis"); break;
 			case "Satanic": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 0, 0, "SatanicNum"); break;
 			case "Alphanumeric": allCiphers[allCiphers.length] = new cipher(key, "English", 191, 195, 127, "AQ"); break;
 
@@ -727,8 +727,8 @@ function Build_Ciphers() {
 			case "Reverse Single Reduction EP": allCiphers[allCiphers.length] = new cipher(key, "English", 110, 226, 156, "Reverse", "SingleReduction", "Exception"); break;
 			case "Reverse Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "Reverse"); break;
 			case "Reverse Extended": allCiphers[allCiphers.length] = new cipher(key, "English", 253, 255, 119, "Reverse", "Extend"); break;
-			case "Reverse Francis Bacon": allCiphers[allCiphers.length] = new cipher(key, "English", 163, 255, 88, "Reverse", "Bacon"); break;
-			case "Reverse Franc Baconis": allCiphers[allCiphers.length] = new cipher(key, "English", 111, 193, 121, "Reverse", "Baconis"); break;
+			case "Rev Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 163, 255, 88, "Reverse", "Bacon"); break;
+			case "Rev Alt Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 111, 193, 121, "Reverse", "Baconis"); break;
 			case "Reverse Satanic": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 51, 51, "Reverse", "SatanicNum"); break;
 
 			case "Agrippa": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Extend"); break;
@@ -834,8 +834,8 @@ function Set_Categories() {
 	cipherArray["Full Reduction KV"] = "English"
 	cipherArray["Single Reduction KV"] = "English"
 	cipherArray["English Extended"] = "English"
-	cipherArray["Francis Bacon"] = "English"
-	cipherArray["Franc Baconis"] = "English"
+	cipherArray["Case Sensitive"] = "English"
+	cipherArray["Alt Case Sensitive"] = "English"
 	cipherArray["Satanic"] = "English"
 
 	cipherArray["Reverse Ordinal"] = "Reverse"
@@ -844,8 +844,8 @@ function Set_Categories() {
 	cipherArray["Reverse Full Reduction EP"] = "Reverse"
 	cipherArray["Reverse Single Reduction EP"] = "Reverse"
 	cipherArray["Reverse Extended"] = "Reverse"
-	cipherArray["Reverse Francis Bacon"] = "Reverse"
-	cipherArray["Reverse Franc Baconis"] = "Reverse"
+	cipherArray["Rev Case Sensitive"] = "Reverse"
+	cipherArray["Rev Alt Case Sensitive"] = "Reverse"
 	cipherArray["Reverse Satanic"] = "Reverse"
 
 	cipherArray["Bacon Simple"] = "Baconian"
