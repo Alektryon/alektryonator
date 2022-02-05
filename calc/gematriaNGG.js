@@ -737,6 +737,7 @@ function Build_Ciphers() {
 			case "Bacon Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "BaconReverse"); break;
 			case "Bacon Short": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "BaconShort"); break;
 			case "Bacon Short Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 88, 125, 254, "BaconShortRev"); break;
+
 			case "Bacon Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 93, 73, "BaconKaye"); break;
 			case "Modern Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 230, 153, 163, "ModernKaye"); break;
 
@@ -746,9 +747,11 @@ function Build_Ciphers() {
 			case "Agrippa": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Extend"); break;
 			case "Agrippa Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Latin", 154, 121, 227); break;
 			case "Agrippa Reduction": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction"); break;
+
 			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 192, 66, 255, "BeatusExtended"); break;
 			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 210, 87, 255, "BeatusOrdinal"); break;
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 225, 107, 255, "BeatusReduction"); break;
+
 			case "Roman Numerals": allCiphers[allCiphers.length] = new cipher(key, "RomanNum", 115, 194, 251); break;
 
 			case "English Qaballa": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 64, 0, "ALW"); break;
