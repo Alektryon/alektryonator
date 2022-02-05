@@ -1,6 +1,6 @@
 var catArr = []; gemArr = []
 var cipherArray = [];
-var openCiphers = ["English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Alphanumeric"]
+var openCiphers = ["English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Alphanumeric Qabbala"]
 var ciphersOn = []; allCiphers = []; sHistory = []
 var opt_NumCalculation = "Full"
 var primeArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 
@@ -754,7 +754,7 @@ function Build_Ciphers() {
 			case "English Qaballa": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 64, 0, "ALW"); break;
 			case "Cipher X": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 88, 0, "KFW"); break;
 			case "Trigram Qabalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "LCH"); break;
-			case "Alphanumeric": allCiphers[allCiphers.length] = new cipher(key, "English", 191, 195, 127, "AQ"); break;
+			case "Alphanumeric Qabbala": allCiphers[allCiphers.length] = new cipher(key, "English", 191, 195, 127, "AQ"); break;
 
 			case "English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 169, 208, 142, "SumerianNum"); break;
 			case "Reverse English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 208, 148, "Reverse", "SumerianNum"); break;
@@ -852,7 +852,7 @@ function Set_Categories() {
 	cipherArray["English Qaballa"] = "Thelemic"
 	cipherArray["Cipher X"] = "Thelemic"
 	cipherArray["Trigram Qabalah"] = "Thelemic"
-	cipherArray["Alphanumeric"] = "Thelemic"
+	cipherArray["Alphanumeric Qabbala"] = "Thelemic"
 
 	cipherArray["English Sumerian"] = "Mathematical"
 	cipherArray["Reverse English Sumerian"] = "Mathematical"
@@ -966,7 +966,7 @@ function Add_AllCiphers(impBool = false) {
 }
 function Add_BaseCiphers(impBool = false) {
 	var x, q, cN, z
-	var baseCiphers = ["English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Alphanumeric"]
+	var baseCiphers = ["English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Alphanumeric Qabbala"]
 
 	openCiphers = []
 	for (z = 0; z < allCiphers.length; z++) {
