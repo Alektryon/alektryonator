@@ -744,7 +744,7 @@ function Build_Ciphers() {
 			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "IlluminatiNovice"); break;
 			case "Illuminati Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 189, 2, "IlluminatiReverse"); break;
 
-			case "Agrippa": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Extend"); break;
+			case "Agrippa Key": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Extend"); break;
 			case "Agrippa Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Latin", 154, 121, 227); break;
 			case "Agrippa Reduction": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction"); break;
 
@@ -844,7 +844,7 @@ function Set_Categories() {
 	cipherArray["Illuminati Novice"] = "Illuminati"
 	cipherArray["Illuminati Reverse"] = "Illuminati"
 	
-	cipherArray["Agrippa"] = "Latin"
+	cipherArray["Agrippa Key"] = "Latin"
 	cipherArray["Agrippa Ordinal"] = "Latin"	
 	cipherArray["Agrippa Reduction"] = "Latin"
 	cipherArray["Beatus of Liebana"] = "Latin"
