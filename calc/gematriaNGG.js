@@ -756,7 +756,7 @@ function Build_Ciphers() {
 
 			case "English Qaballa": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 64, 0, "ALW"); break;
 			case "Cipher X": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 88, 0, "KFW"); break;
-			case "Trigram Qabalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "LCH"); break;
+			case "Trigrammaton Qabalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "LCH"); break;
 			case "Alphanumeric Qabbala": allCiphers[allCiphers.length] = new cipher(key, "English", 191, 195, 127, "AQ"); break;
 
 			case "English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 169, 208, 142, "SumerianNum"); break;
@@ -854,7 +854,7 @@ function Set_Categories() {
 
 	cipherArray["English Qaballa"] = "Thelemic"
 	cipherArray["Cipher X"] = "Thelemic"
-	cipherArray["Trigram Qabalah"] = "Thelemic"
+	cipherArray["Trigrammaton Qabalah"] = "Thelemic"
 	cipherArray["Alphanumeric Qabbala"] = "Thelemic"
 
 	cipherArray["English Sumerian"] = "Mathematical"
