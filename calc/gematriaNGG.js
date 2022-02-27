@@ -796,7 +796,7 @@ function Build_Ciphers() {
 
 			case "Alphanumeric Qabbala": allCiphers[allCiphers.length] = new cipher(key, "English", 191, 195, 127, "AQ"); break;
 	        	case "Master": allCiphers[allCiphers.length] = new cipher(key, "Master", 77,129,200); break;   
-        	    	case "Master Builder": allCiphers[allCiphers.length] = new cipher(key, "Master Builder", 77,172,148); break;   
+        	    	case "Master Builder": allCiphers[allCiphers.length] = new cipher(key, "Master Builder", 0,202,191); break;   
             		case "Masonic": allCiphers[allCiphers.length] = new cipher(key, "Masonic", 255,179,87); break;   
 			case "Satanic": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 0, 0, "SatanicNum"); break;
             		case "Foundation": allCiphers[allCiphers.length] = new cipher(key, "Foundation", 207,80,155); break;   
