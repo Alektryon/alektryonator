@@ -704,7 +704,7 @@ function Build_CharTable(impCipher) {
 		return
 	}
 
-	if (impCipher.Nickname == "Francis Bacon" || impCipher.Nickname == "Franc Baconis" || impCipher.Nickname == "Reverse Francis Bacon" || impCipher.Nickname == "Reverse Franc Baconis") {
+	if (impCipher.cArr.length > 40) {
 		rStr = '<center><table id="ChartTableThin" '
 	} else {
 		rStr = '<table id="ChartTable" '
