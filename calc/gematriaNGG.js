@@ -787,8 +787,8 @@ function Build_Ciphers() {
 			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 192, 66, 255, "BeatusExtended"); break;
 			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 210, 87, 255, "BeatusOrdinal"); break;
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 225, 107, 255, "BeatusReduction"); break;
-			case "Roman Numerals": allCiphers[allCiphers.length] = new cipher(key, "RomanNum", 115, 194, 251); break;
-			case "Cabala Simplex": allCiphers[allCiphers.length] = new cipher(key, "Simplex", 64, 224, 208); break;
+			case "Cabala Simplex": allCiphers[allCiphers.length] = new cipher(key, "Simplex", 115, 194, 251); break;
+			case "Roman Numerals": allCiphers[allCiphers.length] = new cipher(key, "RomanNum", 64, 224, 208); break;
 
 			case "English Qaballa": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 64, 0, "ALW"); break;
 			case "Cipher X": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 88, 0, "KFW"); break;
@@ -890,8 +890,8 @@ function Set_Categories() {
 	cipherArray["Beatus of Liebana"] = "Latin"
 	cipherArray["Beatus Ordinal"] = "Latin"
 	cipherArray["Beatus Reduction"] = "Latin"
-	cipherArray["Roman Numerals"] = "Latin"
 	cipherArray["Cabala Simplex"] = "Latin"
+	cipherArray["Roman Numerals"] = "Latin"
 
 	cipherArray["English Qaballa"] = "Thelemic"
 	cipherArray["Cipher X"] = "Thelemic"
