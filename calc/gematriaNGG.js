@@ -1,6 +1,6 @@
 var catArr = []; gemArr = []
 var cipherArray = [];
-var openCiphers = ["Bacon Simple", "Bacon Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Agrippa Key", "English Qaballa", "Alphanumeric Qabbala"]
+var openCiphers = ["English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Alphanumeric Qabbala"]
 var ciphersOn = []; allCiphers = []; sHistory = []
 var opt_NumCalculation = "Full"
 var primeArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 
@@ -1016,7 +1016,7 @@ function Add_AllCiphers(impBool = false) {
 }
 function Add_BaseCiphers(impBool = false) {
 	var x, q, cN, z
-	var baseCiphers = ["Bacon Simple", "Bacon Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Agrippa Key", "English Qaballa", "Alphanumeric Qabbala"]
+	var baseCiphers = ["English Ordinal", "Reverse Ordinal", "Full Reduction", "Reverse Full Reduction", "Bacon Simple", "Bacon Reverse", "Bacon Short", "Bacon Short Reverse", "Bacon Kaye", "Modern Kaye", "Illuminati Novice", "Alphanumeric Qabbala"]
 
 	openCiphers = []
 	for (z = 0; z < allCiphers.length; z++) {
