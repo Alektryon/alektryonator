@@ -785,7 +785,7 @@ function Build_Ciphers() {
 			case "Elizabethan Simple": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconSimple"); break;
 			case "Elizabethan Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "BaconReverse"); break;
 			case "Elizabethan Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "BaconShort"); break;
-			case "Elizabethan Rev Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 88, 125, 254, "BaconShortRev"); break;
+			case "Elizabethan R Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 88, 125, 254, "BaconShortRev"); break;
 			case "Kaye Cipher": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 93, 73, "BaconKaye"); break;
 			case "Modern Kaye": allCiphers[allCiphers.length] = new cipher(key, "English", 230, 153, 163, "ModernKaye"); break;
 
@@ -888,7 +888,7 @@ function Set_Categories() {
 	cipherArray["Elizabethan Simple"] = "Elizabethan"
 	cipherArray["Elizabethan Reverse"] = "Elizabethan"
 	cipherArray["Elizabethan Reduction"] = "Elizabethan"
-	cipherArray["Elizabethan Rev Reduction"] = "Elizabethan"
+	cipherArray["Elizabethan R Reduction"] = "Elizabethan"
 	cipherArray["Kaye Cipher"] = "Elizabethan"
 	cipherArray["Modern Kaye"] = "Elizabethan"
 
