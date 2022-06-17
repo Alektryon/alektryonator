@@ -141,38 +141,6 @@ class cipher {
 				this.cArr2 = [1040,1041,1042,1043,1044,1045,1025,1046,1047,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071] // caps
 				Build_GemVals(this)
 				break;
-            case "Master":
-				for (y = 0; y < 26; y++) {
-					this.cArr[y] = (y + 97)
-					this.cArr2[y] = (y + 65)
-				}
-				this.vArr = [11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-				this.vArr2 = [11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-				break;
-            case "Master Builder":
-				for (y = 0; y < 26; y++) {
-					this.cArr[y] = (y + 97)
-					this.cArr2[y] = (y + 65)
-				}
-				this.vArr = [22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47]
-				this.vArr2 = [22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47]
-				break;
-            case "Masonic":
-				for (y = 0; y < 26; y++) {
-					this.cArr[y] = (y + 97)
-					this.cArr2[y] = (y + 65)
-				}
-				this.vArr = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]
-				this.vArr2 = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]
-				break;
-            case "Foundation":
-				for (y = 0; y < 26; y++) {
-					this.cArr[y] = (y + 97)
-					this.cArr2[y] = (y + 65)
-				}
-				this.vArr = [44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69]
-				this.vArr2 = [44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69]
-				break;
 		}
 
 		if (impMods.indexOf("Exception") > -1) {this.Exception = true}
@@ -248,6 +216,7 @@ class cipher {
 			}
 		}
 	}
+
 		if (GemTotal > 999999) {
 			return ">1 mil"
 		} else if (impType == 1) {
@@ -797,11 +766,7 @@ function Build_Ciphers() {
 			case "Trigrammaton Qabalah": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 93, 73, "LCH"); break;
 
 			case "Alphanumeric Qabbala": allCiphers[allCiphers.length] = new cipher(key, "AQ", 191, 195, 127); break;
-        	case "Master": allCiphers[allCiphers.length] = new cipher(key, "Master", 102,139,235); break;   
-   	    	case "Master Builder": allCiphers[allCiphers.length] = new cipher(key, "Master Builder", 0,202,191); break;   
-       		case "Masonic": allCiphers[allCiphers.length] = new cipher(key, "Masonic", 255,179,87); break;   
-			case "Satanic": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 0, 0, "SatanicNum"); break;
-       		case "Foundation": allCiphers[allCiphers.length] = new cipher(key, "Foundation", 207,80,155); break;   
+			case "Satanic Gematria": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 0, 0, "SatanicNum"); break;
 
 			case "English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 169, 208, 142, "SumerianNum"); break;
 			case "Reverse English Sumerian": allCiphers[allCiphers.length] = new cipher(key, "English", 220, 208, 148, "Reverse", "SumerianNum"); break;
@@ -898,13 +863,9 @@ function Set_Categories() {
 	cipherArray["English Qaballa"] = "Thelemic"
 	cipherArray["Cipher X"] = "Thelemic"
 	cipherArray["Trigrammaton Qabalah"] = "Thelemic"
-   	cipherArray["Alphanumeric Qabbala"] = "Thelemic"
 
-	cipherArray["Master"] = "Ordinal Custom"
-	cipherArray["Master Builder"] = "Ordinal Custom"
-	cipherArray["Masonic"] = "Ordinal Custom"
-	cipherArray["Satanic"] = "Ordinal Custom"
-	cipherArray["Foundation"] = "Ordinal Custom"
+   	cipherArray["Alphanumeric Qabbala"] = "Ordinal Custom"
+	cipherArray["Satanic Gematria"] = "Ordinal Custom"
 
 	cipherArray["English Sumerian"] = "Mathematical"
 	cipherArray["Reverse English Sumerian"] = "Mathematical"
