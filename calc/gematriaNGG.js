@@ -731,7 +731,7 @@ function Build_Ciphers() {
 			case "English Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0); break;
 			case "English Extended": allCiphers[allCiphers.length] = new cipher(key, "English", 218, 226, 0, "Extend"); break;
 			case "Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 150, 244, 77, "CaseSensitive"); break;
-			case "Alt Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 93, 187, 88, "AltCaseSensitive"); break;
+			case "Alternating Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 93, 187, 88, "AltCaseSensitive"); break;
 
 			case "Reverse Full Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 226, 226, "Reverse", "FullReduction"); break;
 			case "Reverse Single Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 100, 216, 209, "Reverse", "SingleReduction"); break;
@@ -739,8 +739,8 @@ function Build_Ciphers() {
 			case "Reverse Single Reduction EP": allCiphers[allCiphers.length] = new cipher(key, "English", 110, 226, 156, "Reverse", "SingleReduction", "Exception"); break;
 			case "Reverse Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "Reverse"); break;
 			case "Reverse Extended": allCiphers[allCiphers.length] = new cipher(key, "English", 253, 255, 119, "Reverse", "Extend"); break;
-			case "Rev Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 163, 255, 88, "Reverse", "CaseSensitive"); break;
-			case "Rev Alt Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 111, 193, 121, "Reverse", "AltCaseSensitive"); break;
+			case "Reverse Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 163, 255, 88, "Reverse", "CaseSensitive"); break;
+			case "R Alt Case Sensitive": allCiphers[allCiphers.length] = new cipher(key, "English", 111, 193, 121, "Reverse", "AltCaseSensitive"); break;
 
 			case "Elizabethan Simple": allCiphers[allCiphers.length] = new cipher(key, "English", 80, 235, 21, "BaconSimple"); break;
 			case "Elizabethan Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 0, 186, 0, "Reverse", "BaconReverse"); break;
@@ -830,7 +830,7 @@ function Set_Categories() {
 	cipherArray["Single Reduction KV"] = "English"
 	cipherArray["English Extended"] = "English"
 	cipherArray["Case Sensitive"] = "English"
-	cipherArray["Alt Case Sensitive"] = "English"
+	cipherArray["Alternating Case Sensitive"] = "English"
 
 	cipherArray["Reverse Ordinal"] = "Reverse"
 	cipherArray["Reverse Full Reduction"] = "Reverse"
@@ -838,8 +838,8 @@ function Set_Categories() {
 	cipherArray["Reverse Full Reduction EP"] = "Reverse"
 	cipherArray["Reverse Single Reduction EP"] = "Reverse"
 	cipherArray["Reverse Extended"] = "Reverse"
-	cipherArray["Rev Case Sensitive"] = "Reverse"
-	cipherArray["Rev Alt Case Sensitive"] = "Reverse"
+	cipherArray["Reverse Case Sensitive"] = "Reverse"
+	cipherArray["R Alt Case Sensitive"] = "Reverse"
 
 	cipherArray["Elizabethan Simple"] = "Elizabethan"
 	cipherArray["Elizabethan Reverse"] = "Elizabethan"
