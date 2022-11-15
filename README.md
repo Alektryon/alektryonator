@@ -77,13 +77,13 @@ There is a way to temporarily add multiple properly named and colored custom cip
 4. A new cipher under "Other" category will be added and it will be available until you reload the page
 
 ```
-cipherName = "Test Cipher";
-ciphCategory = "Other";
-R = 110;
-G = 179;
-B = 77;
-lowerCaseValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
-upperCaseValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
+cipherName = "Alphanumeric";
+ciphCategory = "Kabbalah";
+R = 191;
+G = 195;
+B = 127;
+lowerCaseValues = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
+upperCaseValues = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
 
 // ======================
 
