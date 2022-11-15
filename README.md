@@ -77,8 +77,8 @@ There is a way to temporarily add multiple properly named and colored custom cip
 4. A new cipher under "Other" category will be added and it will be available until you reload the page
 
 ```
-cipherName = "Alphanumeric";
-ciphCategory = "Kabbalah";
+cipherName = "Test Cipher";
+ciphCategory = "Other";
 R = 191;
 G = 195;
 B = 127;
