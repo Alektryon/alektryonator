@@ -49,9 +49,28 @@ class cipher {
                 }
 				break;
 			case "Latin":
-				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 10680, 119]
-				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 10680, 87]
-				Build_GemVals(this)
+				for (y = 0; y < 26; y++) {
+				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 119]
+				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 87]
+				this.vArr = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,200,300,400,500,600,700,900]
+				this.vArr2 = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,200,300,400,500,600,700,900]
+				}
+				break;
+			case "LatinOrd":
+				for (y = 0; y < 26; y++) {
+				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 119]
+				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 87]
+				this.vArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27]
+				this.vArr2 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27]
+				}
+				break;
+			case "LatinRed":
+				for (y = 0; y < 26; y++) {
+				this.cArr = [97, 98, 99, 100, 101, 102, 103, 104, 105, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 120, 121, 122, 106, 118, 119]
+				this.cArr2 = [65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 88, 89, 90, 74, 86, 87]
+				this.vArr = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,9]
+				this.vArr2 = [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,9]
+				}
 				break;
 			case "RomanNum":
 				for (y = 0; y < 26; y++) {
@@ -752,9 +771,9 @@ function Build_Ciphers() {
 			case "Illuminati Novice": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 255, 29, "IlluminatiNovice"); break;
 			case "Illuminati Reverse": allCiphers[allCiphers.length] = new cipher(key, "English", 255, 189, 2, "Reverse", "IlluminatiReverse"); break;
 
-			case "Agrippa Key": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255, "Extend"); break;
-			case "Agrippa Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Latin", 154, 121, 227); break;
-			case "Agrippa Reduction": allCiphers[allCiphers.length] = new cipher(key, "Latin", 159, 99, 197, "FullReduction"); break;
+			case "Agrippa Key": allCiphers[allCiphers.length] = new cipher(key, "Latin", 153, 102, 255); break;
+			case "Agrippa Ordinal": allCiphers[allCiphers.length] = new cipher(key, "LatinOrd", 154, 121, 227); break;
+			case "Agrippa Reduction": allCiphers[allCiphers.length] = new cipher(key, "LatinRed", 159, 99, 197); break;
 			case "Beatus of Liebana": allCiphers[allCiphers.length] = new cipher(key, "English", 192, 66, 255, "BeatusExtended"); break;
 			case "Beatus Ordinal": allCiphers[allCiphers.length] = new cipher(key, "English", 210, 87, 255, "BeatusOrdinal"); break;
 			case "Beatus Reduction": allCiphers[allCiphers.length] = new cipher(key, "English", 225, 107, 255, "BeatusReduction"); break;
@@ -787,11 +806,6 @@ function Build_Ciphers() {
 			case "Hebrew Gematria": allCiphers[allCiphers.length] = new cipher(key, "Hebrew G", 255, 227, 93, "Extend"); break;
 			case "Hebrew Soffits": allCiphers[allCiphers.length] = new cipher(key, "Hebrew Soffits", 255, 251, 156, "Extend"); break;
 
-			/*case "Hebrew Primes": allCiphers[allCiphers.length] = new cipher(key, "Hebrew G", 255, 189, 2, "PrimeNum"); break;
-			case "Hebrew Trigonal": allCiphers[allCiphers.length] = new cipher(key, "Hebrew G", 255, 189, 2, "TriangleNum"); break;
-			case "Hebrew Squares": allCiphers[allCiphers.length] = new cipher(key, "Hebrew G", 255, 189, 2, "SquareNum"); break;
-			case "Hebrew Reverse Gematria": allCiphers[allCiphers.length] = new cipher(key, "Hebrew G", 255, 227, 93, "Extend", "Reverse"); break;*/
-				
 			case "Greek Reduction": allCiphers[allCiphers.length] = new cipher(key, "Greek", 156, 201, 171, "FullReduction"); break;
 			case "Greek Ordinal": allCiphers[allCiphers.length] = new cipher(key, "Greek", 149, 199, 139); break;
 			case "Greek Isopsephy": allCiphers[allCiphers.length] = new cipher(key, "Greek", 139, 200, 163, "Extend"); break;
@@ -809,9 +823,6 @@ function Build_Ciphers() {
 
 			case "RU Extended": allCiphers[allCiphers.length] = new cipher(key, "Russian", 218, 226, 0, "Extend"); break;
 			case "RU Reverse Extended": allCiphers[allCiphers.length] = new cipher(key, "Russian", 253, 255, 119, "Reverse", "Extend"); break;
-						
-			// case "RU Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 0, 128, 0, "RussianE"); break;
-			// case "RU Reverse Ordinal E": allCiphers[allCiphers.length] = new cipher(key, "Russian", 80, 160, 20, "RussianRevE"); break;
 						
 			case "English Custom": allCiphers[allCiphers.length] = new cipher(key, "English", 236, 236, 177, "EnglishCustom"); break;
 		}
@@ -886,11 +897,6 @@ function Set_Categories() {
 	cipherArray["Hebrew Reduction"] = "Foreign"
 	cipherArray["Hebrew Soffits"] = "Foreign"
 
-	/*cipherArray["Hebrew Primes"] = "Foreign"
-	cipherArray["Hebrew Trigonal"] = "Foreign"
-	cipherArray["Hebrew Squares"] = "Foreign"
-	cipherArray["Hebrew Reverse Gematria"] = "Foreign"*/
-	
 	cipherArray["Greek Isopsephy"] = "Foreign"
 	cipherArray["Greek Ordinal"] = "Foreign"
 	cipherArray["Greek Reduction"] = "Foreign"
@@ -909,9 +915,6 @@ function Set_Categories() {
 	
 	cipherArray["RU Extended"] = "Russian"
 	cipherArray["RU Reverse Extended"] = "Russian"
-
-	// cipherArray["RU Ordinal E"] = "Russian"
-	// cipherArray["RU Reverse Ordinal E"] = "Russian"
 
 	cipherArray["English Custom"] = "Custom"
 	
