@@ -79,9 +79,9 @@ There is a way to temporarily add multiple properly named and colored custom cip
 ```
 cipherName = "Test Cipher";
 ciphCategory = "Other";
-R = 191;
-G = 195;
-B = 127;
+R = 190;
+G = 190;
+B = 126;
 lowerCaseValues = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
 upperCaseValues = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
 
